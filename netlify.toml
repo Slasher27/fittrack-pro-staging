@@ -1,0 +1,38 @@
+# Static SPA (ARCHITECTURE §1). No backend until Phase 3 (D-032): previews show the shell only.
+# Set PUBLIC_SUPABASE_URL / PUBLIC_SUPABASE_ANON_KEY in the Netlify UI when staging exists.
+[build]
+  command = "pnpm build"
+  publish = "build"
+
+[build.environment]
+  NODE_VERSION = "24"
+
+# Previews and branch deploys show /dev/components; production does not.
+[context.deploy-preview.environment]
+  PUBLIC_DEV_ROUTES = "1"
+[context.branch-deploy.environment]
+  PUBLIC_DEV_ROUTES = "1"
+
+# Every route falls back to the SPA shell.
+[[redirects]]
+  from = "/*"
+  to = "/200.html"
+  status = 200
+
+[[headers]]
+  for = "/_app/immutable/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/service-worker.js"
+  [headers.values]
+    Cache-Control = "no-cache"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "DENY"
+    Permissions-Policy = "camera=(self), microphone=(self), geolocation=()"
