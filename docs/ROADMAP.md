@@ -13,12 +13,12 @@ empty, error, offline and no-permission states (CLAUDE.md).
 ---
 
 ## Phase 0 — Foundations (≈ 1 week)
-- [ ] New repo `fittrack-pro`: SvelteKit (Svelte 5) + TS + Tailwind v4 + `adapter-static` (SPA fallback), ESLint/Prettier, Vitest, Playwright + axe-core.
+- [x] New repo `fittrack-pro`: SvelteKit (Svelte 5) + TS + Tailwind v4 + `adapter-static` (SPA fallback), ESLint/Prettier, Vitest, Playwright + axe-core.
 - [ ] GitHub Actions CI (lint, typecheck, unit, e2e). Netlify site with PR previews.
-- [ ] Supabase **local only** (`supabase init` / `supabase start`, Docker). Migrations folder. Typed client generation. No hosted project until Phase 3 (D-032).
-- [ ] `tokens.css` + the components in DESIGN-SYSTEM §3, with a `/dev/components` gallery route (dev only), matching `docs/design/Foundations.html` where DESIGN-SYSTEM §7.1 doesn't override it.
-- [ ] Auth: sign up, sign in, reset, sign out. Age gate (18+) and processing consent at sign-up. The `profiles` table (all ARCHITECTURE §3 columns, including the sync columns, with defaults `up default (extract(epoch from now())*1000)::bigint` and `synced_at default now()` so the sign-up row inserts before the trigger exists) with a row created on sign-up. Phase 1 adds the sync trigger to it.
-- [ ] App shell: bottom tabs (member) and sidebar (trainer), with placeholder screens. Installable PWA (manifest + service worker caching the app shell).
+- [x] Supabase **local only** (`supabase init` / `supabase start`, Docker). Migrations folder. Typed client generation. No hosted project until Phase 3 (D-032).
+- [x] `tokens.css` + the components in DESIGN-SYSTEM §3, with a `/dev/components` gallery route (dev only), matching `docs/design/Foundations.html` where DESIGN-SYSTEM §7.1 doesn't override it.
+- [x] Auth: sign up, sign in, reset, sign out. Age gate (18+) and processing consent at sign-up. The `profiles` table (all ARCHITECTURE §3 columns, including the sync columns, with defaults `up default (extract(epoch from now())*1000)::bigint` and `synced_at default now()` so the sign-up row inserts before the trigger exists) with a row created on sign-up. Phase 1 adds the sync trigger to it.
+- [x] App shell: bottom tabs (member) and sidebar (trainer), with placeholder screens. Installable PWA (manifest + service worker caching the app shell).
 
 **Exit:** sign up/in works against local Supabase and in CI · the Netlify preview builds and loads the app shell · the gallery passes axe with zero serious violations at 390 and 1280 px · CI green · PROGRESS.md updated.
 
