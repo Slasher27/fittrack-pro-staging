@@ -73,8 +73,11 @@
 		outline-offset: 2px;
 	}
 
+	/* Links are underlined (Tailwind's reset removes it), so they never rely on colour alone (§5).
+	   Navigation and button-like links opt out with no-underline. */
 	a {
 		color: var(--brand-ink);
+		text-decoration-line: underline;
 		text-underline-offset: 3px;
 	}
 
