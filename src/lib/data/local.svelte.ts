@@ -2,6 +2,7 @@ import { supabase } from '$lib/supabase/client';
 import { toast } from '$lib/ui/toast.svelte';
 import { deleteLocalDb, openLocalDb, type LocalDb } from './db';
 import { changes, pendingCount } from './repo';
+import { supabaseStorage, syncPhotoBlobs } from './photos';
 import { syncOnce } from './sync';
 import { supabaseTransport } from './transport';
 
@@ -54,6 +55,12 @@ async function round() {
 		local.status = 'idle';
 		local.lastSyncAt = Date.now();
 		if (res.pulled) local.version++;
+		// Photo images move after the rows (best effort: retried next round if it fails).
+		try {
+			if (await syncPhotoBlobs(db, supabaseStorage(supabase))) local.version++;
+		} catch {
+			// Offline or Storage unavailable: the rows are synced; images follow next time.
+		}
 		if (res.rejected)
 			toast(
 				res.rejected === 1
@@ -95,6 +102,7 @@ async function start(userId: string) {
 	await stopLocal();
 	local.userId = userId;
 	local.db = await openLocalDb(userId);
+	local.pending = await pendingCount(local.db); // never claim "all saved" before we've looked
 	changes.addEventListener('change', soon);
 	document.addEventListener('visibilitychange', onVisibility);
 	window.addEventListener('pagehide', onVisibility);

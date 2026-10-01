@@ -29,7 +29,7 @@ empty, error, offline and no-permission states (CLAUDE.md).
 - [x] Port `nutritionTargets()` into `lib/domain/targets.ts` with tests (oracle: v3 `tests/onboard-test.js`; formula in ARCHITECTURE §6). Targets screen in Settings for setting them by hand until onboarding exists (Phase 2).
 - [x] Today: nutrition summary, water (target from `targets.water_ml`), weight trend, quick log (recents and one-tap re-log). PRD §4.1 Today.
 - [x] Nutrition: timeline log, search, custom food (weight-based and count-based servings), recents, multi-add, recipes (ingredients in grams + cooked weight, ported from v3), water. PRD §4.1 Nutrition.
-- [ ] Body: weight and measurements entry (weight, waist, chest, arm, thigh, notes) and photos (add with camera/file, pose, note; grid; view; delete; blob sync). Private by default.
+- [x] Body: weight and measurements entry (weight, waist, chest, arm, thigh, notes) and photos (add with camera/file, pose, note; grid; view; delete; blob sync). Private by default.
 - [ ] Gym profiles: several named locations, equipment editor (catalogue + custom items mapped to capabilities, weight ranges per item). PRD §4.1 Gym profiles.
 - [ ] Port the `coach` Edge Function (model pinned server-side, JWT check, `ai_usage` metering) and **describe-to-log** on Today: forced `parse_food` tool → editable preview → log with `estimated = true`. Voice dictation into the describe box (Web Speech API; the mic is hidden where unsupported). Offline falls back to search.
 - [ ] Foods: seed SA staples; Open Food Facts search import (online only, imports become own foods with `source='off'`); a seed of common SA retailer products from Open Food Facts.

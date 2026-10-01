@@ -1,7 +1,8 @@
 import 'fake-indexeddb/auto';
-import { createClient } from '@supabase/supabase-js';
+import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 import { beforeAll, describe, expect, it } from 'vitest';
 import { openLocalDb } from '$lib/data/db';
+import { addPhoto, deletePhoto, getBlob, supabaseStorage, syncPhotoBlobs } from '$lib/data/photos';
 import { del, get, list, pendingCount, put } from '$lib/data/repo';
 import { syncOnce } from '$lib/data/sync';
 import type { LocalRow } from '$lib/data/tables';
@@ -15,6 +16,7 @@ const key = process.env.PUBLIC_SUPABASE_ANON_KEY;
 describe.skipIf(!url || !key)('sync against local Supabase', () => {
 	// Created in beforeAll: a skipped describe still runs its body, and CI's static job has no backend.
 	let t: Transport;
+	let sb: SupabaseClient;
 	let userId = '';
 	let n = 0;
 	const device = () => openLocalDb(`it-${userId}-${++n}`);
@@ -28,7 +30,7 @@ describe.skipIf(!url || !key)('sync against local Supabase', () => {
 	});
 
 	beforeAll(async () => {
-		const sb = createClient(url!, key!, { auth: { persistSession: false } });
+		sb = createClient(url!, key!, { auth: { persistSession: false } });
 		t = supabaseTransport(sb);
 		const { data, error } = await sb.auth.signUp({
 			email: `sync-${Date.now()}-${Math.random().toString(36).slice(2, 8)}@test.local`,
@@ -99,5 +101,34 @@ describe.skipIf(!url || !key)('sync against local Supabase', () => {
 		await syncOnce(a, t);
 		await syncOnce(b, t, Date.now(), 3); // incremental pull, also paged
 		expect((await list(b, 'water_logs')).length).toBe(pulledB + 1);
+	});
+
+	it('photo images go to private Storage, reach another device and are removed on delete', async () => {
+		const storage = supabaseStorage(sb);
+		const a = await device();
+		const b = await device();
+		await syncOnce(a, t);
+		await syncOnce(b, t);
+
+		const p = await addPhoto(a, userId, {
+			blob: new Blob(['not really a jpeg'], { type: 'image/jpeg' }),
+			takenOn: new Date().toISOString().slice(0, 10),
+			pose: 'Front',
+			note: ''
+		});
+		await syncOnce(a, t);
+		await syncPhotoBlobs(a, storage);
+		await syncOnce(a, t);
+		const { data: files } = await sb.storage.from('photos').list(userId);
+		expect(files?.map((f) => f.name)).toContain(`${p.id}.jpg`);
+
+		await syncOnce(b, t);
+		expect(await syncPhotoBlobs(b, storage)).toBe(1);
+		expect(await (await getBlob(b, p.id))!.text()).toBe('not really a jpeg');
+
+		await deletePhoto(b, (await get(b, 'photos', p.id))!);
+		await syncPhotoBlobs(b, storage);
+		const { data: after } = await sb.storage.from('photos').list(userId);
+		expect(after?.map((f) => f.name) ?? []).not.toContain(`${p.id}.jpg`);
 	});
 });
