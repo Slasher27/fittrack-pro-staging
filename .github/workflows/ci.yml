@@ -50,6 +50,8 @@ jobs:
           . ./.supabase.env
           echo "PUBLIC_SUPABASE_URL=$API_URL" >> .env
           echo "PUBLIC_SUPABASE_ANON_KEY=$ANON_KEY" >> .env
+      - name: Sync integration tests (real upsert_lww and PostgREST)
+        run: pnpm test
       - run: pnpm exec playwright install --with-deps chromium
       - run: pnpm test:e2e
       - uses: actions/upload-artifact@v4

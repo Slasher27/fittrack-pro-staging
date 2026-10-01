@@ -1,7 +1,9 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
+	import { untrack } from 'svelte';
 	import { goto } from '$app/navigation';
 	import { auth } from '$lib/auth.svelte';
+	import { startLocal } from '$lib/data/local.svelte';
 	import BrandLogo from '$lib/ui/BrandLogo.svelte';
 	import Tabs, { type NavItem } from '$lib/ui/Tabs.svelte';
 
@@ -17,8 +19,12 @@
 	];
 
 	// Signed out elsewhere (another tab, expired session): leave the app area.
+	// Signed in: open this member's device data and start syncing (offline-first, ARCHITECTURE §5).
 	$effect(() => {
-		if (!auth.session) goto(resolve('/sign-in'), { replaceState: true });
+		const userId = auth.session?.user.id;
+		if (!userId) goto(resolve('/sign-in'), { replaceState: true });
+		// untrack: this effect depends on the session only, not on the local state startLocal reads.
+		else untrack(() => startLocal(userId));
 	});
 </script>
 

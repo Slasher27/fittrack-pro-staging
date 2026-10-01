@@ -1,28 +1,15 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
-	import { goto } from '$app/navigation';
 	import { auth } from '$lib/auth.svelte';
 	import { showDevRoutes } from '$lib/dev';
-	import { supabase } from '$lib/supabase/client';
 	import { setTheme, theme, type ThemePref } from '$lib/theme/theme.svelte';
-	import Button from '$lib/ui/Button.svelte';
 	import Card from '$lib/ui/Card.svelte';
-	import Icon from '$lib/ui/Icon.svelte';
 	import SegmentedControl from '$lib/ui/SegmentedControl.svelte';
-	import { toast } from '$lib/ui/toast.svelte';
+	import SignOut from './SignOut.svelte';
+	import SyncCard from './SyncCard.svelte';
 
 	let pref = $state<ThemePref>(theme.pref);
 	$effect(() => setTheme(pref));
-
-	let busy = $state(false);
-	async function signOut() {
-		busy = true;
-		// Local scope: signing out works offline and only ends this device's session.
-		const { error } = await supabase!.auth.signOut({ scope: 'local' });
-		busy = false;
-		if (error) return toast('We couldn’t sign you out. Try again.', 'warn');
-		await goto(resolve('/sign-in'), { replaceState: true });
-	}
 </script>
 
 <svelte:head><title>Settings · FitTrack Pro</title></svelte:head>
@@ -46,10 +33,10 @@
 	<Card as="section" aria-labelledby="account">
 		<h2 id="account" class="mt-0 mb-1 text-title">Account</h2>
 		<p class="mt-0 mb-4 text-ink-2">Signed in as {auth.session?.user.email}</p>
-		<Button variant="secondary" {busy} onclick={signOut}>
-			<Icon name="signout" size={20} />Sign out
-		</Button>
+		<SignOut />
 	</Card>
+
+	<SyncCard />
 
 	{#if showDevRoutes}
 		<Card as="section" aria-labelledby="dev">
