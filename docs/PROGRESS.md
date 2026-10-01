@@ -2,7 +2,7 @@
 
 > ## Current status (2026-10-01)
 > **Phase:** 0 — Foundations: **done** (all exit criteria met 2026-10-01, PR #1). Phase 1 — Member core, offline: not started.
-> **Next action:** Phase 1 on branch `feat/phase-1-member-core`. v3 meals decided (D-034, dropped). Migrations (PR #2), offline data layer (PR #3) and targets done. Next item: Today (nutrition summary, water, weight trend, quick log). The Supabase CLI is a devDependency (`pnpm supabase …`). Netlify site `fittrack-pro-staging` is linked to the repo (previews on every PR).
+> **Next action:** Phase 1 on branch `feat/phase-1-member-core`. v3 meals decided (D-034, dropped). Migrations (PR #2), offline data layer (PR #3), targets (PR #4) and Today done. Next item: Nutrition (timeline log, search, custom foods, recents, multi-add, recipes, water). The Supabase CLI is a devDependency (`pnpm supabase …`). Netlify site `fittrack-pro-staging` is linked to the repo (previews on every PR).
 > **Blockers / open questions:**
 > - Final product name (in Phase 6, before the pilot).
 > - Supabase region choice (closest to South Africa), to record in the privacy policy.
@@ -24,6 +24,8 @@
 
 ## Session log
 Newest first. Each entry: date · what was done · decisions (link to DECISIONS.md) · what's next.
+
+- **2026-10-01** · Today (docs/design/Today.html, Phase 1 scope): greeting + local date, nutrition card (kcal left ring, macro bars, "set your targets" empty state), water (+250/+500 ml, undo, target from `targets.water_ml`), weight (7-day average, week-on-week change as neutral text, "Log weight" sheet, one entry per day), "Log again" (6 recent distinct foods, one tap re-logs now in the right meal slot). Two columns from 1024 px. Domain: `day.ts` (local-day ranges incl. DST, meal slot, totals, recents), `weight.ts`. Links are now underlined by default (axe: link-in-text-block). Tests: 65 unit, 46 e2e (Today flow fully offline, then synced). Coach note, workout card and describe-to-log arrive with their own items. Next: Nutrition.
 
 - **2026-10-01** · Targets: `nutritionTargets()` ported to `lib/domain/targets.ts`, pinned to exact v3 outputs for 9 inputs (incl. v3's own onboarding test, every default and floor), plus `currentTarget` and `validateTargets` (same limits as the DB). Settings → Nutrition targets screen (append-only rows, live macro check, loading/empty/error/offline states). `local.version` lets screens refresh after writes and pulled syncs; `formatInt` for "1,240"-style numbers. PR #3's CI failure fixed (integration tests now skip cleanly without a backend). Tests: 52 unit/integration, 42 e2e (incl. offline save → second device). Next: Today.
 

@@ -1,12 +1,13 @@
 import { expect, test } from '@playwright/test';
-import { signUp } from './helpers';
+import { GREETING, signUp } from './helpers';
 
 test('member tabs navigate and mark the current tab', async ({ page }) => {
 	await signUp(page);
 	const nav = page.getByRole('navigation', { name: 'Main' });
 	for (const name of ['Train', 'Nutrition', 'Progress', 'Coach', 'Today']) {
 		await nav.getByRole('link', { name }).click();
-		await expect(page.getByRole('heading', { level: 1, name })).toBeVisible();
+		const heading = name === 'Today' ? GREETING : name;
+		await expect(page.getByRole('heading', { level: 1, name: heading })).toBeVisible();
 		await expect(nav.getByRole('link', { name })).toHaveAttribute('aria-current', 'page');
 	}
 });
