@@ -21,9 +21,11 @@
 		return local.lastSyncAt ? `Synced ${timeAgo(local.lastSyncAt, now)}.` : 'Not synced yet.';
 	});
 	const waiting = $derived(
-		local.pending === 0
-			? 'Everything is saved to your account.'
-			: `${local.pending} ${local.pending === 1 ? 'change' : 'changes'} waiting to sync.`
+		local.pending > 0
+			? `${local.pending} ${local.pending === 1 ? 'change' : 'changes'} waiting to sync.`
+			: local.lastSyncAt === null || local.status !== 'idle'
+				? '' // not confirmed yet: only a finished sync proves everything reached the account
+				: 'Everything is saved to your account.'
 	);
 </script>
 

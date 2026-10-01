@@ -2,7 +2,7 @@
 
 > ## Current status (2026-10-01)
 > **Phase:** 0 — Foundations: **done** (all exit criteria met 2026-10-01, PR #1). Phase 1 — Member core, offline: not started.
-> **Next action:** Phase 1 on branch `feat/phase-1-member-core`. v3 meals decided (D-034, dropped). Migrations, offline data layer, targets, Today, Nutrition (PRs #2–#6) and recipes done. Next item: Body (weight and measurements entry, photos with blob sync). The Supabase CLI is a devDependency (`pnpm supabase …`). Netlify site `fittrack-pro-staging` is linked to the repo (previews on every PR).
+> **Next action:** Phase 1 on branch `feat/phase-1-member-core`. v3 meals decided (D-034, dropped). Migrations, offline data layer, targets, Today, Nutrition, recipes (PRs #2–#7) and Body done. Next item: Gym profiles (locations + equipment editor). The Supabase CLI is a devDependency (`pnpm supabase …`). Netlify site `fittrack-pro-staging` is linked to the repo (previews on every PR).
 > **Blockers / open questions:**
 > - Final product name (in Phase 6, before the pilot).
 > - Supabase region choice (closest to South Africa), to record in the privacy policy.
@@ -24,6 +24,8 @@
 
 ## Session log
 Newest first. Each entry: date · what was done · decisions (link to DECISIONS.md) · what's next.
+
+- **2026-10-01** · Body, on the Progress tab (Phase 5 adds summaries): measurements (weight, waist, chest, arm, thigh, note; one entry per date; table of entries; 7-day trend) and progress photos (camera or library, Front/Side/Back, date, note; grid by date; viewer with confirmed delete). Images: compressed to 1280 px JPEG 0.82 (v3), stored in the device's `blobs` store, uploaded to the private `photos` bucket after each sync round (6 per round), downloaded by other devices, removed from Storage on delete. Bugs fixed: the Sync card claimed "everything is saved" before the first sync had run (now reads the real outbox count at start and only confirms after a finished sync); a reopened photo sheet kept the previous file in the picker. Tests: 90 unit/integration (incl. real Storage upload → second device → delete), 54 e2e. Next: Gym profiles.
 
 - **2026-10-01** · Recipes (Nutrition part B): raw ingredients in grams + cooked weight → per 100 g cooked (v3 maths and rounding, pinned to v3's own test case: 500 g chicken + 300 g rice, 1600 g cooked → 76 kcal/100 g). New recipe from Nutrition, "Edit recipe" from a logged recipe; editing never rewrites past logs. Only per-100 foods can be ingredients (v3 rule). Bugs fixed: IndexedDB can't store Svelte `$state` proxies (now `put()` stores a plain copy; caught by e2e in real Chrome, not by fake-indexeddb); editing a recipe no longer reopens the log sheet. Playwright: 4 local workers, 60 s/test, 10 s/expect (local Supabase was the bottleneck at 7 workers). Tests: 80 unit, 50 e2e, two clean full runs. Nutrition roadmap item complete. Next: Body.
 
