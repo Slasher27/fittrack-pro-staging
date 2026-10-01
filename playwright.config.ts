@@ -6,6 +6,10 @@ export default defineConfig({
 	testDir: 'tests/e2e',
 	testMatch: '**/*.e2e.ts',
 	fullyParallel: true,
+	// Long offline flows sign up, sync and log a whole day; local Supabase on a laptop is the bottleneck.
+	timeout: 60_000,
+	expect: { timeout: 10_000 },
+	workers: process.env.CI ? undefined : 4,
 	forbidOnly: !!process.env.CI,
 	retries: process.env.CI ? 1 : 0,
 	reporter: process.env.CI ? [['github'], ['html', { open: 'never' }]] : 'list',

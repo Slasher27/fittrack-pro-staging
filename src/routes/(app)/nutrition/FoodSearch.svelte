@@ -71,7 +71,9 @@
 							<span class="min-w-0 flex-1">
 								<span class="block truncate font-semibold">{f.name}</span>
 								<span class="block truncate text-[0.875rem] text-ink-2">
-									{f.brand ? `${f.brand} · ` : ''}{foodSummary(f)}
+									{f.kind === 'recipe' ? 'Recipe · ' : ''}{f.brand
+										? `${f.brand} · `
+										: ''}{foodSummary(f)}
 								</span>
 							</span>
 							<Icon name="forward" size={20} />

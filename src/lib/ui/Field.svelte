@@ -4,8 +4,18 @@
 
 	// Label + input + hint + error. The label is always visible (DESIGN-SYSTEM §3).
 	type Props = HTMLInputAttributes & { label: string; hint?: string; error?: string };
-	let { label, hint, error, value = $bindable(), type = 'text', ...rest }: Props = $props();
-	const id = $props.id();
+	let {
+		label,
+		hint,
+		error,
+		value = $bindable(),
+		type = 'text',
+		id: idProp,
+		...rest
+	}: Props = $props();
+	// An id from the caller (e.g. to focus the input) keeps the label linked.
+	const generated = $props.id();
+	const id = $derived(idProp ?? generated);
 	const describedBy = $derived(
 		[hint && `${id}-hint`, error && `${id}-error`].filter(Boolean).join(' ') || undefined
 	);

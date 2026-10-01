@@ -151,3 +151,58 @@ export function foodFromForm(f: FoodForm): Pick<FoodLike, 'per100' | 'servings'>
 		servings: [{ label: f.servingLabel.trim(), grams, ...m }]
 	};
 }
+
+// Recipes (ported from v3 app/foodai.js recipeModal): raw ingredients by weight plus the cooked weight of
+// the whole pot give per-100 g cooked values, so a recipe is logged by grams like any food.
+
+export type Ingredient = { food_id: string; grams: number };
+export type RecipeTotals = Macros & { raw_g: number };
+
+/** Whole-recipe nutrients from ingredients. Foods without per-100 values (or missing) count as nothing. */
+export function recipeTotals(
+	ingredients: Ingredient[],
+	foods: Map<string, FoodLike>
+): RecipeTotals {
+	const t: RecipeTotals = { kcal: 0, protein_g: 0, carbs_g: 0, fat_g: 0, raw_g: 0 };
+	for (const i of ingredients) {
+		const p = foods.get(i.food_id)?.per100;
+		if (!p) continue;
+		const k = i.grams / 100;
+		t.kcal += p.kcal * k;
+		t.protein_g += p.protein_g * k;
+		t.carbs_g += p.carbs_g * k;
+		t.fat_g += p.fat_g * k;
+		t.raw_g += i.grams;
+	}
+	return t;
+}
+
+/** Per 100 g cooked, rounded as v3 did: kcal to the whole number, macros to 0.1 g. */
+export function recipePer100(t: Macros, cookedG: number): Per100 {
+	const k = 100 / cookedG;
+	return {
+		kcal: Math.round(t.kcal * k),
+		protein_g: Math.round(t.protein_g * k * 10) / 10,
+		carbs_g: Math.round(t.carbs_g * k * 10) / 10,
+		fat_g: Math.round(t.fat_g * k * 10) / 10,
+		unit: 'g'
+	};
+}
+
+/** Can this food go in a recipe? It needs per-100 values (weight-based). */
+export const canBeIngredient = (f: FoodLike) => !!f.per100 && !f.deleted;
+
+export type RecipeErrors = Partial<Record<'name' | 'ingredients' | 'cooked', string>>;
+
+export function validateRecipe(
+	name: string,
+	ingredients: Ingredient[],
+	cookedG: number
+): RecipeErrors {
+	const e: RecipeErrors = {};
+	if (!name.trim()) e.name = 'Name the recipe, for example “Beef curry”.';
+	if (!ingredients.length) e.ingredients = 'Add at least one ingredient.';
+	if (!(cookedG > 0 && cookedG <= 50_000))
+		e.cooked = 'Weigh the whole cooked recipe and enter the grams.';
+	return e;
+}

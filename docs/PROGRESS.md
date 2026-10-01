@@ -2,7 +2,7 @@
 
 > ## Current status (2026-10-01)
 > **Phase:** 0 — Foundations: **done** (all exit criteria met 2026-10-01, PR #1). Phase 1 — Member core, offline: not started.
-> **Next action:** Phase 1 on branch `feat/phase-1-member-core`. v3 meals decided (D-034, dropped). Migrations, offline data layer, targets, Today (PRs #2–#5) done; Nutrition part A done (part B: recipes). Next: recipes, then the SA food seed. The Supabase CLI is a devDependency (`pnpm supabase …`). Netlify site `fittrack-pro-staging` is linked to the repo (previews on every PR).
+> **Next action:** Phase 1 on branch `feat/phase-1-member-core`. v3 meals decided (D-034, dropped). Migrations, offline data layer, targets, Today, Nutrition (PRs #2–#6) and recipes done. Next item: Body (weight and measurements entry, photos with blob sync). The Supabase CLI is a devDependency (`pnpm supabase …`). Netlify site `fittrack-pro-staging` is linked to the repo (previews on every PR).
 > **Blockers / open questions:**
 > - Final product name (in Phase 6, before the pilot).
 > - Supabase region choice (closest to South Africa), to record in the privacy policy.
@@ -24,6 +24,8 @@
 
 ## Session log
 Newest first. Each entry: date · what was done · decisions (link to DECISIONS.md) · what's next.
+
+- **2026-10-01** · Recipes (Nutrition part B): raw ingredients in grams + cooked weight → per 100 g cooked (v3 maths and rounding, pinned to v3's own test case: 500 g chicken + 300 g rice, 1600 g cooked → 76 kcal/100 g). New recipe from Nutrition, "Edit recipe" from a logged recipe; editing never rewrites past logs. Only per-100 foods can be ingredients (v3 rule). Bugs fixed: IndexedDB can't store Svelte `$state` proxies (now `put()` stores a plain copy; caught by e2e in real Chrome, not by fake-indexeddb); editing a recipe no longer reopens the log sheet. Playwright: 4 local workers, 60 s/test, 10 s/expect (local Supabase was the bottleneck at 7 workers). Tests: 80 unit, 50 e2e, two clean full runs. Nutrition roadmap item complete. Next: Body.
 
 - **2026-10-01** · Nutrition, part A (docs/design/Nutrition.html): day navigation (‹ ›, "Today"/"Yesterday"), totals (kcal left, g left per macro), local search (all words, accents ignored, ranked by prefix then recent use), log/edit/remove sheet (g/ml or servings, meal, live nutrients), custom foods by weight, volume or count (D-037), multi-add (tick results; each uses its last amount), recent quick-add chips, water (shared WaterCard). Past days log at v3's slot times. `lib/domain/food.ts` + `lib/data/nutrition.ts` (shared with Today). Bugs caught by tests: `aria-controls` pointing at a missing element; search not clearing after logging (timeline stayed hidden); "2 1 rusk" labels. Test helpers `signOut`/sign-up waits made load-tolerant. Tests: 77 unit, 48 e2e (two clean full runs). Next: recipes (part B).
 

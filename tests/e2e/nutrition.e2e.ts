@@ -145,3 +145,70 @@ test('Nutrition: custom foods, log, edit, delete, multi-add, past days — offli
 		timeout: 15_000
 	});
 });
+
+test('Recipes: build from ingredients + cooked weight, log by grams, edit without rewriting history', async ({
+	page,
+	context
+}) => {
+	await signUp(page);
+	await page.goto('/nutrition');
+	await context.setOffline(true);
+
+	// v3's oracle: 500 g chicken breast + 300 g cooked rice, 1600 g cooked → 76 kcal per 100 g.
+	await createFood(page, 'Test chicken breast', {
+		'Calories per 100 g (kcal)': '165',
+		'Protein per 100 g (g)': '31',
+		'Fat per 100 g (g)': '3.6'
+	});
+	await page.keyboard.press('Escape');
+	await createFood(page, 'Test cooked rice', {
+		'Calories per 100 g (kcal)': '130',
+		'Protein per 100 g (g)': '2.7',
+		'Carbs per 100 g (g)': '28',
+		'Fat per 100 g (g)': '0.3'
+	});
+	await page.keyboard.press('Escape');
+
+	await page.getByRole('button', { name: 'New recipe' }).click();
+	const sheet = page.getByRole('dialog', { name: 'New recipe' });
+	await sheet.getByLabel('Recipe name').fill('Beef curry');
+	await sheet.getByLabel('Add an ingredient').fill('chicken');
+	await sheet.getByLabel('Raw weight (g)').fill('500');
+	await sheet.getByRole('button', { name: 'Add ingredient' }).click();
+	await expect(sheet.getByLabel('Add an ingredient')).toBeFocused();
+	await sheet.getByLabel('Add an ingredient').fill('rice');
+	await sheet.getByRole('radio', { name: 'Test cooked rice' }).check();
+	await sheet.getByLabel('Raw weight (g)').fill('300');
+	await sheet.getByRole('button', { name: 'Add ingredient' }).click();
+	await sheet.getByLabel('Cooked weight of the whole recipe (g)').fill('1600');
+	await expect(sheet).toContainText(
+		'Whole recipe: 1,215 kcal from 800 g raw. Per 100 g cooked: 76 kcal'
+	);
+	await expectAccessible(page);
+	await sheet.getByRole('button', { name: 'Save recipe' }).click();
+
+	const log = page.getByRole('dialog', { name: 'Beef curry' });
+	await log.getByLabel('Amount (g)').fill('220');
+	await expect(log.getByText('167 kcal')).toBeVisible();
+	await log.getByRole('button', { name: 'Add to log' }).click();
+	const entry = page.getByRole('button', { name: 'Beef curry, 220 g, 167 kcal. Edit' });
+	await expect(entry).toBeVisible();
+
+	// Edit the recipe (it cooked down more): new logs change, the old one keeps its numbers.
+	await entry.click();
+	await page
+		.getByRole('dialog', { name: 'Beef curry' })
+		.getByRole('button', { name: 'Edit recipe' })
+		.click();
+	const editSheet = page.getByRole('dialog', { name: 'Edit recipe' });
+	await expect(editSheet.getByLabel('Recipe name')).toHaveValue('Beef curry');
+	await editSheet.getByLabel('Cooked weight of the whole recipe (g)').fill('1000');
+	await editSheet.getByRole('button', { name: 'Save changes' }).click();
+	await expect(editSheet).toBeHidden();
+	await expect(page.getByRole('dialog')).toHaveCount(0); // an edit doesn't reopen the log sheet
+	await expect(entry).toBeVisible();
+	await page.getByLabel('Search foods').fill('curry');
+	await expect(page.getByText('Recipe · 122 kcal per 100 g')).toBeVisible();
+
+	await context.setOffline(false);
+});
