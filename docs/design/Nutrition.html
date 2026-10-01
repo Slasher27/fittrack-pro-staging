@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Nutrition log</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'Geist',system-ui,sans-serif;color:#0E1116;-webkit-font-smoothing:antialiased}
+a{color:#2445D8}a:hover{color:#1A33A8}
+.card{background:#FFFFFF;border:1px solid #E3E6EB;border-radius:16px}
+.label{font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#4A5260;margin:0}
+.muted{color:#4A5260}
+.num{font-variant-numeric:tabular-nums}
+.btn{font:inherit;font-weight:600;font-size:16px;min-height:48px;border-radius:12px;border:0;padding:0 20px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none}
+.btn-p{background:#2445D8;color:#FFFFFF}
+.btn-p:hover{background:#1A33A8;color:#FFFFFF}
+.btn-s{background:#FFFFFF;color:#0E1116;border:1px solid #CBD0D8}
+.icon-btn{font:inherit;width:44px;height:44px;border-radius:12px;border:0;background:transparent;color:#0E1116;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;padding:0}
+.chip{font:inherit;font-size:14px;font-weight:500;min-height:44px;padding:0 16px;border-radius:999px;border:1px solid #CBD0D8;background:#FFFFFF;color:#0E1116;display:inline-flex;align-items:center;gap:8px;cursor:pointer}
+.chip-on{background:#E8EDFF;border-color:#2445D8;color:#1A33A8}
+.tab{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-width:64px;min-height:48px;font-size:12px;font-weight:500;color:#5B6372;text-decoration:none}
+.tab:hover{color:#0E1116}
+.tab-on{color:#2445D8;font-weight:600}
+.tab-on:hover{color:#2445D8}
+.opt{display:flex;align-items:center;gap:14px;padding:14px 16px;border:1px solid #E3E6EB;border-radius:14px;background:#FFFFFF;cursor:pointer}
+.opt-on{border:2px solid #2445D8;padding:13px 15px;background:#F7F9FF}
+.opt input{width:22px;height:22px;margin:0;accent-color:#2445D8;flex-shrink:0}
+svg{flex-shrink:0}
+.side{display:flex;align-items:center;gap:12px;min-height:44px;padding:0 12px;border-radius:10px;color:#0E1116;text-decoration:none;font-size:15px;font-weight:500}
+.side:hover{background:#F1F3F6;color:#0E1116}
+.side-on{background:#E8EDFF;color:#1A33A8;font-weight:600}
+.side-on:hover{background:#E8EDFF;color:#1A33A8}
+</style>
+<style>body{background:#E9ECF0;display:flex;justify-content:center;padding:24px}</style>
+</head>
+<body>
+
+
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F6F7F9; display: flex; flex-direction: column">
+  <main style="flex-grow: 1; padding: 52px 20px 12px; display: flex; flex-direction: column; gap: 14px">
+    <header style="display: flex; align-items: center; justify-content: space-between">
+      <button type="button" class="icon-btn" aria-label="Previous day"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg></button>
+      <h1 style="margin: 0; font-size: 20px; font-weight: 700">Today</h1>
+      <button type="button" class="icon-btn" aria-label="Next day" disabled="" style="color: #B6BCC6"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button>
+    </header>
+
+    <section class="card" aria-label="Daily totals" style="padding: 16px; display: flex; flex-direction: column; gap: 12px">
+      <div style="display: flex; justify-content: space-between; align-items: baseline">
+        <span><b class="num" style="font-size: 28px; font-weight: 700">610</b><span class="muted" style="font-size: 15px"> kcal left</span></span>
+        <span class="muted num" style="font-size: 14px">1,240 of 1,850</span>
+      </div>
+      <div style="height: 8px; border-radius: 4px; background: #E3E6EB"><div style="width: 67%; height: 8px; border-radius: 4px; background: #0E1116"></div></div>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; font-size: 14px">
+        <span style="display: flex; flex-direction: column; gap: 2px"><span style="display: flex; align-items: center; gap: 6px"><span aria-hidden="true" style="width: 8px; height: 8px; border-radius: 2px; background: #2445D8"></span><b style="font-weight: 600">Protein</b></span><span class="num muted">38 g left</span></span>
+        <span style="display: flex; flex-direction: column; gap: 2px"><span style="display: flex; align-items: center; gap: 6px"><span aria-hidden="true" style="width: 8px; height: 8px; border-radius: 2px; background: #C2410C"></span><b style="font-weight: 600">Carbs</b></span><span class="num muted">70 g left</span></span>
+        <span style="display: flex; flex-direction: column; gap: 2px"><span style="display: flex; align-items: center; gap: 6px"><span aria-hidden="true" style="width: 8px; height: 8px; border-radius: 2px; background: #6D3FC0"></span><b style="font-weight: 600">Fat</b></span><span class="num muted">19 g left</span></span>
+      </div>
+    </section>
+
+    <div style="display: flex; gap: 8px">
+      <label style="flex-grow: 1; display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 14px; background: #FFFFFF; border: 1px solid #CBD0D8; border-radius: 12px">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4A5260" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+        <span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Search foods</span>
+        <input placeholder="Search foods" style="font: inherit; font-size: 16px; border: 0; outline: none; width: 100%; background: transparent; color: #0E1116">
+      </label>
+      <button type="button" class="icon-btn" aria-label="Scan barcode" style="width: 48px; height: 48px; background: #FFFFFF; border: 1px solid #CBD0D8"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 7V4h3M21 7V4h-3M3 17v3h3M21 17v3h-3M7 8v8M10 8v8M13 8v8M17 8v8"/></svg></button>
+      <button type="button" class="icon-btn" aria-label="Describe a meal by voice" style="width: 48px; height: 48px; background: #FFFFFF; border: 1px solid #CBD0D8"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button>
+    </div>
+
+    <section aria-labelledby="tl" class="card" style="display: flex; flex-direction: column">
+      <h2 id="tl" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Food timeline</h2>
+      <a href="#" style="display: flex; gap: 12px; align-items: center; padding: 12px 14px; border-bottom: 1px solid #E3E6EB; color: #0E1116; text-decoration: none"><span class="num muted" style="font-size: 13px; width: 40px">07:30</span><span style="flex-grow: 1; display: flex; flex-direction: column"><b style="font-size: 15px; font-weight: 600">Oats, banana &amp; whey</b><span class="muted" style="font-size: 13px">1 bowl · 34 g protein</span></span><span class="num" style="font-size: 15px; font-weight: 600">420</span></a>
+      <a href="#" style="display: flex; gap: 12px; align-items: center; padding: 12px 14px; border-bottom: 1px solid #E3E6EB; color: #0E1116; text-decoration: none"><span class="num muted" style="font-size: 13px; width: 40px">12:45</span><span style="flex-grow: 1; display: flex; flex-direction: column"><b style="font-size: 15px; font-weight: 600">Chicken &amp; rice bowl</b><span class="muted" style="font-size: 13px">Recipe · 1 portion</span></span><span class="num" style="font-size: 15px; font-weight: 600">610</span></a>
+      <a href="#" style="display: flex; gap: 12px; align-items: center; padding: 12px 14px; border-bottom: 1px solid #E3E6EB; color: #0E1116; text-decoration: none"><span class="num muted" style="font-size: 13px; width: 40px">15:30</span><span style="flex-grow: 1; display: flex; flex-direction: column"><b style="font-size: 15px; font-weight: 600">Greek yoghurt, plain</b><span class="muted" style="font-size: 13px">175 g · barcode</span></span><span class="num" style="font-size: 15px; font-weight: 600">210</span></a>
+      <button type="button" style="font: inherit; display: flex; gap: 12px; align-items: center; min-height: 52px; padding: 0 14px; border: 0; background: transparent; color: #2445D8; font-weight: 600; font-size: 15px; cursor: pointer; text-align: left"><span class="num" style="font-size: 13px; width: 40px; color: #4A5260; font-weight: 400">18:00</span>Log dinner</button>
+    </section>
+
+    <section aria-labelledby="rec" style="display: flex; flex-direction: column; gap: 8px">
+      <h2 id="rec" class="label">Quick add · recent</h2>
+      <div style="display: flex; gap: 8px; flex-wrap: wrap">
+        <button type="button" class="chip" aria-label="Add 2 boiled eggs, 140 kilocalories">2 boiled eggs · <span class="num">140</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2445D8" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+        <button type="button" class="chip" aria-label="Add biltong 50 grams, 125 kilocalories">Biltong 50 g · <span class="num">125</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2445D8" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+        <button type="button" class="chip" aria-label="Add banana, 105 kilocalories">Banana · <span class="num">105</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2445D8" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+      </div>
+    </section>
+  </main>
+  <nav aria-label="Main" style="display: flex; justify-content: space-around; border-top: 1px solid #E3E6EB; background: #FFFFFF; padding: 6px 8px 24px">
+    <a href="Today.html" class="tab"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg><span>Today</span></a>
+    <a href="Workout.html" class="tab"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6v12M3 9v6M18 6v12M21 9v6M6 12h12"/></svg><span>Train</span></a>
+    <a href="Nutrition.html" class="tab tab-on" aria-current="page"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v7a2 2 0 0 0 4 0V3M9 12v9M17 21V3c-2 0-3.5 2.5-3.5 6s1.5 4 3.5 4"/></svg><span>Nutrition</span></a>
+    <a href="#" class="tab"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></svg><span>Progress</span></a>
+    <a href="#" class="tab"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg><span>Coach</span></a>
+  </nav>
+
+</div>
+</body>
+</html>

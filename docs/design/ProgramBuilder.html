@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Trainer workspace: program builder</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'Geist',system-ui,sans-serif;color:#0E1116;-webkit-font-smoothing:antialiased}
+a{color:#2445D8}a:hover{color:#1A33A8}
+.card{background:#FFFFFF;border:1px solid #E3E6EB;border-radius:16px}
+.label{font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#4A5260;margin:0}
+.muted{color:#4A5260}
+.num{font-variant-numeric:tabular-nums}
+.btn{font:inherit;font-weight:600;font-size:16px;min-height:48px;border-radius:12px;border:0;padding:0 20px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none}
+.btn-p{background:#2445D8;color:#FFFFFF}
+.btn-p:hover{background:#1A33A8;color:#FFFFFF}
+.btn-s{background:#FFFFFF;color:#0E1116;border:1px solid #CBD0D8}
+.icon-btn{font:inherit;width:44px;height:44px;border-radius:12px;border:0;background:transparent;color:#0E1116;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;padding:0}
+.chip{font:inherit;font-size:14px;font-weight:500;min-height:44px;padding:0 16px;border-radius:999px;border:1px solid #CBD0D8;background:#FFFFFF;color:#0E1116;display:inline-flex;align-items:center;gap:8px;cursor:pointer}
+.chip-on{background:#E8EDFF;border-color:#2445D8;color:#1A33A8}
+.tab{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-width:64px;min-height:48px;font-size:12px;font-weight:500;color:#5B6372;text-decoration:none}
+.tab:hover{color:#0E1116}
+.tab-on{color:#2445D8;font-weight:600}
+.tab-on:hover{color:#2445D8}
+.opt{display:flex;align-items:center;gap:14px;padding:14px 16px;border:1px solid #E3E6EB;border-radius:14px;background:#FFFFFF;cursor:pointer}
+.opt-on{border:2px solid #2445D8;padding:13px 15px;background:#F7F9FF}
+.opt input{width:22px;height:22px;margin:0;accent-color:#2445D8;flex-shrink:0}
+svg{flex-shrink:0}
+.side{display:flex;align-items:center;gap:12px;min-height:44px;padding:0 12px;border-radius:10px;color:#0E1116;text-decoration:none;font-size:15px;font-weight:500}
+.side:hover{background:#F1F3F6;color:#0E1116}
+.side-on{background:#E8EDFF;color:#1A33A8;font-weight:600}
+.side-on:hover{background:#E8EDFF;color:#1A33A8}
+</style>
+<style>body{background:#E9ECF0;display:flex;justify-content:center;padding:24px}</style>
+</head>
+<body>
+
+
+<div style="width: 1440px; height: 900px; box-sizing: border-box; background: #F6F7F9; display: flex">
+  <nav aria-label="Workspace" style="width: 240px; flex-shrink: 0; box-sizing: border-box; background: #FFFFFF; border-right: 1px solid #E3E6EB; padding: 28px 16px; display: flex; flex-direction: column; gap: 24px">
+    <div style="display: flex; align-items: center; gap: 10px; padding: 0 8px"><span aria-hidden="true" style="width: 32px; height: 32px; border-radius: 9px; background: #0E1116; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 15px">F</span><b style="font-size: 17px; font-weight: 700">FitTrack <span style="font-weight: 500; color: #4A5260">Coach</span></b></div>
+    <div style="display: flex; flex-direction: column; gap: 2px">
+      <a href="TrainerDashboard.html" class="side"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 7M21.5 20a6.5 6.5 0 0 0-4-6"/></svg>Clients</a>
+      <a href="ProgramBuilder.html" class="side side-on" aria-current="page"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6v12M3 9v6M18 6v12M21 9v6M6 12h12"/></svg>Programs</a>
+      <a href="#" class="side"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h6v16H4zM14 4h6v16h-6z"/></svg>Exercise library</a>
+      <a href="#" class="side"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 4 4 10-10"/></svg>Check-ins<span style="margin-left: auto; font-size: 12px; font-weight: 700; min-width: 22px; height: 22px; border-radius: 999px; background: #2445D8; color: #FFFFFF; display: inline-flex; align-items: center; justify-content: center" aria-label="2 to review">2</span></a>
+      <a href="#" class="side"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg>Messages</a>
+      <a href="#" class="side"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9 7 7M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg>Brand &amp; settings</a>
+    </div>
+    <a href="Today.html" class="side" style="margin-top: auto; border: 1px solid #E3E6EB"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4 3 8l4 4M3 8h14M17 20l4-4-4-4M21 16H7"/></svg>Switch to my training</a>
+  </nav>
+
+  <aside aria-labelledby="cp" style="width: 300px; flex-shrink: 0; box-sizing: border-box; padding: 32px 24px; border-right: 1px solid #E3E6EB; background: #FBFBFC; display: flex; flex-direction: column; gap: 20px">
+    <div style="display: flex; align-items: center; gap: 12px">
+      <span aria-hidden="true" style="width: 44px; height: 44px; border-radius: 999px; background: #E8EDFF; color: #1A33A8; display: flex; align-items: center; justify-content: center; font-weight: 600">LM</span>
+      <div style="display: flex; flex-direction: column"><h2 id="cp" style="margin: 0; font-size: 18px; font-weight: 600">Lisa M.</h2><span class="muted" style="font-size: 14px">Build muscle · 4 days / week</span></div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 8px">
+      <p class="label">Limitations</p>
+      <p style="margin: 0; font-size: 14px; line-height: 20px; padding: 10px 12px; border-radius: 10px; background: #FFF4E5; color: #8A4A00">Left knee: no deep lunges or jumping</p>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 8px">
+      <p class="label">Gym profiles</p>
+      <div class="card" style="padding: 14px; display: flex; flex-direction: column; gap: 8px">
+        <b style="font-size: 15px; font-weight: 600">Home gym</b>
+        <div style="display: flex; flex-wrap: wrap; gap: 6px">
+          <span style="font-size: 13px; padding: 4px 10px; border-radius: 999px; background: #F1F3F6">Dumbbells 2–12 kg</span>
+          <span style="font-size: 13px; padding: 4px 10px; border-radius: 999px; background: #F1F3F6">Resistance bands</span>
+          <span style="font-size: 13px; padding: 4px 10px; border-radius: 999px; background: #F1F3F6">Adjustable bench</span>
+          <span style="font-size: 13px; padding: 4px 10px; border-radius: 999px; background: #F1F3F6">Mat</span>
+        </div>
+      </div>
+      <div class="card" style="padding: 14px; display: flex; flex-direction: column; gap: 8px">
+        <b style="font-size: 15px; font-weight: 600">Commercial gym</b>
+        <span class="muted" style="font-size: 14px">Full equipment · no sled</span>
+      </div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 8px">
+      <p class="label">Last 7 days</p>
+      <div style="display: flex; justify-content: space-between; font-size: 14px"><span class="muted">Workouts</span><b class="num" style="font-weight: 600">2 of 4</b></div>
+      <div style="display: flex; justify-content: space-between; font-size: 14px"><span class="muted">Avg protein</span><b class="num" style="font-weight: 600">118 g / 130 g</b></div>
+      <div style="display: flex; justify-content: space-between; font-size: 14px"><span class="muted">Weight trend</span><b class="num" style="font-weight: 600">−0.3 kg</b></div>
+    </div>
+  </aside>
+
+  <main style="flex-grow: 1; min-width: 0; padding: 32px 36px; display: flex; flex-direction: column; gap: 20px">
+    <header style="display: flex; justify-content: space-between; align-items: flex-end">
+      <div style="display: flex; flex-direction: column; gap: 4px">
+        <p class="label">Programs › Lisa M.</p>
+        <h1 style="margin: 0; font-size: 28px; line-height: 34px; font-weight: 700; letter-spacing: -0.01em">Upper / Lower · 8 weeks</h1>
+      </div>
+      <div style="display: flex; gap: 10px">
+        <button type="button" class="btn btn-s"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/></svg>Generate draft from profile</button>
+        <button type="button" class="btn btn-p">Assign to Lisa</button>
+      </div>
+    </header>
+
+    <div role="tablist" aria-label="Training days" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px">
+      <button role="tab" aria-selected="false" type="button" class="card" style="font: inherit; text-align: left; padding: 14px 16px; cursor: pointer; display: flex; flex-direction: column; gap: 4px; color: #0E1116"><span class="label">Mon</span><b style="font-size: 16px; font-weight: 600">Upper A</b><span class="muted" style="font-size: 13px">Commercial gym · 6 ex</span></button>
+      <button role="tab" aria-selected="true" type="button" style="font: inherit; text-align: left; padding: 13px 15px; cursor: pointer; display: flex; flex-direction: column; gap: 4px; color: #0E1116; background: #FFFFFF; border: 2px solid #2445D8; border-radius: 16px"><span class="label" style="color: #1A33A8">Tue</span><b style="font-size: 16px; font-weight: 600">Lower A</b><span class="muted" style="font-size: 13px">Home gym · 5 ex</span></button>
+      <button role="tab" aria-selected="false" type="button" class="card" style="font: inherit; text-align: left; padding: 14px 16px; cursor: pointer; display: flex; flex-direction: column; gap: 4px; color: #0E1116"><span class="label">Thu</span><b style="font-size: 16px; font-weight: 600">Upper B</b><span class="muted" style="font-size: 13px">Home gym · 6 ex</span></button>
+      <button role="tab" aria-selected="false" type="button" class="card" style="font: inherit; text-align: left; padding: 14px 16px; cursor: pointer; display: flex; flex-direction: column; gap: 4px; color: #0E1116"><span class="label">Sat</span><b style="font-size: 16px; font-weight: 600">Lower B</b><span class="muted" style="font-size: 13px">Commercial gym · 6 ex</span></button>
+    </div>
+
+    <section class="card" aria-labelledby="day" style="display: flex; flex-direction: column">
+      <div style="display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; border-bottom: 1px solid #E3E6EB">
+        <h2 id="day" style="margin: 0; font-size: 18px; font-weight: 600">Lower A</h2>
+        <button type="button" class="chip" aria-label="Location for this day: Home gym. Change"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>Home gym<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+      </div>
+      <table style="width: 100%; border-collapse: collapse; font-size: 15px">
+        <thead>
+          <tr style="text-align: left; font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: #4A5260; border-bottom: 1px solid #E3E6EB">
+            <th scope="col" style="padding: 10px 20px; width: 32px">#</th>
+            <th scope="col" style="padding: 10px 8px">Exercise</th>
+            <th scope="col" style="padding: 10px 8px">Equipment</th>
+            <th scope="col" style="padding: 10px 8px">Sets × reps</th>
+            <th scope="col" style="padding: 10px 8px">Load</th>
+            <th scope="col" style="padding: 10px 20px 10px 8px">Rest</th>
+          </tr>
+        </thead>
+        <tbody class="num">
+          <tr style="border-bottom: 1px solid #E3E6EB"><td style="padding: 14px 20px" class="muted">1</td><td style="padding: 14px 8px; font-weight: 600">Goblet squat</td><td style="padding: 14px 8px">Dumbbell</td><td style="padding: 14px 8px">3 × 10</td><td style="padding: 14px 8px">12 kg</td><td style="padding: 14px 20px 14px 8px">90 s</td></tr>
+          <tr style="border-bottom: 1px solid #E3E6EB"><td style="padding: 14px 20px" class="muted">2</td><td style="padding: 14px 8px; font-weight: 600">Romanian deadlift</td><td style="padding: 14px 8px">Dumbbells</td><td style="padding: 14px 8px">4 × 8</td><td style="padding: 14px 8px">2 × 12 kg</td><td style="padding: 14px 20px 14px 8px">2 min</td></tr>
+          <tr style="background: #FFF8EE"><td style="padding: 14px 20px 6px" class="muted">3</td><td style="padding: 14px 8px 6px; font-weight: 600">Cable pull-through</td><td style="padding: 14px 8px 6px">Cable machine</td><td style="padding: 14px 8px 6px">3 × 12</td><td style="padding: 14px 8px 6px">—</td><td style="padding: 14px 20px 6px 8px">60 s</td></tr>
+          <tr style="background: #FFF8EE; border-bottom: 1px solid #E3E6EB"><td></td><td colspan="5" style="padding: 0 20px 12px 8px"><div style="display: flex; align-items: center; gap: 12px; color: #8A4A00; font-size: 14px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 2 20h20zM12 10v4M12 17v.5"/></svg><span style="flex-grow: 1">Lisa's home gym has no cable machine.</span><button type="button" class="btn btn-s" style="min-height: 40px; font-size: 14px; padding: 0 14px">Swap to banded pull-through</button></div></td></tr>
+          <tr style="border-bottom: 1px solid #E3E6EB"><td style="padding: 14px 20px" class="muted">4</td><td style="padding: 14px 8px"><span style="font-weight: 600">Split squat, short range</span><br><span class="muted" style="font-size: 13px">Knee-friendly variation</span></td><td style="padding: 14px 8px">Dumbbells</td><td style="padding: 14px 8px">3 × 10 each</td><td style="padding: 14px 8px">2 × 6 kg</td><td style="padding: 14px 20px 14px 8px">60 s</td></tr>
+          <tr><td style="padding: 14px 20px" class="muted">5</td><td style="padding: 14px 8px; font-weight: 600">Banded glute bridge</td><td style="padding: 14px 8px">Resistance band</td><td style="padding: 14px 8px">3 × 15</td><td style="padding: 14px 8px">Medium band</td><td style="padding: 14px 20px 14px 8px">45 s</td></tr>
+        </tbody>
+      </table>
+      <div style="padding: 12px 20px 16px; border-top: 1px solid #E3E6EB">
+        <button type="button" class="btn" style="background: transparent; color: #2445D8; padding: 0 8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>Add exercise</button>
+      </div>
+    </section>
+  </main>
+</div>
+</body>
+</html>

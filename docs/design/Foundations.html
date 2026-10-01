@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>FitTrack design foundations</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'Geist',system-ui,sans-serif;color:#0E1116;-webkit-font-smoothing:antialiased}
+a{color:#2445D8}a:hover{color:#1A33A8}
+.card{background:#FFFFFF;border:1px solid #E3E6EB;border-radius:16px}
+.label{font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#4A5260;margin:0}
+.h2{font-size:22px;line-height:28px;font-weight:600;margin:0}
+.p{font-size:15px;line-height:22px;color:#4A5260;margin:0}
+.sw{display:flex;flex-direction:column;gap:6px;font-size:13px;line-height:18px}
+.chipbox{width:100%;height:56px;border-radius:12px;border:1px solid #E3E6EB}
+.btn{font:inherit;font-weight:600;font-size:16px;min-height:48px;border-radius:12px;border:0;padding:0 20px;cursor:pointer}
+.chip{font:inherit;font-size:14px;font-weight:500;min-height:44px;padding:0 16px;border-radius:999px;border:1px solid #CBD0D8;background:#FFFFFF;color:#0E1116}
+</style>
+<style>body{background:#E9ECF0;display:flex;justify-content:center;padding:24px}</style>
+</head>
+<body>
+
+<div style="width: 1280px; height: 1180px; box-sizing: border-box; padding: 56px 64px; background: #F6F7F9; display: flex; flex-direction: column; gap: 32px">
+  <div style="display: flex; justify-content: space-between; align-items: flex-end">
+    <div style="display: flex; flex-direction: column; gap: 8px">
+      <p class="label">FitTrack · Design foundations v1</p>
+      <h1 style="margin: 0; font-size: 44px; line-height: 50px; font-weight: 700; letter-spacing: -0.02em">Calm, fast, legible.</h1>
+      <p class="p" style="font-size: 17px">One accent colour, generous space, numbers first. Built for a sweaty thumb between sets.</p>
+    </div>
+    <div style="display: flex; gap: 8px; align-items: center">
+      <span style="font-size: 13px; font-weight: 600; padding: 6px 12px; border-radius: 999px; background: #E8EDFF; color: #1A33A8">WCAG 2.2 AA</span>
+      <span style="font-size: 13px; font-weight: 600; padding: 6px 12px; border-radius: 999px; background: #FFFFFF; border: 1px solid #E3E6EB; color: #0E1116">Light + dark</span>
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px">
+    <div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px">
+      <p class="label" style="color: #2445D8">01</p>
+      <h2 class="h2" style="font-size: 18px">One job per screen</h2>
+      <p class="p">Today shows what to do now. Everything else is one tap away, never stacked on top.</p>
+    </div>
+    <div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px">
+      <p class="label" style="color: #2445D8">02</p>
+      <h2 class="h2" style="font-size: 18px">Log in under 5 seconds</h2>
+      <p class="p">Recents, multi-add, barcode and voice for food. Last session's weights pre-filled for sets.</p>
+    </div>
+    <div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px">
+      <p class="label" style="color: #2445D8">03</p>
+      <h2 class="h2" style="font-size: 18px">Equipment-aware everywhere</h2>
+      <p class="p">Every workout knows where you are. Swaps never suggest kit that location doesn't have.</p>
+    </div>
+    <div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 8px">
+      <p class="label" style="color: #2445D8">04</p>
+      <h2 class="h2" style="font-size: 18px">Coach in the loop, not in the way</h2>
+      <p class="p">Trainer notes appear in context. Solo users get the same app minus the coach layer.</p>
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 24px">
+    <div class="card" style="grid-column: span 7; padding: 24px; display: flex; flex-direction: column; gap: 16px">
+      <h2 class="h2">Colour</h2>
+      <p class="label">Light</p>
+      <div style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px">
+        <div class="sw"><div class="chipbox" style="background: #F6F7F9"></div><b>Ground</b><span class="p" style="font-size: 13px">#F6F7F9</span></div>
+        <div class="sw"><div class="chipbox" style="background: #FFFFFF"></div><b>Surface</b><span class="p" style="font-size: 13px">#FFFFFF</span></div>
+        <div class="sw"><div class="chipbox" style="background: #0E1116"></div><b>Ink</b><span class="p" style="font-size: 13px">#0E1116 · 18:1</span></div>
+        <div class="sw"><div class="chipbox" style="background: #4A5260"></div><b>Ink 2</b><span class="p" style="font-size: 13px">#4A5260 · 7.3:1</span></div>
+        <div class="sw"><div class="chipbox" style="background: #2445D8"></div><b>Accent</b><span class="p" style="font-size: 13px">#2445D8 · 7.2:1</span></div>
+        <div class="sw"><div class="chipbox" style="background: #E8EDFF"></div><b>Accent tint</b><span class="p" style="font-size: 13px">#E8EDFF</span></div>
+      </div>
+      <p class="label">Data &amp; status (always paired with a text label)</p>
+      <div style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px">
+        <div class="sw"><div class="chipbox" style="background: #2445D8"></div><b>Protein</b><span class="p" style="font-size: 13px">#2445D8</span></div>
+        <div class="sw"><div class="chipbox" style="background: #C2410C"></div><b>Carbs</b><span class="p" style="font-size: 13px">#C2410C · 5.2:1</span></div>
+        <div class="sw"><div class="chipbox" style="background: #6D3FC0"></div><b>Fat</b><span class="p" style="font-size: 13px">#6D3FC0 · 6.7:1</span></div>
+        <div class="sw"><div class="chipbox" style="background: #0F7A5A"></div><b>On track</b><span class="p" style="font-size: 13px">#0F7A5A · 5.3:1</span></div>
+        <div class="sw"><div class="chipbox" style="background: #B4590B"></div><b>Attention</b><span class="p" style="font-size: 13px">#B4590B · 4.8:1</span></div>
+        <div class="sw"><div class="chipbox" style="background: #E3E6EB"></div><b>Line</b><span class="p" style="font-size: 13px">#E3E6EB</span></div>
+      </div>
+      <p class="label">Dark (gym mode — follows system setting)</p>
+      <div style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px">
+        <div class="sw"><div class="chipbox" style="background: #0C0E12"></div><b>Ground</b><span class="p" style="font-size: 13px">#0C0E12</span></div>
+        <div class="sw"><div class="chipbox" style="background: #161A20"></div><b>Surface</b><span class="p" style="font-size: 13px">#161A20</span></div>
+        <div class="sw"><div class="chipbox" style="background: #F2F4F7"></div><b>Ink</b><span class="p" style="font-size: 13px">#F2F4F7 · 17:1</span></div>
+        <div class="sw"><div class="chipbox" style="background: #A3ABB8"></div><b>Ink 2</b><span class="p" style="font-size: 13px">#A3ABB8 · 7.6:1</span></div>
+        <div class="sw"><div class="chipbox" style="background: #8FA6FF"></div><b>Accent</b><span class="p" style="font-size: 13px">#8FA6FF · 7.5:1</span></div>
+        <div class="sw"><div class="chipbox" style="background: #5FD3A4"></div><b>On track</b><span class="p" style="font-size: 13px">#5FD3A4 · 9.4:1</span></div>
+      </div>
+    </div>
+
+    <div style="grid-column: span 5; display: flex; flex-direction: column; gap: 24px">
+      <div class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 12px">
+        <h2 class="h2">Type · Geist</h2>
+        <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid #E3E6EB; padding-bottom: 8px"><span style="font-size: 32px; line-height: 38px; font-weight: 700; letter-spacing: -0.02em">Display</span><span class="p" style="font-size: 13px">32 / 38 · 700</span></div>
+        <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid #E3E6EB; padding-bottom: 8px"><span style="font-size: 22px; line-height: 28px; font-weight: 600">Title</span><span class="p" style="font-size: 13px">22 / 28 · 600</span></div>
+        <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid #E3E6EB; padding-bottom: 8px"><span style="font-size: 16px; line-height: 24px">Body — default reading size</span><span class="p" style="font-size: 13px">16 / 24 · 400</span></div>
+        <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid #E3E6EB; padding-bottom: 8px"><span class="label">Label</span><span class="p" style="font-size: 13px">13 · 600 · caps</span></div>
+        <div style="display: flex; justify-content: space-between; align-items: baseline"><span style="font-size: 28px; font-weight: 600; font-variant-numeric: tabular-nums">1,240 kcal</span><span class="p" style="font-size: 13px">Numbers · tabular</span></div>
+      </div>
+      <div class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 14px">
+        <h2 class="h2">Components</h2>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap">
+          <button class="btn" type="button" style="background: #2445D8; color: #FFFFFF">Start workout</button>
+          <button class="btn" type="button" style="background: #FFFFFF; color: #0E1116; border: 1px solid #CBD0D8">Swap exercise</button>
+          <button class="btn" type="button" style="background: transparent; color: #2445D8; padding: 0 8px">Skip</button>
+        </div>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap">
+          <button class="chip" type="button" aria-pressed="true" style="background: #E8EDFF; border-color: #2445D8; color: #1A33A8">Home gym</button>
+          <button class="chip" type="button" aria-pressed="false">Commercial</button>
+          <button class="chip" type="button" aria-pressed="false">Outdoors</button>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <label for="ds-in" style="font-size: 14px; font-weight: 600">Goal weight (kg)</label>
+          <input id="ds-in" value="60" inputmode="decimal" style="font: inherit; font-size: 16px; min-height: 48px; border-radius: 12px; border: 1px solid #CBD0D8; padding: 0 14px; background: #FFFFFF; color: #0E1116">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px">
+    <div class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 12px">
+      <h2 class="h2">Accessibility non-negotiables</h2>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 24px; font-size: 15px; line-height: 22px">
+        <span>· Text contrast 4.5:1 minimum (3:1 at 24 px+)</span>
+        <span>· Touch targets 44 × 44, primary actions 48</span>
+        <span>· Dynamic Type / font scaling to 200%</span>
+        <span>· Colour never carries meaning alone</span>
+        <span>· Every icon button has a spoken label</span>
+        <span>· Visible focus ring, full keyboard on web</span>
+        <span>· Respects reduced motion</span>
+        <span>· Primary actions in thumb reach (bottom)</span>
+      </div>
+    </div>
+    <div class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 12px">
+      <h2 class="h2">Navigation</h2>
+      <div style="display: flex; flex-direction: column; gap: 10px; font-size: 15px; line-height: 22px">
+        <div style="display: flex; gap: 12px; align-items: baseline"><span class="label" style="min-width: 96px">Client app</span><span>Today · Train · Nutrition · Progress · Coach</span></div>
+        <div style="display: flex; gap: 12px; align-items: baseline"><span class="label" style="min-width: 96px">Solo user</span><span>Same five tabs. Coach tab = AI coach instead of a trainer.</span></div>
+        <div style="display: flex; gap: 12px; align-items: baseline"><span class="label" style="min-width: 96px">Trainer</span><span>Web workspace: Clients · Programs · Library · Check-ins · Messages · Brand. Same account; trainers still track their own training in the app.</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

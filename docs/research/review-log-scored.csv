@@ -1,0 +1,282 @@
+id,competitor,date,rating,theme,sentiment,impact,lesson,side,quote
+0,My PT Hub,2025-11-24,10,T3,+,3.11,value_ease,coach,Easy to use; organised program creation and client tracking; feels professional
+1,My PT Hub,2026-05-08,8,T16,-,1.95,missing_feature,coach,Misses habit stacking; habits are key to my challenges
+2,My PT Hub,2026-05-08,8,T3,+,2.61,value_ease,coach,Great value; recurring event scheduling easy
+3,My PT Hub,2026-05-02,10,T14,-,1.07,ux_friction,coach,Has to switch units manually for self and clients
+4,My PT Hub,2026-05-02,10,T13,+,2.89,support_vendor,coach,Well supported during evaluation; clients find app professional
+5,My PT Hub,2025-11-23,9,T3,+,3.14,value_ease,coach,Unlimited users = value for money
+6,My PT Hub,2025-11-23,9,T17,-,1.72,missing_feature,coach,"No step tracking in reports, no API"
+7,My PT Hub,2025-11-23,9,T12,-,2.24,missing_feature,coach,Stripe not supported in their country; wants other processors
+8,My PT Hub,2025-11-23,9,T1,-,1.15,reliability,coach,Buggy on some phones
+9,My PT Hub,2026-05-09,10,T18,-,1.16,missing_feature,coach,Wants more custom form options and a prewritten training agreement
+10,My PT Hub,2025-09-17,8,T13,+,2.05,support_vendor,coach,Support prompt and friendly
+11,My PT Hub,2025-09-17,8,T16,-,1.59,flexibility,coach,Habits only one-off or daily; wants 1-3x per week
+12,My PT Hub,2025-09-17,8,T12,-,2.09,missing_feature,client,Clients cannot pause recurring payments when in credit
+13,My PT Hub,2025-09-17,8,T2,-,2.08,pricing_trust,coach,Undisclosed extra 0.7% Stripe fee on recurring packages; support unaware
+14,My PT Hub,2026-02-20,8,T20,+,2.08,flexibility,coach,Can match app to own brand and social media aesthetic
+15,My PT Hub,2026-02-20,8,T9,-,2.35,missing_feature,coach,Barcode scan misses many foods; MyFitnessPal logs not visible to coach
+16,My PT Hub,2025-11-04,9,T4,-,1.58,pricing_trust,coach,White-label add-on not included in trial
+17,My PT Hub,2025-11-04,9,T3,+,3.76,value_ease,coach,Switched for cost-to-feature ratio; all features without complexity
+18,My PT Hub,2025-12-12,10,T10,+,3.38,value_ease,client,Clients find it easiest of several apps tried
+19,My PT Hub,2026-02-03,8,T10,-,1.62,ux_friction,coach,UI could be more intuitive with many clients/programs; extra steps
+20,My PT Hub,2026-02-03,8,T17,-,2.14,missing_feature,coach,Reporting and analytics weak for long-term progress
+21,My PT Hub,2026-02-03,8,T1,-,1.24,reliability,coach,Occasional glitches and slow load times
+22,My PT Hub,2025-11-03,10,T20,+,2.57,pricing_trust,coach,Branding with own logo; clients would pay extra for the app
+23,My PT Hub,2025-11-03,10,T6,+,3.27,coach_mobility,coach,Video tutorials; home and bodyweight workouts suit home PT
+24,My PT Hub,2026-07-10,8,T21,-,1.67,missing_feature,coach,Hard to mass-transfer data between two coach accounts
+25,My PT Hub,2026-02-28,3,T3,-,2.84,pricing_trust,coach,Expensive for only 3 clients; must go premium
+26,My PT Hub,2026-02-28,3,T2,-,2.89,pricing_trust,coach,"No month-to-month option, only 12-month"
+27,My PT Hub,2026-06-14,9,T16,+,2.71,motivation_tone,coach,Great habit tracking; client app helps accountability
+28,My PT Hub,2026-06-14,9,T11,-,1.28,missing_feature,coach,Wants more advanced automation
+29,My PT Hub,2026-07-30,8,T9,-,2.26,reliability,client,Clients unable to sync MyFitnessPal and other trackers
+30,My PT Hub,2026-07-30,8,T16,-,1.46,missing_feature,client,Clients cannot go back to a previous day in the habit tracker
+31,My PT Hub,2026-03-22,8,T4,-,2.05,pricing_trust,coach,Packages/booking not viewable in trial; only after upgrading
+32,My PT Hub,2026-07-15,10,T10,-,1.01,ux_friction,coach,Workouts section gets cluttered
+33,My PT Hub,2026-07-15,10,T19,-,1.43,missing_feature,coach,Diet plan builder cannot add options within one meal
+34,My PT Hub,2026-06-11,10,T8,-,1.79,missing_feature,coach,No check-in function for in-person sessions
+35,My PT Hub,2025-10-24,8,T5,-,1.55,missing_feature,coach,No circuit option; had to upload circuits separately
+36,My PT Hub,2025-10-24,8,T15,-,1.54,missing_feature,coach,Wants client community / group chat
+37,My PT Hub,2026-06-02,10,T19,-,1.98,missing_feature,coach,No macro calculator; meal plan should auto-fit client macro split
+38,My PT Hub,2026-06-02,10,T22,+,3.11,missing_feature,coach,AI feature will be a game changer
+39,My PT Hub,2026-07-10,7,T3,+,2.82,value_ease,coach,Everything in one place for a cheaper price than Trainerize
+40,My PT Hub,2026-07-10,7,T17,-,2.02,missing_feature,coach,Wants more customisable client-facing features and reports
+41,My PT Hub,2026-06-25,8,T10,-,2.02,ux_friction,client,Client mobile UI cluttered; wants cleaner minimalist client app; lag on heavy history
+42,My PT Hub,2026-06-25,8,T3,+,3.00,pricing_trust,coach,Unlimited clients; predictable cost for scaling
+43,My PT Hub,2026-07-21,7,T22,-,1.78,missing_feature,coach,Wants more AI and exercise selection at no extra cost
+44,My PT Hub,2026-07-21,7,T23,-,1.78,ux_friction,coach,Client enrolment could be simpler; slow improvements
+45,My PT Hub,2026-02-14,10,T4,-,1.16,pricing_trust,coach,Customisation feature costs extra
+46,My PT Hub,2026-05-05,8,T5,-,1.79,missing_feature,coach,"Only numeric set targets, no rep ranges; writes workout in notes"
+47,My PT Hub,2026-05-05,8,T20,+,2.62,flexibility,coach,Option to get own custom app is great
+48,TrueCoach,2022-07-24,,T10,+,2.13,value_ease,coach,Easy for coach and clients; easy to link videos and review sessions
+49,TrueCoach,2022-07-24,,T29,-,2.09,ux_friction,client,UI changes rolled out without notice slowed clients down for days
+50,TrueCoach,2022-07-24,10,T6,+,2.33,motivation_tone,coach,"Great exercise library; videos of real humans, not cartoons"
+51,TrueCoach,2022-07-24,0,T5,-,3.25,ux_friction,coach,Programming and tweaking painful and tedious; coaching interface cumbersome
+52,TrueCoach,2022-07-24,0,T2,-,3.40,pricing_trust,business,"Raised price with no improvements, then charged more for new features"
+53,TrueCoach,2022-07-24,0,T1,-,3.30,reliability,client,They broke the client app and still have not fixed it
+54,TrueCoach,2022-07-24,7,T11,+,1.68,value_ease,coach,Daily workout notifications so I do not text clients
+55,TrueCoach,2022-07-24,7,T17,+,1.91,motivation_tone,coach,Clients love progress graphs
+56,TrueCoach,2022-07-24,7,T3,-,2.35,pricing_trust,coach,24 clients but must pay for 30-client plan; wants per-slot pricing
+57,TrueCoach,2022-07-25,10,T5,+,3.16,flexibility,coach,"No limit on cues, sets, reps, rest, tempo; warm-ups/cool-downs"
+58,TrueCoach,2022-07-25,10,T30,-,2.56,pricing_trust,business,Wants to sell programs in-app to upsell and keep clients who leave over price
+59,TrueCoach,2022-07-25,10,T3,-,1.62,ux_friction,coach,Client tiers a pain to deal with
+60,TrueCoach,2022-07-24,10,T17,+,3.08,value_ease,coach,Great for compliance and two-way reporting
+61,TrueCoach,2022-07-24,10,T27,-,0.55,flexibility,coach,Wants to switch off or change frequency of reminder emails
+62,TrueCoach,2022-07-24,10,T12,-,2.11,missing_feature,business,System did not like UK bank payments
+63,TrueCoach,2020-10-31,10,T7,-,1.79,reliability,coach,Glitchy on iPad when designing or editing workouts on the fly
+64,TrueCoach,2020-10-31,10,T6,-,1.30,motivation_tone,coach,Lack of body size and race diversity in videos
+65,TrueCoach,2020-10-31,10,T24,-,1.80,flexibility,client,Clients cannot move a workout to another day or edit the completion date
+66,TrueCoach,2020-10-31,10,T28,-,2.10,missing_feature,coach,Wants volume tallies and automatic progression of acute variables (missed from Trainerize)
+67,TrueCoach,2020-10-31,10,T21,+,2.17,reliability,coach,Came back and all info and programs were saved
+68,TrueCoach,2022-07-26,6,T25,-,1.43,missing_feature,coach,Cannot preview a photo before sending in chat; wants voice notes
+69,TrueCoach,2022-07-26,6,T7,-,2.43,missing_feature,coach,Android client app just redirects to a web page
+70,TrueCoach,2022-07-26,6,T12,-,2.77,missing_feature,coach,Payments only available in the US
+71,TrueCoach,2022-07-26,6,T1,-,2.99,reliability,coach,Uploaded workouts do not save; page reloads erase what I typed
+72,TrueCoach,2022-07-24,8,T6,-,2.33,missing_feature,coach,Exercise library execution poor; some videos I would not show a client
+73,TrueCoach,2020-10-30,4,T5,-,2.28,missing_feature,coach,Cannot save individual workouts to drag into the calendar; copy-paste across tabs
+74,TrueCoach,2020-10-30,4,T28,-,2.78,missing_feature,coach,No progression feature; typing sets as text causes user errors
+75,TrueCoach,2020-10-30,4,T3,-,2.67,pricing_trust,coach,Price doubles from 20 to 21 clients
+76,TrueCoach,2020-10-30,4,T2,-,2.80,ux_friction,coach,Adding payments instead of fixing usability
+77,TrueCoach,2022-07-24,10,T13,+,2.86,support_vendor,coach,Support responds in minutes
+78,TrueCoach,2022-07-24,10,T15,-,1.17,missing_feature,coach,Wants a teams section for large groups of athletes
+79,TrueCoach,2022-07-24,10,T31,-,1.11,missing_feature,coach,Wants Whoop and other integrations beyond MyFitnessPal
+80,TrueCoach,2022-07-24,10,T1,-,1.25,reliability,coach,Rare glitches block programming or client access
+81,TrueCoach,2022-07-24,10,T5,+,3.42,value_ease,coach,"Workout builder, metrics, notes, messaging, payments"
+82,TrueCoach,2022-07-24,10,T16,-,1.96,missing_feature,coach,Wants habit-based nutrition coaching and lifestyle metrics like sleep and meditation
+83,TrueCoach,2022-07-24,10,T9,+,1.44,value_ease,coach,MyFitnessPal sync convenient
+84,TrueCoach,2022-08-11,1,T13,-,3.25,support_vendor,coach,Support responds but never resolves problems
+85,TrueCoach,2022-08-11,1,T2,-,2.53,pricing_trust,coach,Price increased
+86,TrueCoach,2022-08-11,1,T9,-,2.54,missing_feature,coach,No simple daily bodyweight input; needs a custom metric
+87,TrueCoach,2022-08-11,1,T7,-,3.20,coach_mobility,coach,Coach app view-only; programming needs a browser; Android coach app no notifications
+88,TrueCoach,2022-08-11,1,T1,-,3.32,reliability,coach,Client videos and pictures do not load; white screens
+89,TrueCoach,2022-08-11,1,T24,-,3.06,flexibility,coach,Cannot insert a rest day that shifts the schedule; one template cannot run on different weekdays per client
+90,TrueCoach,2021-06-28,9,T10,+,2.62,value_ease,coach,Simple and professional; clients upload videos for coach review
+91,TrueCoach,2021-06-28,9,T32,+,2.35,value_ease,client,Easy to upload videos and comments for the coach to evaluate
+92,TrueCoach,2022-07-29,8,T17,-,2.06,missing_feature,coach,Wants better client tracking and day-to-day planning beyond workouts
+93,TrueCoach,2022-07-25,10,T6,+,2.90,value_ease,coach,Exercise library shows clients exactly how to move
+94,TrueCoach,2022-07-25,10,T32,+,2.58,value_ease,coach,Attach videos and pictures for remote feedback
+95,TrueCoach,2022-07-25,10,T5,-,1.59,ux_friction,coach,Cannot insert an A1/A2 into a copied workout without deleting
+96,TrueCoach,2022-07-25,10,T26,-,1.31,flexibility,coach,"Wants per-client toggles: hide nutrition tab, turn messaging off, hide library videos"
+97,TrueCoach,2022-07-25,10,T17,+,2.36,motivation_tone,coach,Clients like seeing past workouts and improvements
+98,TrueCoach,2022-07-25,10,T28,-,1.44,missing_feature,coach,Wants more guidance for long-term programming
+99,TrueCoach,2022-07-24,10,T6,-,1.40,ux_friction,coach,Not easy to upload personal instruction videos
+100,TrueCoach,2022-07-24,10,T17,-,1.18,ux_friction,coach,Hard to pull up older stats without searching weeks of sessions
+101,TrueCoach,2022-07-25,8,T5,+,2.42,value_ease,coach,Assign programs; autocompleting exercise library
+102,TrueCoach,2022-07-25,8,T18,-,1.44,missing_feature,business,Wants membership contracts with e-sign
+103,TrueCoach,2022-07-25,8,T12,-,2.01,pricing_trust,business,Wants single-use payments
+104,TrueCoach,2019-07-12,10,T13,+,2.25,support_vendor,coach,Great support; asks for feedback
+105,TrueCoach,2019-07-12,10,T15,-,1.07,missing_feature,coach,Wants group chat for teams
+106,TrueCoach,2019-07-12,10,T12,-,2.24,missing_feature,business,Wants billing and payment processing
+107,TrueCoach,2022-07-24,10,T6,+,3.50,value_ease,coach,Movement videos save writing descriptions; grew from 5 to 30 clients
+108,TrueCoach,2022-07-24,10,T12,-,2.86,missing_feature,coach,Payment processing not available in Canada
+109,TrueCoach,2019-02-15,10,T31,-,1.04,missing_feature,coach,Wants InBody files linked to client profiles
+110,TrueCoach,2022-07-24,9,T6,+,2.28,value_ease,coach,Exercise library saves sending YouTube clips
+111,TrueCoach,2022-07-24,9,T3,-,1.96,pricing_trust,coach,A comparable product is free
+112,TrueCoach,2023-05-23,4,T1,-,2.84,reliability,client,Uploads fail; restarted app and lost a fully logged workout
+113,TrueCoach,2023-05-23,4,T25,-,2.25,ux_friction,client,Coach comments buried in past workouts behind a tiny button; not linked to messages
+114,TrueCoach,2023-05-23,4,T24,-,2.62,flexibility,client,Workouts in coach time zone mark me as missed; missed workouts should roll over; red X is disheartening; cannot reschedule for vacation
+115,TrueCoach,2025-08-21,8,T8,+,2.88,value_ease,coach,Excellent for 1:1 and in-person or hybrid coaching
+116,TrueCoach,2025-08-21,8,T16,-,2.60,missing_feature,coach,"Needed habit automation, structured check-ins and nutrition coaching for online behaviour change"
+117,TrueCoach,2026-05-06,0,T13,-,3.40,support_vendor,coach,IT support useless; no emails since February
+118,TrueCoach,2025-04-17,1,T6,+,2.15,missing_feature,coach,Add own exercises with video and descriptions
+119,TrueCoach,2025-04-17,1,T5,-,3.13,flexibility,coach,Hard to customise workouts across many clients
+120,TrueCoach,2023-09-25,10,T6,+,2.99,value_ease,coach,Extensive library plus own videos or YouTube links
+121,TrueCoach,2023-09-25,10,T10,+,2.64,value_ease,client,"Clients: simple, love demos, love checking in"
+122,TrueCoach,2023-10-27,10,T6,+,2.50,value_ease,coach,Shared team exercise library for problem areas
+123,TrueCoach,2023-10-27,10,T17,+,2.03,motivation_tone,coach,Year-end summary of goals reached
+124,TrueCoach,2023-10-27,10,T3,-,2.13,flexibility,coach,Client capacity limits
+125,Everfit,2026-06-17,10,T13,+,3.70,support_vendor,coach,Same-day support; switched from Trainerize
+126,Everfit,2026-06-17,10,T18,+,3.17,value_ease,coach,"All-in-one: check-ins, forms and contracts in one place"
+127,Everfit,2026-06-17,10,T26,+,0.52,flexibility,coach,"Can rename ""client"" to ""athlete"""
+128,Everfit,2026-06-17,10,T20,-,1.35,missing_feature,coach,Weaker white-label and branding than Trainerize
+129,Everfit,2026-06-17,10,T4,-,1.90,pricing_trust,coach,Gets expensive; features need higher tiers or add-ons
+130,Everfit,2026-06-17,10,T31,-,2.18,missing_feature,coach,"Wants Garmin/Strava, heart rate and endurance metrics"
+131,Everfit,2026-07-16,10,T6,+,3.44,value_ease,coach,Large library plus custom exercises; rehab and strength
+132,Everfit,2026-07-16,10,T17,-,0.96,missing_feature,coach,Wants a sets-and-reps per muscle group counter
+133,Everfit,2026-07-16,10,T15,-,1.75,missing_feature,coach,Wants time scheduling and client calendar integration
+134,Everfit,2026-07-20,10,T10,+,2.82,value_ease,coach,Clean and easy for coach and clients
+135,Everfit,2026-07-20,10,T10,-,0.90,reliability,coach,Slow to start the app
+136,Everfit,2026-07-11,8,T3,+,2.66,pricing_trust,coach,Free for up to 5 clients; reasonable price steps as clients grow
+137,Everfit,2026-07-11,8,T37,-,1.17,missing_feature,coach,No desktop version for clients; some prefer a big screen
+138,Everfit,2026-07-11,8,T8,-,2.04,missing_feature,coach,Logging a 1:1 workout in the trainer app does not show the client results page
+139,Everfit,2026-07-12,10,T9,-,2.61,reliability,coach,Other macro apps do not sync
+140,Everfit,2026-07-12,10,T33,-,1.51,missing_feature,client,Clients cannot log steps manually
+141,Everfit,2026-05-05,10,T9,+,3.34,value_ease,coach,"Workout logging, calorie tracking and recipes without overwhelm"
+142,Everfit,2026-05-05,10,T3,+,2.84,pricing_trust,coach,Trainerize not fairly priced; Kahunas looked unprofessional
+143,Everfit,2026-05-07,10,T10,+,2.47,value_ease,client,Clients say it is the most aesthetic and user-friendly
+144,Everfit,2026-05-07,10,T9,-,2.34,missing_feature,coach,Wishes in-app macro tracking was good enough to drop MyFitnessPal
+145,Everfit,2026-05-07,10,T18,+,1.25,value_ease,coach,Forms used for weekly check-ins
+146,Everfit,2025-11-28,10,T1,+,2.96,reliability,coach,"Runs smoothly without bugs, unlike big brands"
+147,Everfit,2025-11-28,10,T4,-,2.48,pricing_trust,coach,Numerous paid add-ons significantly increase cost
+148,Everfit,2026-05-05,8,T31,-,2.24,missing_feature,coach,Missing athlete/running performance features
+149,Everfit,2025-11-20,9,T34,+,2.38,value_ease,coach,Resources section and own video tutorials
+150,Everfit,2025-11-20,9,T38,+,2.07,motivation_tone,coach,Clients love the visual comparison at the end of workouts
+151,Everfit,2025-11-20,9,T10,-,0.91,reliability,coach,Initial loading slow
+152,Everfit,2025-11-20,9,T34,-,1.43,missing_feature,coach,Resource folder cap limiting
+153,Everfit,2025-11-20,9,T4,-,2.67,reliability,coach,Paid billing/packages bolt-on did not work
+154,Everfit,2026-01-15,10,T1,+,3.74,reliability,coach,Way fewer bugs than Trainerize
+155,Everfit,2026-01-15,10,T1,-,3.17,reliability,coach,Lag; changes do not go through and must be redone
+156,Everfit,2026-01-15,10,T25,-,1.30,ux_friction,coach,1-minute cap on voice notes
+157,Everfit,2025-11-14,9,T13,+,2.92,support_vendor,coach,Support within hours; public roadmap and feature requests
+158,Everfit,2025-11-14,9,T20,+,2.76,value_ease,coach,Custom branding built in
+159,Everfit,2025-11-14,9,T5,+,2.30,flexibility,coach,Alternate exercises for multiple setups (dumbbell instead of barbell)
+160,Everfit,2025-11-14,9,T11,+,3.03,value_ease,coach,Automations save hours on onboarding
+161,Everfit,2025-11-14,9,T32,+,2.52,value_ease,coach,Clients submit lifting videos for feedback
+162,Everfit,2025-11-14,9,T15,+,2.38,motivation_tone,coach,Community forums keep clients engaged
+163,Everfit,2025-11-14,9,T26,+,2.09,missing_feature,coach,Client subgroups
+164,Everfit,2025-11-14,9,T30,+,2.82,flexibility,coach,On-demand programs for self-directed clients
+165,Everfit,2025-11-14,9,T17,+,2.81,value_ease,coach,Master calendar shows periodisation
+166,Everfit,2025-11-14,9,T11,-,1.81,missing_feature,coach,Cannot schedule direct messages
+167,Everfit,2025-11-14,9,T12,-,1.70,missing_feature,coach,Payments do not track client location for tax
+168,Everfit,2025-11-14,9,T39,-,3.31,missing_feature,coach,Not compliant with health privacy law for regulated professionals
+169,Everfit,2026-07-20,10,T16,+,2.64,value_ease,coach,Habits and nutrition goals in one place
+170,Everfit,2026-07-20,10,T15,-,2.74,missing_feature,coach,No booking system for clients to schedule sessions
+171,Everfit,2026-07-20,10,T35,-,1.30,missing_feature,coach,Wants a coach directory/marketplace for discovery
+172,Everfit,2026-05-01,10,T34,+,2.71,value_ease,coach,Everfit Academy education and webinars
+173,Everfit,2026-05-01,10,T11,+,2.73,value_ease,coach,Autoflows and onboarding flows
+174,Everfit,2026-05-01,10,T5,-,1.97,flexibility,coach,Copy-paste workouts to the next week; change must be repeated in every later workout
+175,Everfit,2026-05-01,10,T34,-,1.42,missing_feature,coach,Limit on resource collections
+176,Everfit,2026-03-18,9,T22,+,2.97,value_ease,coach,AI builder turns written workouts into configured workouts
+177,Everfit,2026-03-18,9,T36,-,1.90,missing_feature,coach,Exercise search needs exact spelling; no synonyms; poor relevance
+178,Everfit,2026-03-09,10,T3,+,3.72,value_ease,coach,Price unbeatable; adding clients so easy it raised income about $1000/month
+179,Everfit,2026-03-09,10,T5,-,1.96,missing_feature,coach,Cannot edit all following workouts at once; weak layout for CrossFit/interval workouts
+180,Everfit,2026-03-09,10,T10,+,3.12,ux_friction,coach,"Clean, structured, neurodivergent-friendly layout reduces overwhelm"
+181,Everfit,2026-07-16,9,T22,+,2.73,value_ease,coach,AI workout builder helps a lot; desktop is user friendly
+182,Everfit,2026-07-16,9,T4,-,1.56,pricing_trust,coach,Many add-ons that could be free or cheaper
+183,Everfit,2026-07-16,9,T15,-,2.27,reliability,coach,Missing booking for sessions
+184,Everfit,2026-05-05,10,T13,+,2.97,motivation_tone,coach,Staff amazing and patient
+185,Everfit,2026-05-07,10,T5,+,2.96,flexibility,coach,Easy to customise client programs
+186,Everfit,2026-09-21,10,T6,+,2.83,value_ease,coach,Extensive exercise library
+187,Everfit,2026-09-21,10,T22,+,2.72,value_ease,coach,AI matches typed workout to library exercises
+188,Everfit,2026-09-21,10,T34,+,3.08,value_ease,coach,Free coach education on business and nutrition
+189,Everfit,2026-09-21,10,T17,-,1.40,missing_feature,coach,Wants side-by-side prescribed vs completed view
+190,Everfit,2026-09-15,10,T16,+,3.37,value_ease,coach,"Habits, mindset, nutrition and training in one platform"
+191,Everfit,2026-09-15,10,T10,-,1.01,ux_friction,coach,Learning curve: many features
+192,Everfit,2026-09-15,10,T11,-,1.07,missing_feature,coach,Wants more automation of admin
+193,Everfit,2026-08-16,10,T8,+,3.06,flexibility,coach,Works for both in-person and online clients
+194,Everfit,2026-08-16,10,T7,-,1.52,missing_feature,coach,Coach app could be better; wants customisable dashboard and client web access
+195,Everfit,2026-08-16,10,T4,-,1.16,pricing_trust,coach,Add-ons not always worth the extra cost
+196,Everfit,2026-07-22,9,T16,+,3.01,motivation_tone,coach,"Habits, check-ins and history keep clients accountable"
+197,Everfit,2026-07-22,9,T20,-,0.89,missing_feature,coach,Wants more branding and layout personalisation
+198,Everfit,2026-07-22,9,T4,-,2.27,pricing_trust,coach,Premium features only as paid add-ons; costs add up
+199,Everfit,2026-07-25,10,T11,-,1.51,flexibility,coach,Wants more flexible automations and onboarding customisation
+200,Trainerize,2019-02-13,10,T5,+,2.44,value_ease,coach,Circuit and rest timers; easy workout creation
+201,Trainerize,2019-02-13,10,T11,+,2.91,value_ease,coach,"Automated reminders, check-ins, daily recap email"
+202,Trainerize,2019-02-13,10,T17,+,2.54,value_ease,coach,"Weight charts, measurements, progress pics"
+203,Trainerize,2019-02-13,10,T7,-,1.87,coach_mobility,coach,Cannot modify a program from the phone
+204,Trainerize,2019-02-13,10,T31,-,0.57,missing_feature,coach,Wants Apple Watch
+205,Trainerize,2019-02-13,10,T40,-,1.27,ux_friction,coach,Check-in vs start-now confusing; skip an exercise in a timed circuit; watch demo while timer runs
+206,Trainerize,2019-02-13,10,T5,-,1.45,missing_feature,coach,No drop sets or rep variations
+207,Trainerize,2019-02-13,10,T41,-,2.27,flexibility,coach,Cannot tweak one client on a master program without converting it to custom
+208,Trainerize,2019-02-13,10,T25,-,1.36,missing_feature,coach,Cannot send video in messages
+209,Trainerize,2022-01-18,9,T10,+,2.88,value_ease,client,Clients find it intuitive; compliance up
+210,Trainerize,2022-01-18,9,T10,-,1.45,ux_friction,coach,Bulky with many clients
+211,Trainerize,2022-01-18,9,T9,-,1.43,missing_feature,coach,Little nutrition beyond MyFitnessPal integration
+212,Trainerize,2024-11-19,2,T1,-,3.25,reliability,coach,"Not user friendly, lots of glitches, little functionality"
+213,Trainerize,2019-02-01,10,T11,+,2.84,value_ease,coach,Nightly report replaces check-in emails
+214,Trainerize,2019-02-01,10,T12,+,3.36,value_ease,coach,"Programs, messaging, payments and invoices in one place"
+215,Trainerize,2018-07-24,9,T6,+,2.86,flexibility,coach,Custom exercises crucial; templates copied to clients
+216,Trainerize,2018-07-24,9,T12,-,1.63,missing_feature,coach,Cannot add a one-time product while a package is running
+217,Trainerize,2018-07-24,9,T41,-,1.91,flexibility,coach,Cannot modify a template once assigned
+218,Trainerize,2019-02-08,8,T41,+,2.52,flexibility,coach,Master programs: copy and customise templates easily
+219,Trainerize,2019-02-08,8,T28,+,2.85,value_ease,coach,Advanced progression capabilities
+220,Trainerize,2019-02-08,8,T15,-,0.98,ux_friction,coach,Calendar could be better
+221,Trainerize,2018-07-24,9,T12,-,1.60,pricing_trust,business,Only one package per client; no add-on upsells
+222,Trainerize,2018-07-24,9,T15,-,1.90,missing_feature,coach,No integrated scheduling
+223,Trainerize,2018-07-24,9,T41,-,1.96,missing_feature,coach,Cannot assign a master and a custom program together
+224,Trainerize,2017-10-26,10,T41,+,1.65,value_ease,coach,Store pre-made programs and copy them out
+225,Trainerize,2017-10-26,10,T15,+,2.14,motivation_tone,coach,Groups for social motivation
+226,Trainerize,2017-10-26,10,T12,+,2.74,value_ease,coach,Payments automation: set up and let it run
+227,Trainerize,2019-02-12,10,T6,+,1.97,value_ease,coach,"Great library, still growing"
+228,Trainerize,2019-02-12,10,T40,-,1.25,reliability,coach,Timer stops when switching to a music app; should run in background
+229,Trainerize,2019-02-12,10,T1,-,2.45,reliability,coach,Crashes a lot
+230,Trainerize,2019-02-08,9,T8,+,2.98,flexibility,client,Clients keep training online after moving or on holiday
+231,Trainerize,2019-02-08,9,T6,-,1.01,missing_feature,coach,Wants a photo on an exercise when there is no video
+232,Trainerize,2019-02-08,9,T31,+,2.41,value_ease,coach,Fitbit and nutrition integrations
+233,Trainerize,2025-01-23,8,T4,-,2.03,pricing_trust,coach,Excessive fees for add-on services
+234,Trainerize,2024-11-04,10,T5,+,1.94,value_ease,coach,Good workout planning
+235,Trainerize,2024-11-04,10,T9,-,2.07,missing_feature,coach,Cannot set training-day and rest-day macro plans
+236,Trainerize,2024-09-06,10,T10,+,3.48,value_ease,coach,Full coach-client relationship in one app
+237,Trainerize,2019-02-01,10,T8,+,2.53,value_ease,coach,Biggest benefit with in-person clients seen once a week
+238,Trainerize,2019-02-01,10,T29,-,2.06,support_vendor,coach,Updates change or remove features I like
+239,Trainerize,2019-02-01,10,T40,-,1.82,missing_feature,coach,No simple way to log resistance bands; cannot see notes from previous times
+240,Trainerize,2019-04-17,10,T38,+,2.00,value_ease,coach,PR detection told to client and coach
+241,Trainerize,2019-04-17,10,T11,+,2.60,motivation_tone,coach,"Push to coach on workout done, PR or message; reminders to clients"
+242,Trainerize,2019-04-17,10,T10,-,1.12,ux_friction,coach,A month to learn; clients unaware of features; wants a client tutorial
+243,Trainerize,2024-03-04,0,T1,-,3.97,reliability,coach,"Data deleted, clients locked out; hours a week troubleshooting since acquisition"
+244,Trainerize,2024-03-04,0,T28,-,2.97,missing_feature,coach,No e1RM tracking or group workout tracking
+245,Trainerize,2024-03-04,0,T2,-,3.53,pricing_trust,coach,Pricing model
+246,Trainerize,2021-06-24,10,T9,+,2.74,value_ease,coach,Meal plan with food tracking
+247,Trainerize,2021-06-24,10,T31,+,2.08,value_ease,coach,Apple Watch connection
+248,Trainerize,2021-06-24,10,T29,-,0.69,ux_friction,coach,Must update the app to see plan changes
+249,Trainerize,2022-05-05,6,T3,+,2.16,pricing_trust,coach,Most affordable for new trainers
+250,Trainerize,2022-05-05,6,T16,+,1.35,value_ease,coach,"Daily to-do list: workouts, habits, cardio, nutrition"
+251,Trainerize,2022-05-05,6,T11,-,2.10,flexibility,coach,Cannot stack templates or pick which automated messages go out
+252,Trainerize,2022-05-05,6,T18,-,1.98,missing_feature,coach,Wants a membership portal with forms
+253,Trainerize,2018-01-19,10,T25,+,2.30,value_ease,coach,Built-in messenger separate from personal texting
+254,Trainerize,2018-01-19,10,T13,+,3.00,support_vendor,coach,Developers worked with me on improvements
+255,Trainerize,2017-04-18,10,T38,+,2.27,motivation_tone,coach,Messages for personal bests help retention
+256,Trainerize,2017-04-18,10,T7,-,2.20,coach_mobility,coach,Cannot access templates from the app
+257,Trainerize,2017-04-18,10,T41,-,1.89,missing_feature,coach,Cannot update several clients' plans at once
+258,Trainerize,2019-02-12,10,T41,+,2.69,value_ease,coach,Copy plans from client to client; progress whole cycles
+259,Trainerize,2019-02-12,10,T8,-,1.55,missing_feature,coach,Training more than one person at once needs a device per person
+260,Trainerize,2019-02-12,10,T37,-,2.55,reliability,coach,Works poorly on Android
+261,Trainerize,2019-11-12,10,T24,-,1.06,flexibility,coach,Programs could only start on a Monday
+262,Trainerize,2019-11-12,10,T12,-,1.40,pricing_trust,coach,Wants proration for mid-month sign-ups
+263,Trainerize,2019-02-08,10,T17,+,2.55,value_ease,coach,Tracking for clients and coach
+264,Trainerize,2019-02-04,9,T17,+,2.08,value_ease,coach,Progress graphs
+265,Trainerize,2019-02-04,9,T40,-,1.37,ux_friction,coach,Client workout notes hard to find
+266,Trainerize,2019-02-04,9,T7,-,2.60,coach_mobility,coach,App only good for messaging; needs a computer for everything else
+267,Trainerize,2021-09-03,8,T13,+,2.04,support_vendor,coach,Human chat support with good follow-up
+268,Trainerize,2021-09-03,8,T10,-,2.87,ux_friction,coach,"Extremely difficult to navigate, even after years"
+269,Trainerize,2026-04-09,7,T5,+,1.90,flexibility,coach,Easy program changes
+270,Trainerize,2026-04-09,7,T6,-,1.17,support_vendor,coach,Outdated demo videos
+271,Trainerize,2026-04-09,7,T31,-,1.78,missing_feature,coach,No Android watch integration
+272,Trainerize,2026-04-09,7,T2,-,1.57,support_vendor,coach,Unlinking Stripe took back-and-forth with support
+273,Trainerize,2025-12-08,5,T5,+,1.69,value_ease,coach,"Custom workouts, videos, progressions"
+274,Trainerize,2025-12-08,5,T10,-,1.55,ux_friction,client,Older and non-techy clients confused at first
+275,Trainerize,2025-06-30,9,T10,+,2.97,value_ease,coach,"One-stop shop, simple on both sides"
+276,Trainerize,2025-07-02,4,T11,+,1.38,value_ease,coach,Scheduled auto messages are the best feature
+277,Trainerize,2025-07-02,4,T9,-,2.89,reliability,coach,MyFitnessPal sync constantly broken; wants own food database; computes averages by hand
+278,Trainerize,2025-07-02,4,T11,-,1.74,missing_feature,coach,Cannot bulk-delete automated messages
+279,Trainerize,2025-12-14,9,T10,+,2.64,value_ease,client,"Easy, goals clear, simple setup"
+280,Trainerize,2025-12-14,9,T31,-,0.87,reliability,client,Fitbit does not always sync

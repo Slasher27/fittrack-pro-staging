@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Active workout</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'Geist',system-ui,sans-serif;color:#0E1116;-webkit-font-smoothing:antialiased}
+a{color:#2445D8}a:hover{color:#1A33A8}
+.card{background:#FFFFFF;border:1px solid #E3E6EB;border-radius:16px}
+.label{font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#4A5260;margin:0}
+.muted{color:#4A5260}
+.num{font-variant-numeric:tabular-nums}
+.btn{font:inherit;font-weight:600;font-size:16px;min-height:48px;border-radius:12px;border:0;padding:0 20px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none}
+.btn-p{background:#2445D8;color:#FFFFFF}
+.btn-p:hover{background:#1A33A8;color:#FFFFFF}
+.btn-s{background:#FFFFFF;color:#0E1116;border:1px solid #CBD0D8}
+.icon-btn{font:inherit;width:44px;height:44px;border-radius:12px;border:0;background:transparent;color:#0E1116;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;padding:0}
+.chip{font:inherit;font-size:14px;font-weight:500;min-height:44px;padding:0 16px;border-radius:999px;border:1px solid #CBD0D8;background:#FFFFFF;color:#0E1116;display:inline-flex;align-items:center;gap:8px;cursor:pointer}
+.chip-on{background:#E8EDFF;border-color:#2445D8;color:#1A33A8}
+.tab{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-width:64px;min-height:48px;font-size:12px;font-weight:500;color:#5B6372;text-decoration:none}
+.tab:hover{color:#0E1116}
+.tab-on{color:#2445D8;font-weight:600}
+.tab-on:hover{color:#2445D8}
+.opt{display:flex;align-items:center;gap:14px;padding:14px 16px;border:1px solid #E3E6EB;border-radius:14px;background:#FFFFFF;cursor:pointer}
+.opt-on{border:2px solid #2445D8;padding:13px 15px;background:#F7F9FF}
+.opt input{width:22px;height:22px;margin:0;accent-color:#2445D8;flex-shrink:0}
+svg{flex-shrink:0}
+.side{display:flex;align-items:center;gap:12px;min-height:44px;padding:0 12px;border-radius:10px;color:#0E1116;text-decoration:none;font-size:15px;font-weight:500}
+.side:hover{background:#F1F3F6;color:#0E1116}
+.side-on{background:#E8EDFF;color:#1A33A8;font-weight:600}
+.side-on:hover{background:#E8EDFF;color:#1A33A8}
+</style>
+<style>body{background:#E9ECF0;display:flex;justify-content:center;padding:24px}</style>
+</head>
+<body>
+
+
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #0C0E12; color: #F2F4F7; display: flex; flex-direction: column">
+  <header style="padding: 52px 12px 8px; display: flex; align-items: center; justify-content: space-between">
+    <a href="Today.html" class="icon-btn" aria-label="Minimise workout" style="color: #F2F4F7"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></a>
+    <div style="display: flex; flex-direction: column; align-items: center">
+      <h1 style="margin: 0; font-size: 17px; font-weight: 600">Lower body A</h1>
+      <span class="num" style="font-size: 14px; color: #A3ABB8" aria-label="Elapsed 24 minutes 18 seconds">24:18</span>
+    </div>
+    <button type="button" class="btn" style="min-height: 44px; padding: 0 16px; background: #8FA6FF; color: #0C0E12; font-size: 15px">Finish</button>
+  </header>
+
+  <main style="flex-grow: 1; padding: 4px 16px 0; display: flex; flex-direction: column; gap: 12px">
+    <div style="display: flex; align-items: center; gap: 10px; padding: 0 4px">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#A3ABB8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
+      <span style="font-size: 14px; color: #A3ABB8">Home gym · swaps only use kit you have here</span>
+    </div>
+
+    <section aria-labelledby="ex1" style="background: #161A20; border: 1px solid #262C35; border-radius: 16px; padding: 16px; display: flex; flex-direction: column; gap: 12px">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start">
+        <div style="display: flex; flex-direction: column; gap: 2px">
+          <span style="font-size: 13px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: #A3ABB8">Exercise 2 of 6</span>
+          <h2 id="ex1" style="margin: 0; font-size: 22px; line-height: 28px; font-weight: 600">Romanian deadlift</h2>
+          <span style="font-size: 14px; color: #A3ABB8">Barbell · 4 × 8 · rest 2 min</span>
+        </div>
+        <button type="button" class="icon-btn" aria-label="Exercise options" style="color: #F2F4F7"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg></button>
+      </div>
+      <p style="margin: 0; font-size: 14px; line-height: 20px; padding: 10px 12px; border-radius: 10px; background: #1E2430; color: #F2F4F7"><b style="color: #8FA6FF; font-weight: 600">Coach:</b> 40 kg if form stays clean. Soft knees, hips back.</p>
+
+      <table style="width: 100%; border-collapse: collapse; font-size: 15px">
+        <thead>
+          <tr style="font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: #A3ABB8; text-align: center">
+            <th scope="col" style="padding: 4px 0; width: 36px">Set</th>
+            <th scope="col" style="padding: 4px 0">Last</th>
+            <th scope="col" style="padding: 4px 0">kg</th>
+            <th scope="col" style="padding: 4px 0">Reps</th>
+            <th scope="col" style="padding: 4px 0; width: 48px"><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Done</span></th>
+          </tr>
+        </thead>
+        <tbody class="num" style="text-align: center">
+          <tr style="background: #13261F">
+            <td style="padding: 6px 0; font-weight: 600">1</td><td style="color: #A3ABB8">35 × 8</td><td>37.5</td><td>8</td>
+            <td><button type="button" aria-label="Set 1 done" aria-pressed="true" style="width: 44px; height: 44px; border-radius: 10px; border: 0; background: #5FD3A4; color: #0C0E12; display: inline-flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg></button></td>
+          </tr>
+          <tr style="background: #13261F">
+            <td style="padding: 6px 0; font-weight: 600">2</td><td style="color: #A3ABB8">35 × 8</td><td>40</td><td>8</td>
+            <td><button type="button" aria-label="Set 2 done" aria-pressed="true" style="width: 44px; height: 44px; border-radius: 10px; border: 0; background: #5FD3A4; color: #0C0E12; display: inline-flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg></button></td>
+          </tr>
+          <tr>
+            <td style="padding: 6px 0; font-weight: 600">3</td><td style="color: #A3ABB8">35 × 8</td>
+            <td><label><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Set 3 weight in kg</span><input value="40" inputmode="decimal" style="font: inherit; width: 64px; height: 44px; text-align: center; border-radius: 10px; border: 2px solid #8FA6FF; background: #0C0E12; color: #F2F4F7"></label></td>
+            <td><label><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Set 3 reps</span><input value="8" inputmode="numeric" style="font: inherit; width: 56px; height: 44px; text-align: center; border-radius: 10px; border: 1px solid #3A4250; background: #0C0E12; color: #F2F4F7"></label></td>
+            <td><button type="button" aria-label="Mark set 3 done" aria-pressed="false" style="width: 44px; height: 44px; border-radius: 10px; border: 1px solid #3A4250; background: transparent; color: #A3ABB8; display: inline-flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg></button></td>
+          </tr>
+          <tr style="color: #A3ABB8">
+            <td style="padding: 6px 0; font-weight: 600">4</td><td>35 × 7</td><td>—</td><td>—</td><td></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+        <button type="button" class="btn" style="background: transparent; color: #F2F4F7; border: 1px solid #3A4250; font-size: 15px">Add set</button>
+        <button type="button" class="btn" style="background: transparent; color: #F2F4F7; border: 1px solid #3A4250; font-size: 15px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4 3 8l4 4M3 8h14M17 20l4-4-4-4M21 16H7"/></svg>Swap</button>
+      </div>
+    </section>
+
+    <section aria-label="Up next" style="display: flex; flex-direction: column; gap: 8px">
+      <h2 style="margin: 0; font-size: 13px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: #A3ABB8">Up next</h2>
+      <a href="#" style="display: flex; justify-content: space-between; align-items: center; min-height: 56px; padding: 0 14px; border-radius: 14px; background: #161A20; color: #F2F4F7; text-decoration: none"><span style="display: flex; flex-direction: column"><b style="font-size: 15px; font-weight: 600">Bulgarian split squat</b><span style="font-size: 13px; color: #A3ABB8">Dumbbells · 3 × 10 each</span></span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#A3ABB8" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></a>
+    </section>
+  </main>
+
+  <div role="timer" aria-label="Rest timer, 1 minute 24 seconds remaining" style="margin: 12px 16px 34px; padding: 10px 10px 10px 16px; border-radius: 16px; background: #1E2430; display: flex; align-items: center; gap: 8px">
+    <span style="flex-grow: 1; display: flex; flex-direction: column"><span style="font-size: 13px; color: #A3ABB8">Rest</span><b class="num" style="font-size: 24px; font-weight: 700">1:24</b></span>
+    <button type="button" aria-label="Subtract 15 seconds" class="btn" style="min-height: 44px; padding: 0 12px; background: #2A3140; color: #F2F4F7; font-size: 15px">−15</button>
+    <button type="button" aria-label="Add 15 seconds" class="btn" style="min-height: 44px; padding: 0 12px; background: #2A3140; color: #F2F4F7; font-size: 15px">+15</button>
+    <button type="button" class="btn" style="min-height: 44px; padding: 0 14px; background: #8FA6FF; color: #0C0E12; font-size: 15px">Skip</button>
+  </div>
+</div>
+</body>
+</html>
