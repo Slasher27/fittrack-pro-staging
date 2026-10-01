@@ -5,7 +5,7 @@ import { openLocalDb } from '$lib/data/db';
 import { del, get, list, pendingCount, put } from '$lib/data/repo';
 import { syncOnce } from '$lib/data/sync';
 import type { LocalRow } from '$lib/data/tables';
-import { supabaseTransport } from '$lib/data/transport';
+import { supabaseTransport, type Transport } from '$lib/data/transport';
 
 // The real sync engine against local Supabase (upsert_lww, RLS, PostgREST filters and paging).
 // Runs when PUBLIC_SUPABASE_URL / PUBLIC_SUPABASE_ANON_KEY are set (.env locally, CI's db job).
@@ -13,8 +13,8 @@ const url = process.env.PUBLIC_SUPABASE_URL;
 const key = process.env.PUBLIC_SUPABASE_ANON_KEY;
 
 describe.skipIf(!url || !key)('sync against local Supabase', () => {
-	const sb = createClient(url!, key!, { auth: { persistSession: false } });
-	const t = supabaseTransport(sb);
+	// Created in beforeAll: a skipped describe still runs its body, and CI's static job has no backend.
+	let t: Transport;
 	let userId = '';
 	let n = 0;
 	const device = () => openLocalDb(`it-${userId}-${++n}`);
@@ -28,6 +28,8 @@ describe.skipIf(!url || !key)('sync against local Supabase', () => {
 	});
 
 	beforeAll(async () => {
+		const sb = createClient(url!, key!, { auth: { persistSession: false } });
+		t = supabaseTransport(sb);
 		const { data, error } = await sb.auth.signUp({
 			email: `sync-${Date.now()}-${Math.random().toString(36).slice(2, 8)}@test.local`,
 			password: 'correct horse battery',
