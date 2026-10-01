@@ -1,0 +1,18 @@
+# Package Managers
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+bun.lock
+bun.lockb
+
+# Miscellaneous
+/static/
+
+# Generated / vendored
+/build/
+/.svelte-kit/
+/supabase/
+/docs/
+src/lib/supabase/types.ts
+playwright-report/
+test-results/

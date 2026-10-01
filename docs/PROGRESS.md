@@ -1,8 +1,8 @@
 # Progress
 
 > ## Current status (2026-10-01)
-> **Phase:** 0 — Foundations (not started).
-> **Next action:** complete the Phase 0 checklist in ROADMAP.md. Backend is local Supabase only (Docker Desktop and the Supabase CLI are installed); the hosted project comes in Phase 3 (D-032).
+> **Phase:** 0 — Foundations: **done** (all exit criteria met 2026-10-01, PR #1). Phase 1 — Member core, offline: not started.
+> **Next action:** merge PR #1, then start Phase 1 with its first item: decide what happens to v3 `meals` (see below). The Supabase CLI is a devDependency (`pnpm supabase …`). Netlify site `fittrack-pro-staging` is linked to the repo (previews on every PR).
 > **Blockers / open questions:**
 > - Final product name (in Phase 6, before the pilot).
 > - Supabase region choice (closest to South Africa), to record in the privacy policy.
@@ -12,7 +12,11 @@
 ## Exit criteria log
 | Phase | Criterion | Met on | Evidence |
 |-------|-----------|--------|----------|
-| | | | |
+| 0 | Sign up/in works against local Supabase | 2026-10-01 | `tests/e2e/auth.e2e.ts`: sign-up (age gate + consent), sign-in, sign-out, redirect back, password reset via Mailpit; 34/34 e2e pass locally |
+| 0 | Gallery passes axe, zero serious/critical, 390 + 1280 px | 2026-10-01 | `tests/e2e/a11y.e2e.ts` (light + dark, plus auth and shell screens); a planted violation is caught (sanity check) |
+| 0 | Sign up/in works in CI · CI green | 2026-10-01 | PR #1: GitHub Actions jobs "Lint, typecheck, unit" and "RLS (pgTAP) and e2e" both green (run 36846603056) |
+| 0 | Netlify preview builds and loads the shell | 2026-10-01 | https://deploy-preview-1--fittrack-pro-staging.netlify.app: shell, gallery and service worker load; no-backend notice as expected (D-032) |
+| 0 | PROGRESS.md updated | 2026-10-01 | This entry |
 
 ## Feedback backlog (Lisa test, Phase 5)
 | Date | From | Issue | Severity | Status |
@@ -21,6 +25,8 @@
 
 ## Session log
 Newest first. Each entry: date · what was done · decisions (link to DECISIONS.md) · what's next.
+
+- **2026-10-01** · Phase 0 build (branch `feat/phase-0-foundations`). Scaffold: SvelteKit 2 / Svelte 5, Vite 8, TS 6, Tailwind 4.3, adapter-static (200.html fallback), ESLint/Prettier, Vitest, Playwright + axe. Local Supabase: `0001_profiles.sql` (all §3 columns + sync defaults, owner-only RLS, no member delete, sign-up trigger with age gate + consent) and `supabase/tests/profiles.test.sql` (17 pgTAP allow/deny). `tokens.css` uses `light-dark()` with Auto/Light/Dark; 17 §3 components + Notice/Icon/Placeholder; `/dev/components` gallery (shown in dev, or with `PUBLIC_DEV_ROUTES=1`). Auth: sign-up/in/reset/out. Shell: member tabs (bottom/rail), trainer sidebar (top menu on phone), placeholders, PWA (manifest, placeholder icons, service-worker shell cache, works offline). CI workflow + netlify.toml. Results: lint/check clean, 12/12 unit, 17/17 pgTAP, 34/34 e2e. Decisions: D-033 (consent in auth metadata). Notes: no danger/red token exists, so destructive buttons use the warn set; `notify_prefs` deferred to Phase 4. Then: Netlify site created and linked, PR #1 opened, CI and preview green. **Phase 0 closed.** Next: merge PR #1, Phase 1.
 
 - **2026-10-01** · Created this repo from the spec pack in FitTrack-app `docs/pro` (now this repo's `docs/`). GitHub remote: Slasher27/fittrack-pro-staging. Next: Phase 0.
 - **2026-10-01** · Chose UI direction A · Quiet (D-030). Billing: in-app payers pay a capped platform fee instead of the per-client fee (D-031). Docs streamlined: after-pilot items moved out of the v1 scope lists, trainer conversations moved to just before the pilot (Phase 6), a "what's current" summary at the top of DECISIONS. Committed on branch `docs/fittrack-pro-spec`.

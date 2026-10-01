@@ -12,3 +12,6 @@ supabase/.temp/
 supabase/.branches/
 .DS_Store
 Thumbs.db
+.netlify/
+vite.config.ts.timestamp-*
+!.env.test

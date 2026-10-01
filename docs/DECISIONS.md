@@ -148,3 +148,8 @@ Offline-first effort goes where it matters: logging and training on the phone.
 **Context:** the owner's free Supabase plan already has 2 active projects (v3 + one other).
 **Decision:** Phases 0–2 run on local Supabase (Docker) and CI only. The hosted `fittrack-pro-staging` project is created at the start of Phase 3, after freeing a slot.
 **Consequences:** Netlify previews before Phase 3 show the shell without a working backend.
+
+### D-033 · Sign-up consent and age confirmation live in auth metadata (2026-10-01)
+**Context:** BUSINESS-RULES §6 needs explicit POPIA processing consent and an 18+ gate at sign-up (D-012), but `profiles` (ARCHITECTURE §3) has no consent column.
+**Decision:** the sign-up form asks for the full date of birth and checks 18+ on the device (`lib/domain/signup.ts`). It sends only `birth_year`, `adult: true` and `consent_version` in the auth sign-up metadata. The `handle_new_user` trigger refuses sign-ups without consent, without `adult`, or with a birth year under 18, then creates the `profiles` row. The consent evidence (version + `auth.users.created_at`) stays in `auth.users.raw_user_meta_data`. `profiles` has no delete grant for members: synced rows are soft-deleted (D-015), and account deletion uses the service role (Phase 6).
+**Consequences:** no schema change. Bump `CONSENT_VERSION` whenever the consent text changes. If re-consent is ever needed, a `consents` table (with RLS + pgTAP) replaces this. Jev rated this option 0.75 against a new column (0.18) or a table (0.07).
