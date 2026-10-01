@@ -24,7 +24,7 @@ empty, error, offline and no-permission states (CLAUDE.md).
 
 ## Phase 1 — Member core, offline (≈ 3 weeks)
 - [x] Decide what happens to v3 `meals` (PROGRESS open question; one option adds saved meals to this phase) and record it in DECISIONS.md.
-- [ ] Migrations: the `synced_at`/`up` trigger and `upsert_lww` RPC (ARCHITECTURE §5), applied to `profiles` too; the `has_pro()` stub (returns true, ARCHITECTURE §3); gym_profiles, gym_equipment, equipment_catalog (seeded), foods, food_logs, water_logs, body_metrics, photos (+ `photos` bucket; `checkin_id` is a plain uuid until Phase 4), targets, ai_usage.
+- [x] Migrations: the `synced_at`/`up` trigger and `upsert_lww` RPC (ARCHITECTURE §5), applied to `profiles` too; the `has_pro()` stub (returns true, ARCHITECTURE §3); gym_profiles, gym_equipment, equipment_catalog (seeded), foods, food_logs, water_logs, body_metrics, photos (+ `photos` bucket; `checkin_id` is a plain uuid until Phase 4), targets, ai_usage.
 - [ ] Local IndexedDB stores + repositories + outbox + sync engine (ARCHITECTURE §5) with the sync unit tests listed in ARCHITECTURE §10 (except the program and relationship ones, which come with Phases 2 and 4).
 - [ ] Port `nutritionTargets()` into `lib/domain/targets.ts` with tests (oracle: v3 `tests/onboard-test.js`; formula in ARCHITECTURE §6). Targets screen in Settings for setting them by hand until onboarding exists (Phase 2).
 - [ ] Today: nutrition summary, water (target from `targets.water_ml`), weight trend, quick log (recents and one-tap re-log). PRD §4.1 Today.
