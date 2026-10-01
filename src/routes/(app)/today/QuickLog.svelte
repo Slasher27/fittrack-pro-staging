@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
 	import { local } from '$lib/data/local.svelte';
-	import { put } from '$lib/data/repo';
+	import { relog as relogFood } from '$lib/data/nutrition';
 	import type { LocalRow } from '$lib/data/tables';
 	import { amountLabel, mealSlotAt, recentFoods } from '$lib/domain/day';
 	import { formatInt } from '$lib/format';
@@ -20,14 +20,7 @@
 		if (!local.db) return;
 		const now = new Date();
 		try {
-			await put(local.db, 'food_logs', {
-				...l,
-				id: crypto.randomUUID(),
-				eaten_at: now.toISOString(),
-				meal_slot: mealSlotAt(now, tz),
-				up: 0,
-				deleted: false
-			});
+			await relogFood(local.db, l, mealSlotAt(now, tz), now.toISOString());
 			toast(`Logged ${l.name}, ${amountLabel(l)}.`, 'ok');
 		} catch {
 			toast('We couldn’t save that. Try again.', 'warn');

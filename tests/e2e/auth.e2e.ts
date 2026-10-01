@@ -1,12 +1,11 @@
 import { expect, test } from '@playwright/test';
-import { PASSWORD, signUp, uniqueEmail } from './helpers';
+import { PASSWORD, signUp, uniqueEmail, signOut } from './helpers';
 
 const MAILPIT = 'http://127.0.0.1:54324';
 
 test('signed-out visitors are sent to sign-in and back afterwards', async ({ page }) => {
 	const email = await signUp(page);
-	await page.goto('/settings');
-	await page.getByRole('button', { name: 'Sign out' }).click();
+	await signOut(page);
 	await expect(page).toHaveURL(/\/sign-in$/);
 
 	await page.goto('/nutrition');
@@ -19,8 +18,7 @@ test('signed-out visitors are sent to sign-in and back afterwards', async ({ pag
 
 test('sign-in shows a clear error for a wrong password', async ({ page }) => {
 	const email = await signUp(page);
-	await page.goto('/settings');
-	await page.getByRole('button', { name: 'Sign out' }).click();
+	await signOut(page);
 	await page.getByLabel('Email').fill(email);
 	await page.getByLabel('Password').fill('wrong password');
 	await page.getByRole('button', { name: 'Sign in' }).click();
@@ -46,8 +44,7 @@ test('sign-up enforces the age gate and consent', async ({ page }) => {
 
 test('password reset by email', async ({ page, request }) => {
 	const email = await signUp(page);
-	await page.goto('/settings');
-	await page.getByRole('button', { name: 'Sign out' }).click();
+	await signOut(page);
 
 	await page.goto('/reset');
 	await page.getByLabel('Email').fill(email);
@@ -74,8 +71,7 @@ test('password reset by email', async ({ page, request }) => {
 	await page.getByRole('button', { name: 'Save password' }).click();
 	await expect(page).toHaveURL(/\/today$/);
 
-	await page.goto('/settings');
-	await page.getByRole('button', { name: 'Sign out' }).click();
+	await signOut(page);
 	await page.getByLabel('Email').fill(email);
 	await page.getByLabel('Password').fill('a brand new password');
 	await page.getByRole('button', { name: 'Sign in' }).click();

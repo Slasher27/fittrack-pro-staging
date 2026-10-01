@@ -63,6 +63,21 @@ export function mealSlotAt(instant: Date, tz = DEFAULT_TIMEZONE): MealSlot {
 	return 'dinner';
 }
 
+/** v3's default slot times, used when logging on a past day (MIGRATION-V3 uses the same). */
+export const SLOT_HOURS: Record<MealSlot, number> = {
+	breakfast: 8,
+	lunch: 13,
+	snack: 16,
+	dinner: 19
+};
+
+/** When a log for `date` happened: now if it's today, else that day at the slot's default time. */
+export function eatenAt(date: string, slot: MealSlot, now: Date, tz = DEFAULT_TIMEZONE): string {
+	const today = new Intl.DateTimeFormat('en-CA', { timeZone: tz }).format(now);
+	if (date === today) return now.toISOString();
+	return new Date(localMidnight(date, tz) + SLOT_HOURS[slot] * 3600_000).toISOString();
+}
+
 export function greeting(instant: Date, tz = DEFAULT_TIMEZONE): string {
 	const h = localHour(instant, tz);
 	return h < 12 ? 'Good morning' : h < 18 ? 'Good afternoon' : 'Good evening';
@@ -108,11 +123,12 @@ export function recentFoods<T extends FoodLogLike>(logs: T[], n = 6): T[] {
 	return out;
 }
 
-/** "80 g", "2 slices", "1 serving". */
+/** "80 g", "1 rusk", "2 × 1 rusk", "2 slices", "1 serving". Serving labels usually carry their count. */
 export function amountLabel(l: Pick<FoodLogLike, 'grams' | 'servings' | 'serving_label'>): string {
-	if (l.servings != null) {
-		const n = Number(l.servings);
-		return `${n} ${l.serving_label || (n === 1 ? 'serving' : 'servings')}`;
-	}
-	return `${Number(l.grams)} g`;
+	if (l.servings == null) return `${Number(l.grams)} g`;
+	const n = Number(l.servings);
+	const label = l.serving_label?.trim();
+	if (!label) return n === 1 ? '1 serving' : `${n} servings`;
+	if (/^\d/.test(label)) return n === 1 ? label : `${n} × ${label}`;
+	return `${n} ${label}`;
 }

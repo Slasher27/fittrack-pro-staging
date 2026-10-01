@@ -168,3 +168,8 @@ Offline-first effort goes where it matters: logging and training on the phone.
 **Context:** v3 kept one IndexedDB and wiped it on every sign-out. Pro has an outbox, so signing out offline could silently lose unsynced logs; health data (POPIA) shouldn't stay on a shared phone either.
 **Decision:** one IndexedDB per user (`fittrack-pro-{user id}`). Signing out first tries to sync; with nothing pending it deletes the database, otherwise it warns ("N changes not synced yet") and offers "Sync, then sign out" or "Sign out and lose them". Jev: 0.81 over keeping data after sign-out (0.18) or v3's shared wipe (0.01).
 **Consequences:** a member who signs in again on the same phone does a full pull. The data layer uses `idb` (ARCHITECTURE §1 allows it) instead of porting v3's wrapper. Stale or rejected pushes re-fetch those rows by id, because the server's newer version may be older than the pull cursor.
+
+### D-037 · per100 records its unit (g or ml) (2026-10-01)
+**Context:** `foods.per100` is "per 100 g or 100 ml" (ARCHITECTURE §3) but nothing said which, and drinks must be logged in ml.
+**Decision:** `per100` carries `unit: 'g' | 'ml'` (absent = `'g'`), inside the jsonb, so no migration. A count serving (`{label, grams?, kcal…}`) may have its own nutrition; when it has a weight, the food also gets per-100 g values so it can be logged in grams too. Jev 0.97 over a new column.
+**Consequences:** `lib/domain/food.ts` reads `unitOf(food)`; the seed foods (next item) and Open Food Facts imports set `unit` for liquids.

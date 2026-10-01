@@ -7,8 +7,9 @@
 	import Card from '$lib/ui/Card.svelte';
 	import { toast } from '$lib/ui/toast.svelte';
 
-	type Props = { logs: LocalRow<'water_logs'>[]; targetMl: number };
-	let { logs, targetMl }: Props = $props();
+	// `at`: when a tap counts (now on today; midday when logging on a past day).
+	type Props = { logs: LocalRow<'water_logs'>[]; targetMl: number; at?: () => string };
+	let { logs, targetMl, at = () => new Date().toISOString() }: Props = $props();
 
 	const ml = $derived(logs.reduce((s, l) => s + l.ml, 0));
 	const litres = (v: number) => (v / 1000).toFixed(2).replace(/\.?0+$/, '');
@@ -20,7 +21,7 @@
 			await put(local.db, 'water_logs', {
 				id: crypto.randomUUID(),
 				user_id: auth.session.user.id,
-				at: new Date().toISOString(),
+				at: at(),
 				ml: amount,
 				up: 0,
 				deleted: false
@@ -39,8 +40,8 @@
 	}
 </script>
 
-<Card as="section" class="flex flex-col gap-3" aria-labelledby="water-today">
-	<h2 id="water-today" class="m-0 label text-ink-2">Water</h2>
+<Card as="section" class="flex flex-col gap-3" aria-labelledby="water-heading">
+	<h2 id="water-heading" class="m-0 label text-ink-2">Water</h2>
 	<p class="m-0 nums">
 		<span class="text-[1.75rem] leading-8 font-semibold">{litres(ml)}</span>
 		<span class="text-ink-2"> / {litres(targetMl)} L</span>
@@ -48,7 +49,7 @@
 	<div
 		class="h-2 overflow-hidden rounded-full bg-surface-2"
 		role="meter"
-		aria-label="Water today"
+		aria-label="Water"
 		aria-valuemin={0}
 		aria-valuemax={targetMl}
 		aria-valuenow={ml}

@@ -24,6 +24,13 @@ export async function signUp(page: Page, email = uniqueEmail('member'), name = '
 	return email;
 }
 
+/** Sign out from Settings. It syncs first (D-036), which can take a while under parallel test load. */
+export async function signOut(page: Page) {
+	await page.goto('/settings');
+	await page.getByRole('button', { name: 'Sign out' }).click();
+	await expect(page).toHaveURL(/\/sign-in$/, { timeout: 15_000 });
+}
+
 /** Zero serious or critical axe violations (DESIGN-SYSTEM §5). */
 export async function expectAccessible(page: Page) {
 	const { violations } = await new AxeBuilder({ page })
