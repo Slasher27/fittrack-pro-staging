@@ -15,12 +15,12 @@ empty, error, offline and no-permission states (CLAUDE.md).
 ## Phase 0 — Foundations (≈ 1 week)
 - [ ] New repo `fittrack-pro`: SvelteKit (Svelte 5) + TS + Tailwind v4 + `adapter-static` (SPA fallback), ESLint/Prettier, Vitest, Playwright + axe-core.
 - [ ] GitHub Actions CI (lint, typecheck, unit, e2e). Netlify site with PR previews.
-- [ ] Supabase: new project `fittrack-pro-staging` + local CLI. Migrations folder. Typed client generation.
+- [ ] Supabase **local only** (`supabase init` / `supabase start`, Docker). Migrations folder. Typed client generation. No hosted project until Phase 3 (D-032).
 - [ ] `tokens.css` + the components in DESIGN-SYSTEM §3, with a `/dev/components` gallery route (dev only), matching `docs/design/Foundations.html` where DESIGN-SYSTEM §7.1 doesn't override it.
 - [ ] Auth: sign up, sign in, reset, sign out. Age gate (18+) and processing consent at sign-up. The `profiles` table (all ARCHITECTURE §3 columns, including the sync columns, with defaults `up default (extract(epoch from now())*1000)::bigint` and `synced_at default now()` so the sign-up row inserts before the trigger exists) with a row created on sign-up. Phase 1 adds the sync trigger to it.
 - [ ] App shell: bottom tabs (member) and sidebar (trainer), with placeholder screens. Installable PWA (manifest + service worker caching the app shell).
 
-**Exit:** sign up/in works on the staging preview · the gallery passes axe with zero serious violations at 390 and 1280 px · CI green · PROGRESS.md updated.
+**Exit:** sign up/in works against local Supabase and in CI · the Netlify preview builds and loads the app shell · the gallery passes axe with zero serious violations at 390 and 1280 px · CI green · PROGRESS.md updated.
 
 ## Phase 1 — Member core, offline (≈ 3 weeks)
 - [ ] Decide what happens to v3 `meals` (PROGRESS open question; one option adds saved meals to this phase) and record it in DECISIONS.md.
@@ -49,6 +49,7 @@ empty, error, offline and no-permission states (CLAUDE.md).
 **Exit:** "never lose a set": an e2e test kills the app mid-workout and loses 0 logged sets, online and offline (COMPETITOR-INSIGHTS T1) · Duwayne generates a program for his home gym and logs a full training week in Pro · switching a day to "Commercial gym" adapts correctly · logging a prefilled set takes ≤ 2 taps · the solo coach proposes a plan change that applies only after Accept.
 
 ## Phase 3 — Move Duwayne onto Pro (≈ 3–5 days)
+- [ ] Create the hosted Supabase project `fittrack-pro-staging` (free a free-plan slot first), push migrations, set the Netlify env vars (D-032).
 - [ ] `scripts/migrate-v3.ts` exactly as [MIGRATION-V3.md](MIGRATION-V3.md): dry run, report, idempotent real run.
 - [ ] Verify with MIGRATION-V3 §5 (counts, daily totals, bests, weight trend, active program).
 - [ ] Put v3 into read-only mode for Duwayne (banner pointing to Pro). Keep it deployed for 60 days.

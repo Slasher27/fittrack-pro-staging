@@ -2,7 +2,7 @@
 
 > ## Current status (2026-10-01)
 > **Phase:** 0 — Foundations (not started).
-> **Next action:** complete the Phase 0 checklist in ROADMAP.md (repo created and pushed 2026-10-01; Docker Desktop and the Supabase CLI are installed; the Supabase project `fittrack-pro-staging` and the Netlify site are created in Phase 0).
+> **Next action:** complete the Phase 0 checklist in ROADMAP.md. Backend is local Supabase only (Docker Desktop and the Supabase CLI are installed); the hosted project comes in Phase 3 (D-032).
 > **Blockers / open questions:**
 > - Final product name (in Phase 6, before the pilot).
 > - Supabase region choice (closest to South Africa), to record in the privacy policy.

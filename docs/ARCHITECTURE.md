@@ -383,7 +383,7 @@ Port v3's `coach` Edge Function and client tool loop (`lib/ai`, preview → acce
 
 ## 11. Environments and secrets
 
-`local` (Supabase CLI + Docker), `staging`, `prod`. Region: the closest available to
+`local` (Supabase CLI + Docker; the only backend in Phases 0–2), `staging` (hosted, from Phase 3, D-032), `prod`. Region: the closest available to
 South Africa, recorded in the privacy policy. Secrets live only in Supabase/Netlify env:
 `ANTHROPIC_API_KEY`, `VAPID_PRIVATE_KEY` (Web Push), `PAYSTACK_SECRET` and `REVENUECAT_WEBHOOK_SECRET`
 (Phase 6), `SERVICE_ROLE_KEY` (Edge Functions and the local migration script only).

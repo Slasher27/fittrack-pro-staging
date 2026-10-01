@@ -144,3 +144,7 @@ Offline-first effort goes where it matters: logging and training on the phone.
 **Decision:** no choice screen. Per client per month: first 3 free; a client who paid the trainer through the app costs a capped `[PERCENT]` platform fee of that payment; any other active client costs the per-active-client fee (BUSINESS-RULES §3.1). A monthly cap on the total.
 **Consequences:** "we only earn when you earn" for trainers who bill in-app, no forced move off cash/EFT, no leakage loophole. Nightly billing classifies each active client by whether a `client_payment` ledger row exists for that month.
 
+### D-032 · Local Supabase until Phase 3 (2026-10-01)
+**Context:** the owner's free Supabase plan already has 2 active projects (v3 + one other).
+**Decision:** Phases 0–2 run on local Supabase (Docker) and CI only. The hosted `fittrack-pro-staging` project is created at the start of Phase 3, after freeing a slot.
+**Consequences:** Netlify previews before Phase 3 show the shell without a working backend.
