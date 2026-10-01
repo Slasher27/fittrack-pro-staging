@@ -32,3 +32,13 @@ function parseIsoDate(s: string): { y: number; m: number; d: number } | null {
 		return null;
 	return { y, m: mo, d };
 }
+
+/** "just now", "5 minutes ago", "2 hours ago", "3 days ago". */
+export function timeAgo(thenMs: number, nowMs: number): string {
+	const s = Math.max(0, Math.round((nowMs - thenMs) / 1000));
+	if (s < 45) return 'just now';
+	const rtf = new Intl.RelativeTimeFormat('en', { numeric: 'auto' });
+	if (s < 3600) return rtf.format(-Math.round(s / 60), 'minute');
+	if (s < 86_400) return rtf.format(-Math.round(s / 3600), 'hour');
+	return rtf.format(-Math.round(s / 86_400), 'day');
+}

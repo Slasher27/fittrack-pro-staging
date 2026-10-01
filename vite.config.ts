@@ -1,9 +1,10 @@
 import tailwindcss from '@tailwindcss/vite';
+import { loadEnv } from 'vite';
 import { defineConfig } from 'vitest/config';
 import adapter from '@sveltejs/adapter-static';
 import { sveltekit } from '@sveltejs/kit/vite';
 
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
 	plugins: [
 		tailwindcss(),
 		sveltekit({
@@ -19,6 +20,8 @@ export default defineConfig({
 	test: {
 		expect: { requireAssertions: true },
 		environment: 'node',
-		include: ['tests/unit/**/*.test.ts']
+		include: ['tests/unit/**/*.test.ts', 'tests/integration/**/*.test.ts'],
+		// Integration tests read the local Supabase URL and key from .env (skipped when absent).
+		env: loadEnv(mode, process.cwd(), 'PUBLIC_')
 	}
-});
+}));

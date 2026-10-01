@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { ageOn, localDate } from '$lib/domain/dates';
+import { ageOn, localDate, timeAgo } from '$lib/domain/dates';
 
 describe('localDate', () => {
 	it('uses Africa/Johannesburg by default (UTC+2)', () => {
@@ -32,5 +32,17 @@ describe('ageOn', () => {
 		expect(ageOn('2001-02-30', '2026-10-01')).toBeNull();
 		expect(ageOn('1990-1-1', '2026-10-01')).toBeNull();
 		expect(ageOn('2027-01-01', '2026-10-01')).toBeNull();
+	});
+});
+
+describe('timeAgo', () => {
+	const now = Date.parse('2026-10-01T12:00:00Z');
+	it('reads naturally', () => {
+		expect(timeAgo(now - 10_000, now)).toBe('just now');
+		expect(timeAgo(now - 5 * 60_000, now)).toBe('5 minutes ago');
+		expect(timeAgo(now - 60_000, now)).toBe('1 minute ago');
+		expect(timeAgo(now - 2 * 3600_000, now)).toBe('2 hours ago');
+		expect(timeAgo(now - 26 * 3600_000, now)).toBe('yesterday');
+		expect(timeAgo(now - 3 * 86_400_000, now)).toBe('3 days ago');
 	});
 });

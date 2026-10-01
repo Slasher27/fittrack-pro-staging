@@ -2,7 +2,7 @@
 
 > ## Current status (2026-10-01)
 > **Phase:** 0 — Foundations: **done** (all exit criteria met 2026-10-01, PR #1). Phase 1 — Member core, offline: not started.
-> **Next action:** Phase 1 on branch `feat/phase-1-member-core`. v3 meals decided (D-034, dropped). Phase 1 migrations done (0002–0009, D-035). Next item: IndexedDB stores, repositories, outbox and sync engine. The Supabase CLI is a devDependency (`pnpm supabase …`). Netlify site `fittrack-pro-staging` is linked to the repo (previews on every PR).
+> **Next action:** Phase 1 on branch `feat/phase-1-member-core`. v3 meals decided (D-034, dropped). Migrations (PR #2) and the offline data layer (D-036) done. Next item: port `nutritionTargets()` + the Targets screen. The Supabase CLI is a devDependency (`pnpm supabase …`). Netlify site `fittrack-pro-staging` is linked to the repo (previews on every PR).
 > **Blockers / open questions:**
 > - Final product name (in Phase 6, before the pilot).
 > - Supabase region choice (closest to South Africa), to record in the privacy policy.
@@ -24,6 +24,8 @@
 
 ## Session log
 Newest first. Each entry: date · what was done · decisions (link to DECISIONS.md) · what's next.
+
+- **2026-10-01** · Offline data layer: per-user IndexedDB (`idb`), repositories (write = row + outbox entry in one transaction, soft deletes, monotonic `up`), sync engine (parent-first push in batches of 500, stale/rejected rows re-fetched, incremental pull by server cursor with 10 s overlap and keyset paging, full pull on first run / schema upgrade / past the 90-day horizon), triggers (start, 2 s after a change, online, hidden/pagehide, focus, every 5 min). Settings: Sync card (live status) and the sign-out guard (D-036). Tests: 17 sync unit tests on a fake server (mutation-checked: 4 deliberate bugs, all caught), 4 integration tests against local Supabase (also in CI), 4 new e2e. Bug found and fixed: the app layout's effect tracked local state and re-created the database after sign-out. Next: targets.
 
 - **2026-10-01** · Phase 1 migrations: sync trigger + `upsert_lww` (LWW, patch semantics, per-row rejects, allow-list), `has_pro()` stub, equipment catalogue (34 items covering all 27 v3 capability tokens), gym profiles and equipment, foods, food/water logs, body metrics, photos + private bucket, targets (owner-only until Phase 4), ai_usage (read-only for members). pgTAP 17 → 118 (allow/deny for every table), unit 14, e2e 34, all green. Decision D-035. Next: offline data layer (IndexedDB, repositories, outbox, sync engine).
 
