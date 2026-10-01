@@ -21,7 +21,10 @@ export async function put<T extends SyncedTable>(
 	const tx = db.transaction([table, 'outbox'], 'readwrite');
 	const store = tx.objectStore(table);
 	const prev = (await store.get(row.id)) as LocalRow<T> | undefined;
-	const next = normalise(table, { ...prev, ...row, up: stamp(prev?.up, now) } as LocalRow<T>);
+	// Rows are plain JSON (photo images live in the blobs store). Copying also strips Svelte $state
+	// proxies, which IndexedDB can't store (a recipe's ingredient list hit this).
+	const plain = JSON.parse(JSON.stringify(row)) as LocalRow<T>;
+	const next = normalise(table, { ...prev, ...plain, up: stamp(prev?.up, now) } as LocalRow<T>);
 	const entry: OutboxEntry = { key: outboxKey(table, row.id), table, id: row.id, up: next.up };
 	await Promise.all([store.put(next), tx.objectStore('outbox').put(entry), tx.done]);
 	changes.dispatchEvent(new CustomEvent('change', { detail: { table } }));

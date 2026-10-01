@@ -21,8 +21,18 @@
 		date: string;
 		tz: string;
 		onlogged?: () => void;
+		oneditrecipe?: (food: FoodRow) => void;
 	};
-	let { open = $bindable(), food, log = null, slot, date, tz, onlogged }: Props = $props();
+	let {
+		open = $bindable(),
+		food,
+		log = null,
+		slot,
+		date,
+		tz,
+		onlogged,
+		oneditrecipe
+	}: Props = $props();
 
 	const SLOTS: { value: MealSlot; label: string }[] = [
 		{ value: 'breakfast', label: 'Breakfast' },
@@ -122,6 +132,11 @@
 					Enter an amount to see the nutrition.
 				{/if}
 			</p>
+			{#if food?.kind === 'recipe' && oneditrecipe}
+				<div>
+					<Button variant="ghost" compact onclick={() => oneditrecipe(food)}>Edit recipe</Button>
+				</div>
+			{/if}
 		</form>
 	{/if}
 	{#snippet footer()}

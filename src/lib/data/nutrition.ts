@@ -9,7 +9,9 @@ import {
 	nutrientsFor,
 	type Amount,
 	type FoodForm,
-	type FoodLike
+	type FoodLike,
+	type Ingredient,
+	type Per100
 } from '$lib/domain/food';
 
 export type FoodRow = LocalRow<'foods'>;
@@ -75,4 +77,31 @@ export function saveFood(db: LocalDb, userId: string, form: FoodForm, existing?:
 		...(foodFromForm(form) as Pick<FoodRow, 'per100' | 'servings'>),
 		up: 0
 	});
+}
+
+/** Create or update a recipe: stored as one of the member's foods, per 100 g cooked. */
+export function saveRecipe(
+	db: LocalDb,
+	userId: string,
+	recipe: { name: string; ingredients: Ingredient[]; cookedG: number; per100: Per100 },
+	existing?: FoodRow
+) {
+	return put(db, 'foods', {
+		...(existing ?? {
+			id: crypto.randomUUID(),
+			brand: null,
+			barcode: null,
+			group_name: null,
+			deleted: false
+		}),
+		owner_id: userId,
+		kind: 'recipe',
+		source: 'user',
+		name: recipe.name.trim(),
+		per100: recipe.per100,
+		servings: [],
+		ingredients: recipe.ingredients,
+		cooked_g: recipe.cookedG,
+		up: 0
+	} as FoodRow);
 }

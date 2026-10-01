@@ -6,6 +6,10 @@ import {
 	gramsFor,
 	nutrientsFor,
 	searchFoods,
+	canBeIngredient,
+	recipePer100,
+	recipeTotals,
+	validateRecipe,
 	validateFoodForm,
 	type FoodForm,
 	type FoodLike
@@ -167,5 +171,63 @@ describe('custom food form', () => {
 			per100: { kcal: 154, protein_g: 0, carbs_g: 24, fat_g: 5, unit: 'ml' },
 			servings: []
 		});
+	});
+});
+
+describe('recipes (v3 maths)', () => {
+	const chicken: FoodLike = {
+		id: 'chicken-breast',
+		name: 'Chicken breast',
+		per100: { kcal: 165, protein_g: 31, carbs_g: 0, fat_g: 3.6 },
+		servings: []
+	};
+	const foods = new Map<string, FoodLike>([
+		['chicken-breast', chicken],
+		['rice', rice],
+		['egg', egg]
+	]);
+
+	// v3 tests/food-test.js §C: 500 g chicken breast + 300 g rice, cooked weight 1600 g. Expected values
+	// computed with v3's recipeModal maths on v3's seed foods (2026-10-01).
+	it('matches v3: whole totals and per 100 g cooked', () => {
+		const t = recipeTotals(
+			[
+				{ food_id: 'chicken-breast', grams: 500 },
+				{ food_id: 'rice', grams: 300 }
+			],
+			foods
+		);
+		expect(t.kcal).toBeCloseTo(1215, 6);
+		expect(t.protein_g).toBeCloseTo(163.1, 6);
+		expect(t.raw_g).toBe(800);
+		const per100 = recipePer100(t, 1600);
+		expect(per100).toEqual({ kcal: 76, protein_g: 10.2, carbs_g: 5.3, fat_g: 1.2, unit: 'g' });
+		// Logging 220 g of it, as v3's test does.
+		expect(
+			nutrientsFor({ id: 'r', name: 'Curry', per100, servings: [] }, { grams: 220 }).kcal
+		).toBe(167.2);
+	});
+
+	it('skips count-only and unknown ingredients', () => {
+		const t = recipeTotals(
+			[
+				{ food_id: 'egg', grams: 50 },
+				{ food_id: 'nope', grams: 10 },
+				{ food_id: 'rice', grams: 100 }
+			],
+			foods
+		);
+		expect(t).toEqual({ kcal: 130, protein_g: 2.7, carbs_g: 28, fat_g: 0.3, raw_g: 100 });
+		expect(canBeIngredient(egg)).toBe(false);
+		expect(canBeIngredient(bread)).toBe(true);
+	});
+
+	it('validates name, ingredients and cooked weight', () => {
+		expect(validateRecipe('Curry', [{ food_id: 'rice', grams: 100 }], 900)).toEqual({});
+		expect(Object.keys(validateRecipe(' ', [], 0)).sort()).toEqual([
+			'cooked',
+			'ingredients',
+			'name'
+		]);
 	});
 });

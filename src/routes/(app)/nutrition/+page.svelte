@@ -22,12 +22,15 @@
 	import { currentTarget } from '$lib/domain/targets';
 	import { formatInt } from '$lib/format';
 	import { net } from '$lib/net.svelte';
+	import Button from '$lib/ui/Button.svelte';
+	import Icon from '$lib/ui/Icon.svelte';
 	import IconButton from '$lib/ui/IconButton.svelte';
 	import Notice from '$lib/ui/Notice.svelte';
 	import { toast } from '$lib/ui/toast.svelte';
 	import FoodFormSheet from './FoodFormSheet.svelte';
 	import FoodSearch from './FoodSearch.svelte';
 	import LogFoodSheet from './LogFoodSheet.svelte';
+	import RecipeSheet from './RecipeSheet.svelte';
 	import Timeline from './Timeline.svelte';
 	import TotalsCard from './TotalsCard.svelte';
 
@@ -51,6 +54,8 @@
 	let formName = $state('');
 	let picked = $state<FoodRow | null>(null);
 	let editing = $state<FoodLogRow | null>(null);
+	let recipeOpen = $state(false);
+	let recipe = $state<FoodRow | null>(null);
 
 	const day = $derived(page.url.searchParams.get('day') ?? data?.today ?? localDate(new Date()));
 
@@ -160,6 +165,12 @@
 		toast(`Logged ${l.name}, ${amountLabel(l)}.`, 'ok');
 	}
 
+	function openRecipe(r: FoodRow | null) {
+		logOpen = false;
+		recipe = r;
+		recipeOpen = true;
+	}
+
 	function created(food: FoodRow) {
 		query = '';
 		pick(food);
@@ -205,6 +216,11 @@
 				oncreate={(name) => ((formName = name), (formOpen = true))}
 			/>
 			{#if !query.trim()}
+				<div>
+					<Button variant="secondary" compact onclick={() => openRecipe(null)}>
+						<Icon name="plus" size={20} />New recipe
+					</Button>
+				</div>
 				<Timeline logs={data.logs} tz={data.tz} onedit={edit} onlog={startSlot} />
 			{/if}
 		</div>
@@ -241,6 +257,16 @@
 		date={day}
 		tz={data.tz}
 		onlogged={() => (query = '')}
+		oneditrecipe={openRecipe}
 	/>
 	<FoodFormSheet bind:open={formOpen} name={formName} onsaved={created} />
+	<RecipeSheet
+		bind:open={recipeOpen}
+		foods={data.foods}
+		{recipe}
+		onsaved={(f, created) => {
+			query = '';
+			if (created) pick(f); // a new recipe: log it now; an edit returns to the log
+		}}
+	/>
 {/if}
