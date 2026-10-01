@@ -14,7 +14,9 @@ export const local = $state<{
 	status: Status;
 	lastSyncAt: number | null;
 	pending: number;
-}>({ db: null, userId: null, status: 'idle', lastSyncAt: null, pending: 0 });
+	/** Bumps on every local write and every sync that pulled changes: screens re-read when it changes. */
+	version: number;
+}>({ db: null, userId: null, status: 'idle', lastSyncAt: null, pending: 0, version: 0 });
 
 const DEBOUNCE_MS = 2000;
 const REFRESH_MS = 5 * 60_000;
@@ -51,6 +53,7 @@ async function round() {
 		const res = await syncOnce(db, supabaseTransport(supabase));
 		local.status = 'idle';
 		local.lastSyncAt = Date.now();
+		if (res.pulled) local.version++;
 		if (res.rejected)
 			toast(
 				res.rejected === 1
@@ -65,6 +68,7 @@ async function round() {
 }
 
 function soon() {
+	local.version++;
 	clearTimeout(timer);
 	timer = setTimeout(syncNow, DEBOUNCE_MS);
 	if (local.db) pendingCount(local.db).then((n) => (local.pending = n));
@@ -111,6 +115,7 @@ export async function stopLocal() {
 	await running;
 	local.db?.close();
 	Object.assign(local, { db: null, userId: null, status: 'idle', lastSyncAt: null, pending: 0 });
+	local.version++;
 }
 
 /** Sign-out (D-036): remove this member's data from the device. Only call with nothing pending. */
