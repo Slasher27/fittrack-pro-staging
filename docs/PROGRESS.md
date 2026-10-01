@@ -1,12 +1,20 @@
 # Progress
 
-> ## Current status (2026-10-01)
-> **Phase:** 0 — Foundations: **done** (all exit criteria met 2026-10-01, PR #1). Phase 1 — Member core, offline: not started.
-> **Next action:** Phase 1 on branch `feat/phase-1-member-core`. v3 meals decided (D-034, dropped). Migrations, offline data layer, targets, Today, Nutrition, recipes (PRs #2–#7) and Body done. Next item: Gym profiles (locations + equipment editor). The Supabase CLI is a devDependency (`pnpm supabase …`). Netlify site `fittrack-pro-staging` is linked to the repo (previews on every PR).
+> ## Current status (end of session, 2026-10-01)
+> **Phase 0 — Foundations:** done (PR #1).
+> **Phase 1 — Member core, offline:** in progress, **7 of 10 items done** (PRs #2–#8, all merged to `main`, CI green): v3 meals decision, migrations, offline data layer + sync, targets, Today, Nutrition (incl. recipes), Body (measurements + photos).
+> **Next action:** Phase 1 item 8, **Gym profiles** (see "Notes for the next session" below), then the `coach` Edge Function + describe-to-log, then the SA foods seed. After that, check the Phase 1 exit criteria.
 > **Blockers / open questions:**
+> - **Describe-to-log needs an Anthropic API key** for the local `coach` function (`supabase/functions/.env`, never committed). Ask the owner at the start of that item.
+> - **Phase 1 exit check needs the owner:** "median food log from Today ≤ 10 s (manual timing, 10 runs)".
 > - Final product name (in Phase 6, before the pilot).
 > - Supabase region choice (closest to South Africa), to record in the privacy policy.
 > - ⚖ items in BUSINESS-RULES.md, to check with an accountant/attorney before Phase 6.
+
+### Notes for the next session
+- **Gym profiles** (ROADMAP Phase 1, PRD §4.1): route `/settings/gyms` (DESIGN-SYSTEM §7: Gym profiles reuses the Equipment design). Follow `docs/design/Equipment.html` with the §7.1 overrides: a SegmentedControl (not `role="tab"`) to switch profiles, no links inside checkbox labels, "Save" continues onboarding when reached from there (Phase 2). Catalogue rows are in `equipment_catalog` (34 items, D-035); custom kit must map to ≥ 1 capability (`lib/domain/capabilities.ts`); weights per `weight_kind` (range `{min,max,step}` or list of kg). Create the default "Home" profile only **after the first pull** on a device (ARCHITECTURE §5). Add `capabilities(gymProfile)` in `lib/domain/equipment.ts` with tests (`assume_full` = everything).
+- **How the owner works:** the owner opens and merges PRs in the browser (no `gh` CLI here). Give a prefilled "compare" link, plain click-by-click steps, wait for CI (the GitHub check-runs API is public), then say when to merge.
+- **Environment:** Docker Desktop's CLI is at `%LOCALAPPDATA%/Programs/DockerDesktop/resources/bin` (may need adding to PATH in a fresh shell). The Supabase CLI is a devDependency (`pnpm supabase …`). e2e and integration tests need local Supabase running and `.env` (see `.env.example`).
 
 ## Exit criteria log
 | Phase | Criterion | Met on | Evidence |
@@ -16,6 +24,10 @@
 | 0 | Sign up/in works in CI · CI green | 2026-10-01 | PR #1: GitHub Actions jobs "Lint, typecheck, unit" and "RLS (pgTAP) and e2e" both green (run 36846603056) |
 | 0 | Netlify preview builds and loads the shell | 2026-10-01 | https://deploy-preview-1--fittrack-pro-staging.netlify.app: shell, gallery and service worker load; no-backend notice as expected (D-032) |
 | 0 | PROGRESS.md updated | 2026-10-01 | This entry |
+| 1 | Food, water, weight and photos logged in airplane mode sync on reconnect | – | Evidence so far (not yet signed off): e2e `today`, `nutrition`, `progress`, `targets` log offline, go online and confirm "Everything is saved"; the "within 10 s" timing is not measured yet |
+| 1 | Two devices converge after conflicting offline edits (test) | – | `tests/unit/data/sync.test.ts` (fake server) and `tests/integration/sync.supabase.test.ts` (real Supabase, in CI); to be signed off with the phase |
+| 1 | A deletion on one device disappears on the other (test) | – | Same two files (rows and photo images); to be signed off with the phase |
+| 1 | Median food log from Today ≤ 10 s (manual, 10 runs) | – | Not done: needs the owner, after the SA foods seed |
 
 ## Feedback backlog (Lisa test, Phase 5)
 | Date | From | Issue | Severity | Status |
@@ -24,6 +36,8 @@
 
 ## Session log
 Newest first. Each entry: date · what was done · decisions (link to DECISIONS.md) · what's next.
+
+- **2026-10-01 · Session summary.** Phase 0 built and closed (PR #1). Phase 1: 7 of 10 items (PRs #2–#8). Decisions D-033 to D-037 (sign-up consent in auth metadata; v3 meals not migrated; catalogue as migration data + v3 capability tokens; per-user device data and the sign-out guard; per100 unit). Totals at the end of the day: 118 pgTAP, 90 unit/integration, 54 e2e (axe at 390 and 1280 px), all green locally and in CI. Notable bugs caught by tests before reaching the owner: sign-out re-creating the device database, IndexedDB refusing Svelte proxies, the Sync card claiming "all saved" too early, a stale file in the photo picker, CI crashing on skipped integration tests. Next: Gym profiles.
 
 - **2026-10-01** · Body, on the Progress tab (Phase 5 adds summaries): measurements (weight, waist, chest, arm, thigh, note; one entry per date; table of entries; 7-day trend) and progress photos (camera or library, Front/Side/Back, date, note; grid by date; viewer with confirmed delete). Images: compressed to 1280 px JPEG 0.82 (v3), stored in the device's `blobs` store, uploaded to the private `photos` bucket after each sync round (6 per round), downloaded by other devices, removed from Storage on delete. Bugs fixed: the Sync card claimed "everything is saved" before the first sync had run (now reads the real outbox count at start and only confirms after a finished sync); a reopened photo sheet kept the previous file in the picker. Tests: 90 unit/integration (incl. real Storage upload → second device → delete), 54 e2e. Next: Gym profiles.
 
