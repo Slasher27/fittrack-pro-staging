@@ -63,7 +63,7 @@ workout entries while `ts` stays "now").
 
 ## 4. Not migrated
 
-- `meals` (seed meal-plan meals and custom meals): decided at the start of Phase 1 (PROGRESS.md).
+- `meals`, both the 28 seed meal-plan meals and custom meals (D-034). Past food logs that came from a meal are migrated like any other `log` row.
 - Device-local or derived kv: `coachChat`, `coachArchive`, `reviews`, `lastReview`, `woDraft`, `session`, `syncState`, `tombstones`, `sbproject`, `mealSeedVersion`, `exerciseSeedVersion`, `howtoDismissed`, `insightDismissals`, `localOnly`, `aiKey`.
 - Settings `theme`, `notify`, `lastNotify` (Pro has its own settings).
 - EQUIP `n` (plate counts), `barKg`, `dbMaxKg`, `plateKg`, `microPlateKg`, bar `name` (Pro stores available weights, not counts).

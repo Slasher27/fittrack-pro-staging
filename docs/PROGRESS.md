@@ -2,12 +2,11 @@
 
 > ## Current status (2026-10-01)
 > **Phase:** 0 — Foundations: **done** (all exit criteria met 2026-10-01, PR #1). Phase 1 — Member core, offline: not started.
-> **Next action:** merge PR #1, then start Phase 1 with its first item: decide what happens to v3 `meals` (see below). The Supabase CLI is a devDependency (`pnpm supabase …`). Netlify site `fittrack-pro-staging` is linked to the repo (previews on every PR).
+> **Next action:** Phase 1 on branch `feat/phase-1-member-core`. v3 meals decided (D-034, dropped). Next item: the sync migrations (trigger, `upsert_lww`, `has_pro()` stub, Phase 1 tables). The Supabase CLI is a devDependency (`pnpm supabase …`). Netlify site `fittrack-pro-staging` is linked to the repo (previews on every PR).
 > **Blockers / open questions:**
 > - Final product name (in Phase 6, before the pilot).
 > - Supabase region choice (closest to South Africa), to record in the privacy policy.
 > - ⚖ items in BUSINESS-RULES.md, to check with an accountant/attorney before Phase 6.
-> - **Decide at the start of Phase 1:** what happens to v3 `meals` (28 seed meal-plan meals + any custom meals). Pro has no saved-meal entity (D-007; recents and multi-add replace it). Options: drop them, turn custom meals into multi-add favourites, or add a small "saved meals" feature in Phase 1.
 
 ## Exit criteria log
 | Phase | Criterion | Met on | Evidence |
@@ -25,6 +24,8 @@
 
 ## Session log
 Newest first. Each entry: date · what was done · decisions (link to DECISIONS.md) · what's next.
+
+- **2026-10-01** · PR #1 merged; production site live at fittrack-pro-staging.netlify.app. Phase 1 started: v3 meals are not migrated (D-034, owner's choice over saved meals or multi-add favourites). Next: Phase 1 migrations.
 
 - **2026-10-01** · Phase 0 build (branch `feat/phase-0-foundations`). Scaffold: SvelteKit 2 / Svelte 5, Vite 8, TS 6, Tailwind 4.3, adapter-static (200.html fallback), ESLint/Prettier, Vitest, Playwright + axe. Local Supabase: `0001_profiles.sql` (all §3 columns + sync defaults, owner-only RLS, no member delete, sign-up trigger with age gate + consent) and `supabase/tests/profiles.test.sql` (17 pgTAP allow/deny). `tokens.css` uses `light-dark()` with Auto/Light/Dark; 17 §3 components + Notice/Icon/Placeholder; `/dev/components` gallery (shown in dev, or with `PUBLIC_DEV_ROUTES=1`). Auth: sign-up/in/reset/out. Shell: member tabs (bottom/rail), trainer sidebar (top menu on phone), placeholders, PWA (manifest, placeholder icons, service-worker shell cache, works offline). CI workflow + netlify.toml. Results: lint/check clean, 12/12 unit, 17/17 pgTAP, 34/34 e2e. Decisions: D-033 (consent in auth metadata). Notes: no danger/red token exists, so destructive buttons use the warn set; `notify_prefs` deferred to Phase 4. Then: Netlify site created and linked, PR #1 opened, CI and preview green. **Phase 0 closed.** Next: merge PR #1, Phase 1.
 
