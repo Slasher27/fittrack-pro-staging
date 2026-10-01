@@ -1,0 +1,114 @@
+@import 'tailwindcss';
+@import '@fontsource/geist/latin-400.css';
+@import '@fontsource/geist/latin-500.css';
+@import '@fontsource/geist/latin-600.css';
+@import '@fontsource/geist/latin-700.css';
+@import './lib/ui/tokens.css';
+
+/* Tailwind theme mapped to the tokens (DESIGN-SYSTEM §2). Use these classes, never raw colours. */
+@theme inline {
+	--color-*: initial;
+	--color-transparent: transparent;
+	--color-current: currentColor;
+	--color-bg: var(--bg);
+	--color-surface: var(--surface);
+	--color-surface-2: var(--surface-2);
+	--color-line: var(--line);
+	--color-line-strong: var(--line-strong);
+	--color-ink: var(--ink);
+	--color-ink-2: var(--ink-2);
+	--color-brand: var(--brand);
+	--color-brand-hover: var(--brand-hover);
+	--color-brand-ink: var(--brand-ink);
+	--color-brand-tint: var(--brand-tint);
+	--color-on-brand: var(--on-brand);
+	--color-protein: var(--protein);
+	--color-carbs: var(--carbs);
+	--color-fat: var(--fat);
+	--color-ok: var(--ok);
+	--color-ok-tint: var(--ok-tint);
+	--color-ok-ink: var(--ok-ink);
+	--color-warn: var(--warn);
+	--color-warn-tint: var(--warn-tint);
+	--color-warn-ink: var(--warn-ink);
+
+	--font-sans: 'Geist', ui-sans-serif, system-ui, sans-serif;
+
+	/* Type scale in rem so it follows browser text size (DESIGN-SYSTEM §2, §5 200% rule). */
+	--text-display: 2rem;
+	--text-display--line-height: 2.375rem;
+	--text-display--font-weight: 700;
+	--text-title: 1.375rem;
+	--text-title--line-height: 1.75rem;
+	--text-title--font-weight: 600;
+	--text-body: 1rem;
+	--text-body--line-height: 1.5rem;
+	--text-label: 0.8125rem;
+	--text-label--line-height: 1.125rem;
+
+	--radius-cell: 10px;
+	--radius-control: 12px;
+	--radius-card: 16px;
+
+	--ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@layer base {
+	html {
+		font-family: var(--font-sans);
+		-webkit-text-size-adjust: 100%;
+	}
+
+	body {
+		margin: 0;
+		background: var(--bg);
+		color: var(--ink);
+		font-size: var(--text-body);
+		line-height: var(--text-body--line-height);
+		-webkit-font-smoothing: antialiased;
+	}
+
+	:focus-visible {
+		outline: 2px solid var(--brand);
+		outline-offset: 2px;
+	}
+
+	a {
+		color: var(--brand-ink);
+		text-underline-offset: 3px;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		*,
+		*::before,
+		*::after {
+			animation-duration: 0.01ms !important;
+			animation-iteration-count: 1 !important;
+			transition-duration: 0.01ms !important;
+			scroll-behavior: auto !important;
+		}
+	}
+}
+
+@utility label {
+	font-size: var(--text-label);
+	line-height: var(--text-label--line-height);
+	font-weight: 600;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+}
+
+@utility nums {
+	font-variant-numeric: tabular-nums;
+}
+
+@utility sr-only-focusable {
+	&:not(:focus) {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
+		clip-path: inset(50%);
+		white-space: nowrap;
+	}
+}

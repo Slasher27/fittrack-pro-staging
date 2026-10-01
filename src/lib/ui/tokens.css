@@ -1,0 +1,40 @@
+/* Design tokens: DESIGN-SYSTEM §2 (A · Quiet, D-030). The only place raw colour values live.
+   Each token is light-dark(light, dark). Theme: Auto follows the OS; <html data-theme="light|dark"> pins it.
+   Trainer branding may override only the --brand* and --on-brand tokens (ARCHITECTURE §8). */
+
+:root {
+	color-scheme: light dark;
+
+	--bg: light-dark(#f7f7f8, #0b0b0c);
+	--surface: light-dark(#ffffff, #161618);
+	--surface-2: light-dark(#efeff1, #1f1f22);
+	--line: light-dark(#e4e4e7, #2a2a2e);
+	--line-strong: light-dark(#7c7c86, #74747e);
+	--ink: light-dark(#18181b, #f4f4f5);
+	--ink-2: light-dark(#52525b, #a1a1aa);
+
+	--brand: light-dark(#18181b, #f4f4f5);
+	--brand-hover: light-dark(#3f3f46, #d4d4d8);
+	--brand-ink: light-dark(#18181b, #f4f4f5);
+	--brand-tint: light-dark(#e8e8e9, #1f1f22);
+	--on-brand: light-dark(#ffffff, #0b0b0c);
+
+	--protein: light-dark(#0e7490, #22d3ee);
+	--carbs: light-dark(#c2410c, #fb923c);
+	--fat: light-dark(#7c3aed, #a78bfa);
+
+	--ok: light-dark(#0f7a5a, #5fd3a4);
+	--ok-tint: light-dark(#e3f4ec, #13261f);
+	--ok-ink: light-dark(#0b5e45, #5fd3a4);
+	--warn: light-dark(#b4590b, #f2a65a);
+	--warn-tint: light-dark(#fff4e5, #2a2116);
+	--warn-ink: light-dark(#8a4a00, #f2a65a);
+}
+
+:root[data-theme='light'] {
+	color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+	color-scheme: dark;
+}
