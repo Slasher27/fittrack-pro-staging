@@ -1,5 +1,5 @@
 import { expect, test, type Page } from '@playwright/test';
-import { expectAccessible, signUp } from './helpers';
+import { expectAccessible, signOut, signUp } from './helpers';
 
 /** Names of this origin's IndexedDB databases. */
 const databases = (page: Page) =>
@@ -13,8 +13,7 @@ test('settings shows sync status, and signing out removes the device data', asyn
 	await expectAccessible(page);
 	expect((await databases(page)).some((n) => n.startsWith('fittrack-pro-'))).toBe(true);
 
-	await page.getByRole('button', { name: 'Sign out' }).click();
-	await expect(page).toHaveURL(/\/sign-in$/);
+	await signOut(page);
 	expect((await databases(page)).some((n) => n.startsWith('fittrack-pro-'))).toBe(false);
 });
 

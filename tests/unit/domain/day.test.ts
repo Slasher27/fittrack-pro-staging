@@ -3,6 +3,7 @@ import {
 	amountLabel,
 	dayRange,
 	dayTotals,
+	eatenAt,
 	greeting,
 	localMidnight,
 	mealSlotAt,
@@ -106,5 +107,17 @@ describe('amountLabel', () => {
 		expect(amountLabel({ grams: 80, servings: null, serving_label: null })).toBe('80 g');
 		expect(amountLabel({ grams: null, servings: 2, serving_label: 'slices' })).toBe('2 slices');
 		expect(amountLabel({ grams: null, servings: 1, serving_label: null })).toBe('1 serving');
+		expect(amountLabel({ grams: null, servings: 1, serving_label: '1 rusk' })).toBe('1 rusk');
+		expect(amountLabel({ grams: null, servings: 2, serving_label: '1 rusk' })).toBe('2 × 1 rusk');
+		expect(amountLabel({ grams: null, servings: 1.5, serving_label: '40 g' })).toBe('1.5 × 40 g');
+	});
+});
+
+describe('eatenAt', () => {
+	const now = new Date('2026-10-01T10:15:00Z'); // 12:15 in Johannesburg
+	it('is now for today, and the slot time on other days', () => {
+		expect(eatenAt('2026-10-01', 'dinner', now)).toBe('2026-10-01T10:15:00.000Z');
+		expect(eatenAt('2026-09-29', 'dinner', now)).toBe('2026-09-29T17:00:00.000Z'); // 19:00 SAST
+		expect(eatenAt('2026-09-29', 'breakfast', now)).toBe('2026-09-29T06:00:00.000Z');
 	});
 });

@@ -2,7 +2,7 @@
 
 > ## Current status (2026-10-01)
 > **Phase:** 0 — Foundations: **done** (all exit criteria met 2026-10-01, PR #1). Phase 1 — Member core, offline: not started.
-> **Next action:** Phase 1 on branch `feat/phase-1-member-core`. v3 meals decided (D-034, dropped). Migrations (PR #2), offline data layer (PR #3), targets (PR #4) and Today done. Next item: Nutrition (timeline log, search, custom foods, recents, multi-add, recipes, water). The Supabase CLI is a devDependency (`pnpm supabase …`). Netlify site `fittrack-pro-staging` is linked to the repo (previews on every PR).
+> **Next action:** Phase 1 on branch `feat/phase-1-member-core`. v3 meals decided (D-034, dropped). Migrations, offline data layer, targets, Today (PRs #2–#5) done; Nutrition part A done (part B: recipes). Next: recipes, then the SA food seed. The Supabase CLI is a devDependency (`pnpm supabase …`). Netlify site `fittrack-pro-staging` is linked to the repo (previews on every PR).
 > **Blockers / open questions:**
 > - Final product name (in Phase 6, before the pilot).
 > - Supabase region choice (closest to South Africa), to record in the privacy policy.
@@ -24,6 +24,8 @@
 
 ## Session log
 Newest first. Each entry: date · what was done · decisions (link to DECISIONS.md) · what's next.
+
+- **2026-10-01** · Nutrition, part A (docs/design/Nutrition.html): day navigation (‹ ›, "Today"/"Yesterday"), totals (kcal left, g left per macro), local search (all words, accents ignored, ranked by prefix then recent use), log/edit/remove sheet (g/ml or servings, meal, live nutrients), custom foods by weight, volume or count (D-037), multi-add (tick results; each uses its last amount), recent quick-add chips, water (shared WaterCard). Past days log at v3's slot times. `lib/domain/food.ts` + `lib/data/nutrition.ts` (shared with Today). Bugs caught by tests: `aria-controls` pointing at a missing element; search not clearing after logging (timeline stayed hidden); "2 1 rusk" labels. Test helpers `signOut`/sign-up waits made load-tolerant. Tests: 77 unit, 48 e2e (two clean full runs). Next: recipes (part B).
 
 - **2026-10-01** · Today (docs/design/Today.html, Phase 1 scope): greeting + local date, nutrition card (kcal left ring, macro bars, "set your targets" empty state), water (+250/+500 ml, undo, target from `targets.water_ml`), weight (7-day average, week-on-week change as neutral text, "Log weight" sheet, one entry per day), "Log again" (6 recent distinct foods, one tap re-logs now in the right meal slot). Two columns from 1024 px. Domain: `day.ts` (local-day ranges incl. DST, meal slot, totals, recents), `weight.ts`. Links are now underlined by default (axe: link-in-text-block). Tests: 65 unit, 46 e2e (Today flow fully offline, then synced). Coach note, workout card and describe-to-log arrive with their own items. Next: Nutrition.
 

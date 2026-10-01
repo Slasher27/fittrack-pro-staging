@@ -8,11 +8,11 @@
 	import { dayRange, greeting } from '$lib/domain/day';
 	import { currentTarget } from '$lib/domain/targets';
 	import { net } from '$lib/net.svelte';
+	import WaterCard from '$lib/components/WaterCard.svelte';
 	import Avatar from '$lib/ui/Avatar.svelte';
 	import Notice from '$lib/ui/Notice.svelte';
 	import NutritionCard from './NutritionCard.svelte';
 	import QuickLog from './QuickLog.svelte';
-	import WaterCard from './WaterCard.svelte';
 	import WeightCard from './WeightCard.svelte';
 
 	// Today (PRD §4.1, docs/design/Today.html): what to do now. Phase 1 shows nutrition, water,

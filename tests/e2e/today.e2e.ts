@@ -91,12 +91,12 @@ test('Today: targets, one-tap re-log, water and weight, all offline', async ({ p
 
 	await page.getByRole('button', { name: 'Add 250 millilitres of water' }).click();
 	await page.getByRole('button', { name: 'Add 500 millilitres of water' }).click();
-	await expect(page.getByRole('meter', { name: 'Water today' })).toHaveAttribute(
+	await expect(page.getByRole('meter', { name: 'Water' })).toHaveAttribute(
 		'aria-valuetext',
 		'0.75 of 2.5 litres'
 	);
 	await page.getByRole('button', { name: 'Undo last' }).click();
-	await expect(page.getByRole('meter', { name: 'Water today' })).toHaveAttribute(
+	await expect(page.getByRole('meter', { name: 'Water' })).toHaveAttribute(
 		'aria-valuetext',
 		'0.25 of 2.5 litres'
 	);
