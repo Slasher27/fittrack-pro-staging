@@ -29,7 +29,7 @@ lists other places where the spec overrides those files.
 
 ## How to work in this repo
 
-Setup is done: this repo (`C:\Websitesittrack-pro`) holds `CLAUDE.md` at the root and the spec in `docs/`.
+Setup is done: this repo (`C:\Websites\fittrack-pro`) holds `CLAUDE.md` at the root and the spec in `docs/`.
 Start every Claude Code session with:
 > Read CLAUDE.md and docs/PROGRESS.md, then continue the current phase from docs/ROADMAP.md.
 
