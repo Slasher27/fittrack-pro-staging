@@ -38,22 +38,27 @@
 		}
 		if (!local.db || !auth.session) return;
 		// One entry per day: update today's if there is one.
-		await put(local.db, 'body_metrics', {
-			...(todays ?? {
-				id: crypto.randomUUID(),
-				user_id: auth.session.user.id,
-				date: today,
-				waist_cm: null,
-				chest_cm: null,
-				arm_cm: null,
-				thigh_cm: null,
-				steps: null,
-				notes: null,
-				deleted: false
-			}),
-			weight_kg: Math.round(kg * 100) / 100,
-			up: 0
-		});
+		try {
+			await put(local.db, 'body_metrics', {
+				...(todays ?? {
+					id: crypto.randomUUID(),
+					user_id: auth.session.user.id,
+					date: today,
+					waist_cm: null,
+					chest_cm: null,
+					arm_cm: null,
+					thigh_cm: null,
+					steps: null,
+					notes: null,
+					deleted: false
+				}),
+				weight_kg: Math.round(kg * 100) / 100,
+				up: 0
+			});
+		} catch {
+			error = 'We couldn’t save this on your device. Try again.';
+			return;
+		}
 		open = false;
 		toast(`Logged ${kg} kg.`, 'ok');
 	}

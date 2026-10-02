@@ -35,6 +35,14 @@ describe('validateMeasure', () => {
 		expect(Object.keys(e).sort()).toEqual(['arm_cm', 'date', 'weight_kg']);
 		expect(e.weight_kg).toBe('Enter a number from 20 to 400 kg.');
 	});
+
+	it('refuses moving an entry onto a date that already has one', () => {
+		const f = { ...blank, date: '2026-09-30', weight_kg: '80' };
+		expect(validateMeasure(f, '2026-10-01', ['2026-09-30']).date).toBe(
+			'There’s already an entry for this date. Edit that one instead.'
+		);
+		expect(validateMeasure(f, '2026-10-01', ['2026-09-29'])).toEqual({});
+	});
 });
 
 describe('toMeasurement', () => {

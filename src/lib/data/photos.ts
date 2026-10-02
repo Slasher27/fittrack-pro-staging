@@ -80,6 +80,15 @@ export async function deletePhoto(db: LocalDb, photo: PhotoRow) {
 }
 
 /**
+ * Patch only `remote`. A transfer can take seconds, and the member may delete the photo or edit its note
+ * meanwhile: writing back the copy read before the transfer would undo that (and win on every device).
+ */
+async function setRemote(db: LocalDb, id: string, remote: boolean) {
+	const row = (await db.get('photos', id)) as PhotoRow | undefined;
+	if (row && row.remote !== remote) await put(db, 'photos', { id, remote } as PhotoRow);
+}
+
+/**
  * Move images between this device and Storage, at most `limit` transfers per round (v3: 6):
  * upload new local images (then mark the row remote), download images other devices uploaded,
  * and remove deleted photos' images. Returns how many images changed on this device.
@@ -103,12 +112,12 @@ export async function syncPhotoBlobs(
 			if (p.remote) {
 				budget--;
 				await storage.remove(p.storage_path);
-				await put(db, 'photos', { ...p, remote: false });
+				await setRemote(db, p.id, false);
 			}
 		} else if (local && !p.remote) {
 			budget--;
 			await storage.upload(p.storage_path, local);
-			await put(db, 'photos', { ...p, remote: true });
+			await setRemote(db, p.id, true);
 		} else if (!local && p.remote) {
 			budget--;
 			const blob = await storage.download(p.storage_path);

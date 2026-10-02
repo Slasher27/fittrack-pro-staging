@@ -2,9 +2,9 @@
 	import { resolve } from '$app/paths';
 	import { auth } from '$lib/auth.svelte';
 	import { local } from '$lib/data/local.svelte';
-	import { list, put } from '$lib/data/repo';
+	import { list, put, timezoneOf } from '$lib/data/repo';
 	import type { LocalRow } from '$lib/data/tables';
-	import { localDate } from '$lib/domain/dates';
+	import { DEFAULT_TIMEZONE, localDate } from '$lib/domain/dates';
 	import {
 		currentTarget,
 		macroKcal,
@@ -36,6 +36,8 @@
 	let form = $state<Form>({ ...blank });
 	let current = $state<LocalRow<'targets'> | undefined>();
 	let loaded = $state(false);
+	let loadFailed = $state(false);
+	let tz = $state(DEFAULT_TIMEZONE);
 	let dirty = $state(false);
 	let errors = $state<TargetsErrors>({});
 	let busy = $state(false);
@@ -64,12 +66,15 @@
 	$effect(() => {
 		void local.version;
 		const db = local.db;
-		if (!db) return;
-		list(db, 'targets').then((rows) => {
-			current = currentTarget(rows, localDate(new Date()));
+		const userId = auth.session?.user.id;
+		if (!db || !userId) return;
+		(async () => {
+			tz = await timezoneOf(db, userId);
+			current = currentTarget(await list(db, 'targets'), localDate(new Date(), tz));
 			loaded = true;
+			loadFailed = false;
 			if (!dirty) form = current ? toForm(current) : { ...blank };
-		});
+		})().catch(() => (loadFailed = true));
 	});
 
 	async function save(e: SubmitEvent) {
@@ -86,7 +91,7 @@
 			await put(local.db, 'targets', {
 				id: crypto.randomUUID(),
 				user_id: auth.session.user.id,
-				effective_from: localDate(new Date()),
+				effective_from: localDate(new Date(), tz),
 				...(parsed as Required<TargetsInput>),
 				set_by: 'self',
 				set_by_id: null,
@@ -119,7 +124,11 @@
 <h1 class="mt-0 mb-2 text-display">Nutrition targets</h1>
 <p class="mt-0 mb-6 text-ink-2">Your daily goals. Today and Nutrition measure against them.</p>
 
-{#if !loaded}
+{#if loadFailed && !loaded}
+	<Notice tone="warn" alert
+		>We couldn’t open your targets on this device. Reload to try again.</Notice
+	>
+{:else if !loaded}
 	<p role="status" class="text-ink-2">Loading your targets…</p>
 {:else}
 	<form class="flex flex-col gap-4" onsubmit={save} oninput={() => (dirty = true)} novalidate>

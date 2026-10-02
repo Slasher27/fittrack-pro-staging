@@ -8,7 +8,7 @@ import {
 	syncPhotoBlobs,
 	type PhotoStorage
 } from '$lib/data/photos';
-import { get, list } from '$lib/data/repo';
+import { get, list, put } from '$lib/data/repo';
 import { syncOnce } from '$lib/data/sync';
 import { FakeServer } from './fake-server';
 
@@ -83,6 +83,27 @@ describe('photo blob sync', () => {
 		expect(storage.files.size).toBe(6);
 		await syncPhotoBlobs(db, storage);
 		expect(storage.files.size).toBe(8);
+	});
+
+	it('a delete or note edit made during the upload is kept', async () => {
+		const storage = new FakeStorage();
+		const db = await openLocalDb(`${USER}-ph-${++n}`);
+		const opts = { takenOn: '2026-10-01', pose: 'Front' as const, note: '' };
+		const kept = await addPhoto(db, USER, { ...opts, blob: jpeg('a') });
+		const gone = await addPhoto(db, USER, { ...opts, blob: jpeg('b') });
+		const upload = storage.upload.bind(storage);
+		storage.upload = async (path, blob) => {
+			await upload(path, blob);
+			if (path === kept.storage_path) await put(db, 'photos', { ...kept, note: 'edited' });
+			else await deletePhoto(db, gone);
+		};
+		await syncPhotoBlobs(db, storage);
+		const k = await get(db, 'photos', kept.id);
+		expect(k?.note).toBe('edited');
+		expect(k?.remote).toBe(true);
+		expect(await get(db, 'photos', gone.id)).toBeUndefined();
+		await syncPhotoBlobs(db, storage); // the uploaded image of the deleted photo is removed
+		expect(storage.files.has(gone.storage_path)).toBe(false);
 	});
 
 	it('keeps the image when the upload fails, and retries', async () => {

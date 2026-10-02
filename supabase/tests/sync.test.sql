@@ -1,7 +1,7 @@
 -- Sync plumbing: stamp trigger, upsert_lww (LWW, stale, rejected, allow-list), no hard deletes, has_pro stub.
 begin;
 create extension if not exists pgtap with schema extensions;
-select plan(18);
+select plan(20);
 
 create function pg_temp.sign_up(uid uuid) returns void language sql as $$
   insert into auth.users (instance_id, id, aud, role, email, raw_user_meta_data, created_at, updated_at)
@@ -83,6 +83,22 @@ select is(
     "rejected": [{"id": "00000000-0000-0000-0000-00000000a003", "error": "42501"},
                  {"id": "00000000-0000-0000-0000-00000000a004", "error": "23514"}]}'::jsonb,
   'rows refused by RLS or a check are rejected without failing the batch');
+
+-- A child whose parent is missing (rejected or purged) is rejected on its own; the batch still applies.
+insert into public.gym_profiles (id, user_id, name, up)
+values ('00000000-0000-0000-0000-00000000b001', 'aaaaaaaa-0000-0000-0000-000000000001', 'Home', 1);
+select is(
+  public.upsert_lww('gym_equipment', jsonb_build_array(
+    jsonb_build_object('id', '00000000-0000-0000-0000-00000000b002', 'user_id', 'aaaaaaaa-0000-0000-0000-000000000001',
+                       'gym_profile_id', '00000000-0000-0000-0000-00000000b0ff', 'custom_name', 'Orphan',
+                       'capabilities', array['bench'], 'up', 1),
+    jsonb_build_object('id', '00000000-0000-0000-0000-00000000b003', 'user_id', 'aaaaaaaa-0000-0000-0000-000000000001',
+                       'gym_profile_id', '00000000-0000-0000-0000-00000000b001', 'custom_name', 'Bench',
+                       'capabilities', array['bench'], 'up', 1))),
+  '{"applied": ["00000000-0000-0000-0000-00000000b003"], "stale": [],
+    "rejected": [{"id": "00000000-0000-0000-0000-00000000b002", "error": "23503"}]}'::jsonb,
+  'a row whose parent is missing is rejected without failing the batch');
+select lives_ok('set constraints all immediate', 'no foreign-key check is left to fail the batch at commit');
 
 select is(
   (public.upsert_lww('water_logs', '[{"id":"00000000-0000-0000-0000-00000000a006","ml":200}]')->'rejected'->0->>'error'),

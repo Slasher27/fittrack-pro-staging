@@ -173,3 +173,8 @@ Offline-first effort goes where it matters: logging and training on the phone.
 **Context:** `foods.per100` is "per 100 g or 100 ml" (ARCHITECTURE §3) but nothing said which, and drinks must be logged in ml.
 **Decision:** `per100` carries `unit: 'g' | 'ml'` (absent = `'g'`), inside the jsonb, so no migration. A count serving (`{label, grams?, kcal…}`) may have its own nutrition; when it has a weight, the food also gets per-100 g values so it can be logged in grams too. Jev 0.97 over a new column.
 **Consequences:** `lib/domain/food.ts` reads `unitOf(food)`; the seed foods (next item) and Open Food Facts imports set `unit` for liquids.
+
+### D-038 · Foreign keys are checked row by row in `upsert_lww` (2026-10-02)
+**Context:** foreign keys between synced tables are `deferrable initially deferred` (ARCHITECTURE §3). Inside `upsert_lww` that meant they were checked at commit, outside each row's savepoint, so a row whose parent the server doesn't have (rejected, or purged after 90 days) failed the whole batch on every retry and stalled the outbox for good. Found in the 2026-10-02 review.
+**Decision:** `upsert_lww` runs `set constraints all immediate` (migration 0010). The constraints stay deferrable for other multi-table writes; only the RPC's own transaction checks them per row.
+**Consequences:** an orphan row is `rejected` (23503) like any other refused row: the device drops it from its outbox, re-fetches it, and removes it locally when the server has no copy (ARCHITECTURE §5). Example: a food refused by a check takes its logs with it on that device, instead of blocking all later syncing. Pinned by `supabase/tests/sync.test.sql`.

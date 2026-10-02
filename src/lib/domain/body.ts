@@ -32,11 +32,21 @@ const LIMITS: Record<Exclude<keyof MeasureForm, 'date' | 'notes'>, [number, numb
 
 const parse = (s: string) => (s.trim() === '' ? null : Number(s.replace(',', '.')));
 
-/** Any subset of fields; at least one measurement or a note. Dates can't be in the future. */
-export function validateMeasure(f: MeasureForm, today: string): MeasureErrors {
+/**
+ * Any subset of fields; at least one measurement or a note. Dates can't be in the future.
+ * `taken`: dates that already have another entry (when moving an entry to a new date), so a date
+ * never ends up with two entries.
+ */
+export function validateMeasure(
+	f: MeasureForm,
+	today: string,
+	taken: string[] = []
+): MeasureErrors {
 	const e: MeasureErrors = {};
 	if (!/^\d{4}-\d{2}-\d{2}$/.test(f.date)) e.date = 'Choose a date.';
 	else if (f.date > today) e.date = 'The date can’t be in the future.';
+	else if (taken.includes(f.date))
+		e.date = 'There’s already an entry for this date. Edit that one instead.';
 	for (const [k, [min, max, unit]] of Object.entries(LIMITS) as [
 		keyof typeof LIMITS,
 		[number, number, string]

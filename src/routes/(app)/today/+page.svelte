@@ -28,6 +28,7 @@
 		metrics: LocalRow<'body_metrics'>[];
 	};
 	let day = $state<Day | null>(null);
+	let loadFailed = $state(false);
 	let now = $state(new Date());
 
 	$effect(() => {
@@ -67,7 +68,8 @@
 				water,
 				metrics
 			};
-		})();
+			loadFailed = false;
+		})().catch(() => (loadFailed = true));
 	});
 
 	const dateLabel = $derived(
@@ -106,7 +108,11 @@
 	</div>
 {/if}
 
-{#if !day}
+{#if loadFailed && !day}
+	<Notice tone="warn" alert
+		>We couldn’t open today’s log on this device. Reload to try again.</Notice
+	>
+{:else if !day}
 	<p role="status" class="text-ink-2">Loading today…</p>
 {:else}
 	<div class="grid gap-4 lg:grid-cols-2">
