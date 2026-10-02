@@ -20,8 +20,8 @@ Update `docs/PROGRESS.md`: the status block, ticked checklist items, exit-criter
 pnpm dev                 # app on http://localhost:5173
 pnpm check               # svelte-check + tsc
 pnpm lint
-pnpm test                # vitest (lib/domain, lib/data)
-pnpm test:e2e            # playwright + axe at 390 and 1280 px
+pnpm test                # vitest (lib/domain, lib/data; + integration tests when .env points at local Supabase)
+pnpm test:e2e            # playwright + axe at 390 and 1280 px (needs `pnpm supabase start` and .env, see .env.example)
 pnpm supabase start      # local stack (Docker; the CLI is a devDependency)
 pnpm supabase db reset   # re-run migrations + seed
 pnpm supabase test db    # pgTAP RLS tests
