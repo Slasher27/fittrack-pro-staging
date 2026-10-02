@@ -7,9 +7,9 @@
 	import WaterCard from '$lib/components/WaterCard.svelte';
 	import { local } from '$lib/data/local.svelte';
 	import { asFood, logFood, relog, type FoodLogRow, type FoodRow } from '$lib/data/nutrition';
-	import { get, list } from '$lib/data/repo';
+	import { list, timezoneOf } from '$lib/data/repo';
 	import type { LocalRow } from '$lib/data/tables';
-	import { DEFAULT_TIMEZONE, localDate } from '$lib/domain/dates';
+	import { localDate } from '$lib/domain/dates';
 	import {
 		amountLabel,
 		dayRange,
@@ -57,6 +57,9 @@
 	let recipeOpen = $state(false);
 	let recipe = $state<FoodRow | null>(null);
 
+	let loads = 0;
+	let loadFailed = $state(false);
+
 	const day = $derived(page.url.searchParams.get('day') ?? data?.today ?? localDate(new Date()));
 
 	$effect(() => {
@@ -65,8 +68,9 @@
 		const userId = auth.session?.user.id;
 		const date = page.url.searchParams.get('day');
 		if (!db || !userId) return;
+		const run = ++loads; // a slower, older load must not overwrite a newer day
 		(async () => {
-			const tz = (await get(db, 'profiles', userId))?.timezone || DEFAULT_TIMEZONE;
+			const tz = await timezoneOf(db, userId);
 			const today = localDate(new Date(), tz);
 			const [start, end] = dayRange(date ?? today, tz);
 			const range = IDBKeyRange.bound(start, end, false, true);
@@ -78,6 +82,8 @@
 				list(db, 'water_logs', { index: 'at', range }),
 				list(db, 'foods')
 			]);
+			if (run !== loads) return;
+			loadFailed = false;
 			data = {
 				tz,
 				today,
@@ -87,7 +93,7 @@
 				water,
 				foods
 			};
-		})();
+		})().catch(() => run === loads && (loadFailed = true));
 	});
 
 	const shift = (n: number) => {
@@ -201,7 +207,11 @@
 	</div>
 {/if}
 
-{#if !data}
+{#if loadFailed && !data}
+	<Notice tone="warn" alert
+		>We couldn’t open your food log on this device. Reload to try again.</Notice
+	>
+{:else if !data}
 	<p role="status" class="text-ink-2">Loading your food log…</p>
 {:else}
 	<div class="grid gap-4 lg:grid-cols-[1fr_20rem]">

@@ -1,8 +1,9 @@
 # Progress
 
-> ## Current status (end of session, 2026-10-01)
+> ## Current status (2026-10-02)
 > **Phase 0 — Foundations:** done (PR #1).
 > **Phase 1 — Member core, offline:** in progress, **7 of 10 items done** (PRs #2–#8, all merged to `main`, CI green): v3 meals decision, migrations, offline data layer + sync, targets, Today, Nutrition (incl. recipes), Body (measurements + photos).
+> **2026-10-02:** review fixes (owner-approved, not a checklist item): sync no longer stalls on an orphan row (D-038), photo uploads no longer undo deletes, targets use the member's timezone, measurement date clash, load/save error states.
 > **Next action:** Phase 1 item 8, **Gym profiles** (see "Notes for the next session" below), then the `coach` Edge Function + describe-to-log, then the SA foods seed. After that, check the Phase 1 exit criteria.
 > **Blockers / open questions:**
 > - **Describe-to-log needs an Anthropic API key** for the local `coach` function (`supabase/functions/.env`, never committed). Ask the owner at the start of that item.
@@ -36,6 +37,8 @@
 
 ## Session log
 Newest first. Each entry: date · what was done · decisions (link to DECISIONS.md) · what's next.
+
+- **2026-10-02** · Full review of Phase 0–1 by four sub-agents (sync, database/RLS, UI/a11y, domain vs v3), findings checked by hand; Jev chose "fix first" (0.99). Fix PR: `upsert_lww` checks foreign keys per row (migration 0010, D-038; one orphan row used to fail every push for good), photo blob sync patches only `remote` (an upload no longer undoes a delete or note edit made meanwhile), Targets uses the member's timezone (`timezoneOf`), a measurement can't be moved onto a date that has an entry, failed saves show an error instead of a stuck button, Today/Nutrition/Progress/Targets show an error if the device data can't be read, and Nutrition ignores out-of-order loads. Each fix has a test shown failing first. Tests: 120 pgTAP, 92 unit/integration, 54 e2e. Left for later (low): `localMidnight` where DST starts at midnight (Santiago, Asunción, Havana), `weightTrend` counting a date twice across devices, far-future `up` freezing a row, members setting `set_by='trainer'`, a failed image upload lost on sign-out, the trainer phone menu's focus handling, catch on remove/undo actions. For Gym profiles (decide in its pre-flight): cross-owner `gym_profile_id` (RLS check), catalogue capabilities not enforced, `weights` shape, plate counts, `assume_full` vs Commercial, Save destination from Settings, free-tier one-gym limit, band levels, duplicate defaults, soft-deleting a profile's equipment. Next: Gym profiles.
 
 - **2026-10-01 · Session summary.** Phase 0 built and closed (PR #1). Phase 1: 7 of 10 items (PRs #2–#8). Decisions D-033 to D-037 (sign-up consent in auth metadata; v3 meals not migrated; catalogue as migration data + v3 capability tokens; per-user device data and the sign-out guard; per100 unit). Totals at the end of the day: 118 pgTAP, 90 unit/integration, 54 e2e (axe at 390 and 1280 px), all green locally and in CI. Notable bugs caught by tests before reaching the owner: sign-out re-creating the device database, IndexedDB refusing Svelte proxies, the Sync card claiming "all saved" too early, a stale file in the photo picker, CI crashing on skipped integration tests. Next: Gym profiles.
 

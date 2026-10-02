@@ -49,7 +49,11 @@
 
 	async function save(e: SubmitEvent) {
 		e.preventDefault();
-		errors = validateMeasure(form, today);
+		// Adding on a date that has an entry updates it; moving an entry onto such a date is refused.
+		const taken = entry
+			? entries.filter((r) => r.id !== entry.id && !r.deleted).map((r) => r.date)
+			: [];
+		errors = validateMeasure(form, today, taken);
 		if (Object.keys(errors).length) {
 			queueMicrotask(() =>
 				document.querySelector<HTMLElement>('#measure-form [aria-invalid="true"]')?.focus()
@@ -59,16 +63,21 @@
 		if (!local.db || !auth.session) return;
 		busy = true;
 		const existing = entry ?? entries.find((r) => r.date === form.date && !r.deleted);
-		await put(local.db, 'body_metrics', {
-			...(existing ?? { id: crypto.randomUUID(), steps: null, deleted: false }),
-			user_id: auth.session.user.id,
-			date: form.date,
-			...toMeasurement(form),
-			up: 0
-		});
-		busy = false;
-		open = false;
-		toast('Measurements saved.', 'ok');
+		try {
+			await put(local.db, 'body_metrics', {
+				...(existing ?? { id: crypto.randomUUID(), steps: null, deleted: false }),
+				user_id: auth.session.user.id,
+				date: form.date,
+				...toMeasurement(form),
+				up: 0
+			});
+			open = false;
+			toast('Measurements saved.', 'ok');
+		} catch {
+			errors = { form: 'We couldn’t save this on your device. Try again.' };
+		} finally {
+			busy = false;
+		}
 	}
 
 	async function remove() {

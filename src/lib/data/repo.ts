@@ -1,5 +1,6 @@
 import { outboxKey, type LocalDb, type OutboxEntry } from './db';
 import { normalise, type LocalRow, type SyncedTable } from './tables';
+import { DEFAULT_TIMEZONE } from '$lib/domain/dates';
 
 // Repositories: every member-app write goes through here (CLAUDE.md: never straight to Supabase).
 // A write saves the row and its outbox entry in one transaction, so nothing is lost if the app dies.
@@ -62,4 +63,9 @@ export async function list<T extends SyncedTable>(
 
 export async function pendingCount(db: LocalDb) {
 	return db.count('outbox');
+}
+
+/** The member's timezone, which their "day" is measured in (CLAUDE.md: Dates). */
+export async function timezoneOf(db: LocalDb, userId: string) {
+	return (await get(db, 'profiles', userId))?.timezone || DEFAULT_TIMEZONE;
 }

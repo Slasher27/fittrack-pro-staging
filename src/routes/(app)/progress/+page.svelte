@@ -2,15 +2,16 @@
 	import { auth } from '$lib/auth.svelte';
 	import { local } from '$lib/data/local.svelte';
 	import type { PhotoRow } from '$lib/data/photos';
-	import { get, list } from '$lib/data/repo';
+	import { list, timezoneOf } from '$lib/data/repo';
 	import type { LocalRow } from '$lib/data/tables';
 	import { history, photosByDate } from '$lib/domain/body';
-	import { DEFAULT_TIMEZONE, localDate } from '$lib/domain/dates';
+	import { localDate } from '$lib/domain/dates';
 	import { changeLabel, weightTrend } from '$lib/domain/weight';
 	import Button from '$lib/ui/Button.svelte';
 	import Card from '$lib/ui/Card.svelte';
 	import EmptyState from '$lib/ui/EmptyState.svelte';
 	import Icon from '$lib/ui/Icon.svelte';
+	import Notice from '$lib/ui/Notice.svelte';
 	import Stat from '$lib/ui/Stat.svelte';
 	import MeasureSheet from './MeasureSheet.svelte';
 	import PhotoAddSheet from './PhotoAddSheet.svelte';
@@ -22,6 +23,7 @@
 	let data = $state<{ today: string; metrics: Row[]; photos: PhotoRow[] } | null>(null);
 	let measureOpen = $state(false);
 	let entry = $state<Row | null>(null);
+	let loadFailed = $state(false);
 	let addOpen = $state(false);
 	let viewOpen = $state(false);
 	let viewing = $state<PhotoRow | null>(null);
@@ -32,10 +34,11 @@
 		const userId = auth.session?.user.id;
 		if (!db || !userId) return;
 		(async () => {
-			const tz = (await get(db, 'profiles', userId))?.timezone || DEFAULT_TIMEZONE;
+			const tz = await timezoneOf(db, userId);
 			const [metrics, photos] = await Promise.all([list(db, 'body_metrics'), list(db, 'photos')]);
+			loadFailed = false;
 			data = { today: localDate(new Date(), tz), metrics, photos };
-		})();
+		})().catch(() => (loadFailed = true));
 	});
 
 	const entries = $derived(data ? history(data.metrics) : []);
@@ -75,7 +78,11 @@
 
 <h1 class="mt-0 mb-6 text-display">Progress</h1>
 
-{#if !data}
+{#if loadFailed && !data}
+	<Notice tone="warn" alert
+		>We couldn’t open your progress on this device. Reload to try again.</Notice
+	>
+{:else if !data}
 	<p role="status" class="text-ink-2">Loading your progress…</p>
 {:else}
 	<div class="flex flex-col gap-4">
