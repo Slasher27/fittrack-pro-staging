@@ -37,3 +37,34 @@ export type Capability = (typeof CAPABILITIES)[number];
 export function isCapability(s: string): s is Capability {
 	return (CAPABILITIES as readonly string[]).includes(s);
 }
+
+/** What each capability is called on screen, e.g. "counts as: Barbell, Landmine" for custom kit. */
+export const CAPABILITY_LABELS: Record<Capability, string> = {
+	barbell: 'Barbell',
+	rack: 'Squat rack',
+	bench: 'Bench',
+	dumbbell: 'Dumbbells',
+	kettlebell: 'Kettlebell',
+	'pull-up-bar': 'Pull-up bar',
+	'dip-station': 'Dip station',
+	pulley: 'Cable or pulley',
+	band: 'Resistance band',
+	machine: 'Weight machine',
+	box: 'Box or step',
+	rope: 'Rope',
+	rower: 'Rower',
+	bike: 'Bike',
+	'ab-wheel': 'Ab wheel',
+	'ez-bar': 'EZ bar',
+	'trap-bar': 'Trap bar',
+	landmine: 'Landmine',
+	smith: 'Smith machine',
+	sled: 'Sled',
+	plate: 'Weight plates',
+	'med-ball': 'Medicine ball',
+	rings: 'Rings',
+	trx: 'Suspension trainer',
+	treadmill: 'Treadmill',
+	'foam-roller': 'Foam roller',
+	stairs: 'Stairs'
+};
