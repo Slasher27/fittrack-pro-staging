@@ -41,6 +41,14 @@
 			<span class="flex-1 font-semibold">Nutrition targets</span>
 			<Icon name="forward" size={20} />
 		</a>
+		<a
+			href={resolve('/settings/gyms')}
+			class="flex min-h-14 items-center gap-3 rounded-card border-t border-line px-5 py-3 text-ink no-underline hover:bg-surface-2"
+		>
+			<Icon name="train" size={22} />
+			<span class="flex-1 font-semibold">Gym profiles</span>
+			<Icon name="forward" size={20} />
+		</a>
 	</Card>
 
 	<Card as="section" aria-labelledby="account">

@@ -178,3 +178,21 @@ Offline-first effort goes where it matters: logging and training on the phone.
 **Context:** foreign keys between synced tables are `deferrable initially deferred` (ARCHITECTURE §3). Inside `upsert_lww` that meant they were checked at commit, outside each row's savepoint, so a row whose parent the server doesn't have (rejected, or purged after 90 days) failed the whole batch on every retry and stalled the outbox for good. Found in the 2026-10-02 review.
 **Decision:** `upsert_lww` runs `set constraints all immediate` (migration 0010). The constraints stay deferrable for other multi-table writes; only the RPC's own transaction checks them per row.
 **Consequences:** an orphan row is `rejected` (23503) like any other refused row: the device drops it from its outbox, re-fetches it, and removes it locally when the server has no copy (ARCHITECTURE §5). Example: a food refused by a check takes its logs with it on that device, instead of blocking all later syncing. Pinned by `supabase/tests/sync.test.sql`.
+
+### D-039 · The equipment catalogue is bundled in the app (2026-10-02)
+**Context:** `equipment_catalog` is reference data on the server (D-035) and isn't a synced table. Gym profiles must work offline, including on a device that hasn't been online since install.
+**Decision:** `lib/domain/catalog.ts` carries a copy of the 34 items. A unit test parses `0005_equipment_catalog_data.sql` and fails if the copy differs. The server stays authoritative for capabilities (migration 0011 overwrites a catalogue item's capabilities from the catalogue).
+**Consequences:** a catalogue change is a new migration plus the same change in `catalog.ts` (the test enforces it), shipped together.
+
+### D-040 · Gym profiles: full-equipment switch, saved as you go (2026-10-02)
+**Context:** open points for the Gym profiles item (PRD §4.1, DESIGN-SYSTEM §7.1). Owner's choices, all as recommended.
+**Decision:**
+- Each gym has a "Full equipment" switch (`assume_full`), on by default for a commercial gym (v3: commercial → everything). Turning it off shows the item list; the kit ticked before comes back.
+- Every change saves at once, offline, through the repositories. "Done" returns to Settings; from onboarding (Phase 2) it continues to step 5.
+- Plates and bars store the weights you have (kg lists), not counts (MIGRATION-V3).
+- Starting weights when an item is ticked: `DEFAULT_WEIGHTS` in `lib/domain/equipment.ts` (e.g. kettlebells 12/16/24 kg, adjustable dumbbells 2–32 kg in 2 kg steps).
+- The free tier's one-gym limit (BUSINESS-RULES §3.5) is built with billing in Phase 6; everyone counts as Pro until then.
+- Band levels come with the Phase 2 logger (T40); for now a gym has bands or not.
+- No equipment search yet: 34 items fit on one screen (the design's "140+" was a placeholder).
+- Unticking soft-deletes the row; ticking again revives it, so edited weights survive. Deleting a gym soft-deletes its equipment and passes "default" to another gym; two defaults (two offline devices) resolve to the newest edit.
+**Consequences:** `capabilities(gym, items)` is ready for Phase 2's `canDo` and swaps.

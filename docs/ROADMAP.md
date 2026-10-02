@@ -30,7 +30,7 @@ empty, error, offline and no-permission states (CLAUDE.md).
 - [x] Today: nutrition summary, water (target from `targets.water_ml`), weight trend, quick log (recents and one-tap re-log). PRD §4.1 Today.
 - [x] Nutrition: timeline log, search, custom food (weight-based and count-based servings), recents, multi-add, recipes (ingredients in grams + cooked weight, ported from v3), water. PRD §4.1 Nutrition.
 - [x] Body: weight and measurements entry (weight, waist, chest, arm, thigh, notes) and photos (add with camera/file, pose, note; grid; view; delete; blob sync). Private by default.
-- [ ] Gym profiles: several named locations, equipment editor (catalogue + custom items mapped to capabilities, weight ranges per item). PRD §4.1 Gym profiles.
+- [x] Gym profiles: several named locations, equipment editor (catalogue + custom items mapped to capabilities, weight ranges per item). PRD §4.1 Gym profiles.
 - [ ] Port the `coach` Edge Function (model pinned server-side, JWT check, `ai_usage` metering) and **describe-to-log** on Today: forced `parse_food` tool → editable preview → log with `estimated = true`. Voice dictation into the describe box (Web Speech API; the mic is hidden where unsupported). Offline falls back to search.
 - [ ] Foods: seed SA staples; Open Food Facts search import (online only, imports become own foods with `source='off'`); a seed of common SA retailer products from Open Food Facts.
 
@@ -87,7 +87,7 @@ empty, error, offline and no-permission states (CLAUDE.md).
 **Exit:** the PRD §3 success criteria are met for 4 consecutive weeks.
 
 ## Phase 6 — Commercial readiness (≈ 3–4 weeks)
-- [ ] Entitlements + the real `has_pro()` (replacing the stub) with a **backfill** for existing users (coaching rows for active relationships, comps for Duwayne and pilot trainers' clients) run before the switch; extend `invite-accept` and `end_relationship` with their entitlement writes (ARCHITECTURE §4.2, §9), free tier and 14-day trial (BUSINESS-RULES §3.5, §4), subscriptions, ledger (insert-only), nightly billing jobs (active-client counts with the free 3 and the cap, grace, continuation, referral credit).
+- [ ] Entitlements + the real `has_pro()` (replacing the stub) with a **backfill** for existing users (coaching rows for active relationships, comps for Duwayne and pilot trainers' clients) run before the switch; extend `invite-accept` and `end_relationship` with their entitlement writes (ARCHITECTURE §4.2, §9), free tier and 14-day trial (BUSINESS-RULES §3.5, §4; incl. the one-gym limit on Gym profiles, D-040), subscriptions, ledger (insert-only), nightly billing jobs (active-client counts with the free 3 and the cap, grace, continuation, referral credit).
 - [ ] Exercise demo-video library (D-028), licensed, served through an Edge Function.
 - [ ] Paystack: trainer billing (free 3, per-active-client fee or capped platform fee for in-app payers, monthly cap; invoices; D-027, D-031), solo Pro (web), optional coaching packages, session packs and single sessions with split payments ⚖. Self-serve cancel and renewal reminders (BUSINESS-RULES §3.6). Account screen: subscription status.
 - [ ] Capacitor iOS/Android builds with native push. RevenueCat solo Pro in-app purchase. Store listings.
