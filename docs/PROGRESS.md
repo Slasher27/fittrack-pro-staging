@@ -1,21 +1,23 @@
 # Progress
 
-> ## Current status (2026-10-02)
+> ## Current status (end of session, 2026-10-02)
 > **Phase 0 — Foundations:** done (PR #1).
-> **Phase 1 — Member core, offline:** in progress, **8 of 10 items done** (PRs #2–#8 and Gym profiles; review fixes in PR #10): v3 meals decision, migrations, offline data layer + sync, targets, Today, Nutrition (incl. recipes), Body (measurements + photos), Gym profiles.
-> **2026-10-02:** review fixes (owner-approved, not a checklist item): sync no longer stalls on an orphan row (D-038), photo uploads no longer undo deletes, targets use the member's timezone, measurement date clash, load/save error states.
-> **Next action:** the `coach` Edge Function + describe-to-log (needs the Anthropic API key, see below), then the SA foods seed. After that, check the Phase 1 exit criteria.
+> **Phase 1 — Member core, offline:** in progress, **8 of 10 items done** (PRs #2–#8, #11; review fixes #10; all merged to `main`, CI green): v3 meals decision, migrations, offline data layer + sync, targets, Today, Nutrition (incl. recipes), Body (measurements + photos), Gym profiles.
+> **Next action:** ask the owner which item first. **Describe-to-log** if the key is in `supabase/functions/.env` (see below), otherwise the **SA foods seed** (no key needed). After both, check the Phase 1 exit criteria.
 > **Blockers / open questions:**
-> - **Describe-to-log needs an Anthropic API key** for the local `coach` function (`supabase/functions/.env`, never committed). Ask the owner at the start of that item.
-> - **Phase 1 exit check needs the owner:** "median food log from Today ≤ 10 s (manual timing, 10 runs)".
+> - **Describe-to-log needs the Anthropic API key.** `supabase/functions/.env` exists (git-ignored, checked) with an empty `ANTHROPIC_API_KEY=`; the owner was asked to paste the key there, never into chat. Check it's filled in (without printing it) before starting.
+> - **Phase 1 exit check needs the owner:** "median food log from Today ≤ 10 s (manual timing, 10 runs)", after the SA foods seed.
 > - Final product name (in Phase 6, before the pilot).
 > - Supabase region choice (closest to South Africa), to record in the privacy policy.
 > - ⚖ items in BUSINESS-RULES.md, to check with an accountant/attorney before Phase 6.
 
 ### Notes for the next session
+- **Describe-to-log** (ROADMAP Phase 1 item 9): port v3 `C:WebsitesFitTrack-appsupabaseunctionscoach` and the `app/coachai.js` tool loop into `supabase/functions/coach` + `lib/ai/*`; describe-to-log from v3 `app/foodai.js` into `lib/ai/food.ts`. Model pinned server-side, JWT check, one `ai_usage` row per call (table exists, service-role writes only, 0009). Forced `parse_food` tool → editable preview on Today → log with `food_logs.estimated = true` (column exists); foods it creates use `source = 'ai'`. Voice via the Web Speech API (hide the mic where unsupported); offline falls back to search. Load the `claude-api` skill before writing the function (current model ids and pricing). Tests: mock the Anthropic call in CI (no key there).
+- **SA foods seed** (item 10): `supabase/seed/` is empty. Seed foods are global rows (`owner_id` null, `source = 'seed'`), with `per100.unit` set for liquids (D-037). Open Food Facts search import is online only and creates own foods with `source = 'off'`.
+- **Left for later (low, from the 2026-10-02 review):** `localMidnight` where DST starts at midnight (Santiago, Asunción, Havana); `weightTrend` counting a date twice across devices; a far-future `up` freezing a row (cap in the stamp trigger); members able to set `targets.set_by = 'trainer'` (fix with Phase 4 policies); a failed image upload lost on sign-out; the trainer phone menu's focus handling; catch on remove/undo actions; `food_logs.food_id` may reference another member's private food (same fix pattern as 0011).
 - **Gym profiles** are done (D-039, D-040). Phase 2 reuses `capabilities(gym, items)` from `lib/domain/equipment.ts` for `canDo` and swaps, and the onboarding "Where you train" step reuses `/settings/gyms` (its "Done" should continue to step 5 there).
-- **How the owner works:** the owner opens and merges PRs in the browser (no `gh` CLI here). Give a prefilled "compare" link, plain click-by-click steps, wait for CI (the GitHub check-runs API is public), then say when to merge.
-- **Environment:** Docker Desktop's CLI is at `%LOCALAPPDATA%/Programs/DockerDesktop/resources/bin` (may need adding to PATH in a fresh shell). The Supabase CLI is a devDependency (`pnpm supabase …`). e2e and integration tests need local Supabase running and `.env` (see `.env.example`).
+- **How the owner works:** the owner opens and merges PRs in the browser (no `gh` CLI here). Give a prefilled "compare" link, plain click-by-click steps, wait for CI, then say "merge now". Poll the public check-runs API **every 2 minutes at most** (60 requests/hour limit; 30 s polling got rate-limited on 2026-10-02). A run with `conclusion: null` is still running.
+- **Environment:** Docker Desktop may not be running at the start of a session: start it (`%LOCALAPPDATA%/Programs/DockerDesktop/Docker Desktop.exe`), add `%LOCALAPPDATA%/Programs/DockerDesktop/resources/bin` to PATH, then `pnpm supabase start`. The Supabase CLI is a devDependency (`pnpm supabase …`). e2e and integration tests need local Supabase running and `.env` (see `.env.example`). `python3` here is the Windows Store stub and hangs; use `node` for scripts.
 
 ## Exit criteria log
 | Phase | Criterion | Met on | Evidence |
@@ -37,6 +39,8 @@
 
 ## Session log
 Newest first. Each entry: date · what was done · decisions (link to DECISIONS.md) · what's next.
+
+- **2026-10-02 · Session summary.** Full review of Phase 0–1 (four sub-agents plus checks by hand): all tests green, five bugs not covered by tests, fixed in PR #10 (D-038, incl. a sync stall on an orphan row). Gym profiles built and merged (PR #11, D-039, D-040). Phase 1: 8 of 10 items. Totals: 145 pgTAP, 115 unit/integration, 58 e2e (axe at 390 and 1280 px), all green locally and in CI. Next: describe-to-log (once the API key is in place) or the SA foods seed.
 
 - **2026-10-02** · Gym profiles (docs/design/Equipment.html with the §7.1 overrides): `/settings/gyms`, linked from Settings. Default "Home" created only after the device's first pull (one at a time, so overlapping reloads can't make two). Several gyms (name, type, default, delete with confirmation; deleting soft-deletes its equipment and passes on the default). "Full equipment" switch (on for a commercial gym). Catalogue items by category as checkboxes with starting weights; "Edit weights" beside the label: a range (lightest/heaviest/steps) or a list of kg (add/remove). Custom kit with "Counts as" capabilities (≥ 1). Everything saves at once, offline. Gym picker: segments for up to 3 short names, a select otherwise (no overflow at 390 px). Server (migration 0011): equipment can only hang off the member's own gym, catalogue items always carry the catalogue's capabilities, weights must match the item's `weight_kind`. Catalogue bundled in the app with a test against the migration (D-039). Owner's choices recorded in D-040 (full-equipment switch, save as you go, free one-gym limit with billing in Phase 6, band levels with the Phase 2 logger). Bugs caught before review: duplicate "Home" from overlapping reloads (test shown failing first); the reviewer found unticking failing when two devices ticked the same item, and the picker overflowing with long names. Tests: 145 pgTAP, 115 unit/integration, 58 e2e. Next: `coach` Edge Function + describe-to-log.
 
